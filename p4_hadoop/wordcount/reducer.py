@@ -1,6 +1,3 @@
-#!/usr/bin/env python
-
-
 '''
 wordcount example adopted from 
 http://dogdogfish.com/hadoop/hadoop-wordcount-in-python/
