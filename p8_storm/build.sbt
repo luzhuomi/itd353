@@ -14,6 +14,8 @@ resolvers += "Sonatype OSS Snapshots" at "https://oss.sonatype.org/content/repos
 
 resolvers += "clojars" at "https://clojars.org/repo"
 
+resolvers += "luzhuomi github repo" at "https://raw.githubusercontent.com/luzhuomi/mavenrepo/master/"
+
 libraryDependencies += "org.twitter4j" % "twitter4j-core" % "4.0.3"
 libraryDependencies += "org.twitter4j" % "twitter4j-stream" % "4.0.3"
 
