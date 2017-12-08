@@ -21,8 +21,7 @@ libraryDependencies += "org.twitter4j" % "twitter4j-stream" % "4.0.3"
 
 libraryDependencies += "com.github.velvia" %% "scala-storm" % "0.3.0-SNAPSHOT"
 
-// libraryDependencies += "org.apache.storm" % "storm-core" % "0.9.3" % "provided" exclude("junit", "junit")
-libraryDependencies += "org.apache.storm" % "storm-core" % "1.0.2" % "provided" exclude("junit", "junit")
+libraryDependencies += "org.apache.storm" % "storm-core" % "1.0.2" exclude("junit", "junit")
 
 scalacOptions ++= Seq("-feature", "-deprecation", "-Yresolve-term-conflict:package")
 
@@ -35,6 +34,7 @@ scalacOptions ++= Seq("-feature", "-deprecation", "-Yresolve-term-conflict:packa
 assemblyMergeStrategy in assembly := {
     case PathList("log4j.properties") => MergeStrategy.discard
     case PathList("META-INF", xs @ _*) => MergeStrategy.discard
+    case PathList("defaults.yaml", xs @ _*) => MergeStrategy.discard
     case _ => MergeStrategy.last // leiningen build files
 }
 
