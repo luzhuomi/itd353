@@ -33,4 +33,5 @@ nimbus.childopts: \"-Xmx512m\"
 supervisor.childopts: \"-Xmx256m\"
 " >> apache-storm-1.0.5/conf/storm.yaml
 mv apache-storm-1.0.5 /opt/
+chown itd353 -R /opt/apache-storm-1.0.5
 cd $CURR_DIR
