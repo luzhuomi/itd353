@@ -81,7 +81,7 @@ object WordCountTopology {
     builder.setSpout("randsentence", new RandomSentenceSpout, 5)
     builder.setBolt("split", new SplitSentence, 8)
         .shuffleGrouping("randsentence")
-    builder.setBolt("count", new WordCount, 12)
+    builder.setBolt("count", new WordCount, 1)
         .fieldsGrouping("split", new Fields("word"))
 
     val conf = new Config
