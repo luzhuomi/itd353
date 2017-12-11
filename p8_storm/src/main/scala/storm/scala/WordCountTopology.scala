@@ -1,9 +1,12 @@
 package storm.scala
 
+import scala.language.postfixOps
 import storm.scala.dsl._
 import storm.scala.dsl.StormSpout
 import org.apache.storm.Config
 import org.apache.storm.LocalCluster
+import org.apache.storm.StormSubmitter
+import org.apache.storm.generated._
 import org.apache.storm.topology.TopologyBuilder
 import org.apache.storm.tuple.{Fields, Tuple, Values}
 import collection.mutable.{Map, HashMap}
@@ -85,9 +88,26 @@ object WordCountTopology {
     conf.setDebug(true)
     conf.setMaxTaskParallelism(3)
 
-    val cluster = new LocalCluster
-    cluster.submitTopology("word-count", conf, builder.createTopology)
-    Thread sleep 10000
-    cluster.shutdown
+    args.toList match 
+    { 
+      case "remote"::_ => {
+	try {
+	  StormSubmitter.submitTopology("word-count", conf, builder.createTopology)
+	} catch {
+	  case (e:AlreadyAliveException) => {
+	    println("Topology Exists!")
+	  }
+	  case (e:InvalidTopologyException) => {
+	    println("Invalid Topology!")
+	  }
+	}
+      }
+      case _ => {
+	val cluster = new LocalCluster
+	cluster.submitTopology("word-count", conf, builder.createTopology)
+	Thread sleep 10000
+	cluster.shutdown
+      }
+    }
   }
 }
