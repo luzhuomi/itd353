@@ -11,6 +11,8 @@ import org.apache.storm.topology.TopologyBuilder
 import org.apache.storm.tuple.{Fields, Tuple, Values}
 import collection.mutable.{Map, HashMap}
 import util.Random
+import org.slf4j.LoggerFactory
+import org.slf4j.Logger
 
 
 
@@ -40,15 +42,35 @@ object WordCountTopology {
 
 
   class WordCount extends StormBolt(List("word", "count")) {
+    val logger = LoggerFactory.getLogger(classOf[WordCount]);
     var counts: Map[String, Int] = _
+    var lastLogTime: Long = _
     setup {
       counts = new HashMap[String, Int]().withDefaultValue(0)
+      lastLogTime = System.currentTimeMillis;
     }
     def execute(t: Tuple) = t matchSeq {
       case Seq(word: String) =>
         counts(word) += 1
         using anchor t emit (word, counts(word))
         t ack
+        val now = System.currentTimeMillis
+        val diff = (now - lastLogTime) / 1000
+	if (diff > 5) {
+	  lastLogTime = now;
+	  logger.info("Word Count: "+counts.size);
+	  publishList();
+	}
+    }
+
+    def publishList() {
+      counts.toList.foreach( keyVal => {
+	val word = keyVal._1
+	val count = keyVal._2
+	logger.info(s"$word:$count") 
+	
+      })
+      counts = new HashMap[String, Int]().withDefaultValue(0)
     }
   }
 
@@ -59,7 +81,7 @@ object WordCountTopology {
     builder.setSpout("randsentence", new RandomSentenceSpout, 5)
     builder.setBolt("split", new SplitSentence, 8)
         .shuffleGrouping("randsentence")
-    builder.setBolt("count", new WordCount, 12)
+    builder.setBolt("count", new WordCount, 1)
         .fieldsGrouping("split", new Fields("word"))
 
     val conf = new Config
