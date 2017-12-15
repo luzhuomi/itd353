@@ -8,7 +8,7 @@ hdfs_nn = "127.0.0.1"
 pat = re.compile("^(.*) ([A-Za-z]{2}) ([0-9]{5})(-[0-9]{4})?$")
 
 def match_each(line):
-    r = pat.match(line.strip)
+    r = pat.match(line.strip())
     if r is None:
         return line + "\tN"
     else:
