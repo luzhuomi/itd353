@@ -23,12 +23,7 @@ def to_words(tweet):
     return tweet.split(" ")
 
 def pad_cap(xs,size):
-    if (len(xs) == 0) and (size > 0) :
-        return [ 0.0 for x in range(0,size) ]
-    elif (len(xs) == 0 or size == 0):
-        return []
-    else:
-        return [xs[0]] + pad_cap(xs[1:],size-1)
+    return xs[0:size] + [ 0.0 for x in range(0, size-len(xs))]
 
 def to_labeledpoint(l, twt):
     ws = map(lambda w:hash(w), to_words(twt))
@@ -37,8 +32,8 @@ def to_labeledpoint(l, twt):
 def main():
     sc = SparkContext()
     sc.appName = "Spark SVM"
-    posTXT = sc.textFile("hdfs://%s:9000/data/tweet/label_data/Kpop/*.txt" % hdfs_nn)
-    negTXT = sc.textFile("hdfs://%s:9000/data/tweet/label_data/othertweet/*.txt" % hdfs_nn)
+    posTXT = sc.textFile("hdfs://%s:9000/data/tweet/label_data/Kpop/*.txt" % hdfs_nn).sample(False,0.1)
+    negTXT = sc.textFile("hdfs://%s:9000/data/tweet/label_data/othertweet/*.txt" % hdfs_nn).sample(False,0.1)
     # convert the training data to labeled points
     posLP = posTXT.map(lambda twt:to_labeledpoint(1.0, twt))
     negLP = negTXT.map(lambda twt:to_labeledpoint(0.0, twt))
@@ -49,7 +44,7 @@ def main():
     test = splits[1]
 
     # Run training algorithm to build the model
-    num_iteration = 100
+    num_iteration = 10
     model = SVMWithSGD.train(training,num_iteration)
     # Clear the default threshold
     model.clearThreshold()
