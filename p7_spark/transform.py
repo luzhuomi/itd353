@@ -2,9 +2,8 @@ from __future__ import print_function
 
 import sys
 from operator import add
+from pyspark import SparkContext, SparkConf
 
-#from pyspark.sql import SparkSession # spark 2.0
-from pyspark import SparkContext # spark 1.x
 hdfs_nn = "127.0.0.1"
 
 def join(tokenized):
@@ -13,8 +12,9 @@ def join(tokenized):
     return "\t".join([x,y])
 
 def main():
-    sc = SparkContext()
-    sc.appName = "ETL (Transform) Example"
+    conf = SparkConf().setAppName("ETL (Transform) Example")
+    sc = SparkContext(conf=conf)
+
     input = sc.textFile("hdfs://%s:9000/data/transform/" % hdfs_nn)
     tokenizeds = input.map(lambda line : line.split(" "))
     tokenizeds.cache()
@@ -34,5 +34,5 @@ if __name__ == "__main__":
     main()
 
 '''
-$ /opt/spark-1.5.2-bin-hadoop2-hive2-r/bin/spark-submit transform.py
+$ /opt/spark-2.2.1-bin-hadoop2.7/bin/spark-submit transform.py
 '''

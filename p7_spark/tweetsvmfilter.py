@@ -2,8 +2,9 @@ from __future__ import print_function
 
 import sys,re
 import numpy
-#from pyspark.sql import SparkSession # spark 2.0
-from pyspark import SparkContext # spark 1.x
+from pyspark import SparkContext, SparkConf
+
+
 from pyspark.mllib import *
 from pyspark.mllib.regression import LabeledPoint
 from pyspark.mllib.linalg import Vectors
@@ -30,8 +31,9 @@ def to_labeledpoint(l, twt):
     return LabeledPoint(l, Vectors.dense(pad_cap(ws,vector_fixed_size)))
 
 def main():
-    sc = SparkContext()
-    sc.appName = "Spark SVM"
+    conf = SparkConf().setAppName("Spark SVM")
+    sc = SparkContext(conf=conf)
+
     posTXT = sc.textFile("hdfs://%s:9000/data/tweet/label_data/Kpop/*.txt" % hdfs_nn).sample(False,0.1)
     negTXT = sc.textFile("hdfs://%s:9000/data/tweet/label_data/othertweet/*.txt" % hdfs_nn).sample(False,0.1)
     # convert the training data to labeled points
@@ -62,5 +64,5 @@ if __name__ == "__main__":
     main()
 
 '''
-$ /opt/spark-1.5.2-bin-hadoop2-hive2-r/bin/spark-submit extract.py
+$ /opt/spark-2.2.1-bin-hadoop2.7/bin/spark-submit tweetsvmfilter.py
 '''
