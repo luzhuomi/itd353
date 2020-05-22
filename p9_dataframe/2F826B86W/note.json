@@ -1,0 +1,149 @@
+{
+  "paragraphs": [
+    {
+      "text": "%md\n# hello\n",
+      "user": "anonymous",
+      "dateUpdated": "2020-05-21 17:24:07.975",
+      "config": {
+        "colWidth": 12.0,
+        "fontSize": 9.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "markdown",
+          "editOnDblClick": true,
+          "completionKey": "TAB",
+          "completionSupport": false
+        },
+        "editorMode": "ace/mode/markdown",
+        "editorHide": true,
+        "tableHide": false
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "\u003cdiv class\u003d\"markdown-body\"\u003e\n\u003ch1\u003ehello\u003c/h1\u003e\n\u003c/div\u003e"
+          }
+        ]
+      },
+      "apps": [],
+      "jobName": "paragraph_1590039474765_717326740",
+      "id": "20200521-133754_1946431062",
+      "dateCreated": "2020-05-21 13:37:54.765",
+      "dateStarted": "2020-05-21 17:24:07.975",
+      "dateFinished": "2020-05-21 17:24:10.273",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "import org.apache.spark._\nimport org.apache.spark.sql._\nimport org.apache.spark.rdd.RDD\n\nval sparkmaster \u003d \"spark://Kennys-MBP:7077\"\nval hadoopmaster \u003d \"hdfs://127.0.0.1:9000\"\n\nval sparkSession \u003d SparkSession.builder().master(sparkmaster).appName(\"wordcount notebook\").getOrCreate()\nsparkSession.",
+      "user": "anonymous",
+      "dateUpdated": "2020-05-21 17:25:33.116",
+      "config": {
+        "colWidth": 12.0,
+        "fontSize": 9.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "editorMode": "ace/mode/scala"
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "import org.apache.spark._\nimport org.apache.spark.sql._\nimport org.apache.spark.rdd.RDD\nsparkmaster: String \u003d spark://Kennys-MBP:7077\nhadoopmaster: String \u003d hdfs://127.0.0.1:9000\nsparkSession: org.apache.spark.sql.SparkSession \u003d org.apache.spark.sql.SparkSession@4580a8db\n"
+          }
+        ]
+      },
+      "apps": [],
+      "jobName": "paragraph_1590046292357_439302256",
+      "id": "20200521-153132_1113350900",
+      "dateCreated": "2020-05-21 15:31:32.357",
+      "dateStarted": "2020-05-21 17:17:12.333",
+      "dateFinished": "2020-05-21 17:17:22.432",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "val sc \u003d sparkSession.sparkContext\nval textFile \u003d sc.textFile(\"hdfs://localhost:9000/data/\")\nval counts \u003d textFile.flatMap(line \u003d\u003e line.split(\" \")).map((word:String) \u003d\u003e (word, 1)).reduceByKey(_ + _)\ncounts.saveAsTextFile(\"hdfs://localhost:9000/output/\")",
+      "user": "anonymous",
+      "dateUpdated": "2020-05-21 17:18:44.595",
+      "config": {
+        "colWidth": 12.0,
+        "fontSize": 9.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "editorMode": "ace/mode/scala"
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "sc: org.apache.spark.SparkContext \u003d org.apache.spark.SparkContext@67dcc913\ntextFile: org.apache.spark.rdd.RDD[String] \u003d hdfs://localhost:9000/data/ MapPartitionsRDD[1] at textFile at \u003cconsole\u003e:35\ncounts: org.apache.spark.rdd.RDD[(String, Int)] \u003d ShuffledRDD[4] at reduceByKey at \u003cconsole\u003e:36\n"
+          }
+        ]
+      },
+      "apps": [],
+      "jobName": "paragraph_1590039092519_-1838401343",
+      "id": "20200521-133132_1758129777",
+      "dateCreated": "2020-05-21 13:31:32.520",
+      "dateStarted": "2020-05-21 17:18:44.610",
+      "dateFinished": "2020-05-21 17:18:47.203",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "user": "anonymous",
+      "config": {},
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "apps": [],
+      "jobName": "paragraph_1590052647890_871585181",
+      "id": "20200521-171727_1003153865",
+      "dateCreated": "2020-05-21 17:17:27.890",
+      "status": "READY",
+      "progressUpdateIntervalMs": 500
+    }
+  ],
+  "name": "WordCount",
+  "id": "2F826B86W",
+  "noteParams": {},
+  "noteForms": {},
+  "angularObjects": {
+    "md:shared_process": [],
+    "spark:shared_process": []
+  },
+  "config": {
+    "isZeppelinNotebookCronEnable": false
+  },
+  "info": {}
+}

@@ -1,0 +1,221 @@
+{
+  "paragraphs": [
+    {
+      "text": "%md\n\n# Practical 9 Part 1: Spark Dataframe ",
+      "user": "anonymous",
+      "dateUpdated": "2020-05-22 09:57:32.953",
+      "config": {
+        "colWidth": 12.0,
+        "fontSize": 9.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "markdown",
+          "editOnDblClick": true,
+          "completionKey": "TAB",
+          "completionSupport": false
+        },
+        "editorMode": "ace/mode/markdown",
+        "editorHide": true,
+        "tableHide": false
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "\u003cdiv class\u003d\"markdown-body\"\u003e\n\u003ch1\u003ePractical 9 Part 1: Spark Dataframe\u003c/h1\u003e\n\u003c/div\u003e"
+          }
+        ]
+      },
+      "apps": [],
+      "jobName": "paragraph_1590053074592_-336601275",
+      "id": "20200521-172434_1587067134",
+      "dateCreated": "2020-05-21 17:24:34.592",
+      "dateStarted": "2020-05-22 09:57:32.953",
+      "dateFinished": "2020-05-22 09:57:35.285",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "import org.apache.spark._\nimport org.apache.spark.sql._\nimport org.apache.spark.rdd.RDD\n\nval sparkmaster \u003d \"spark://Kennys-MBP:7077\"\nval hadoopmaster \u003d \"hdfs://127.0.0.1:9000\"\n\nval sparkSession \u003d SparkSession.builder().master(sparkmaster).appName(\"dataframe notebook\").getOrCreate()\n\n",
+      "user": "anonymous",
+      "dateUpdated": "2020-05-22 09:03:09.572",
+      "config": {
+        "colWidth": 12.0,
+        "fontSize": 9.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "editorMode": "ace/mode/scala"
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "import org.apache.spark._\nimport org.apache.spark.sql._\nimport org.apache.spark.rdd.RDD\nsparkmaster: String \u003d spark://Kennys-MBP:7077\nhadoopmaster: String \u003d hdfs://127.0.0.1:9000\nsparkSession: org.apache.spark.sql.SparkSession \u003d org.apache.spark.sql.SparkSession@7235a615\n"
+          }
+        ]
+      },
+      "apps": [],
+      "jobName": "paragraph_1590053103798_945027404",
+      "id": "20200521-172503_953106042",
+      "dateCreated": "2020-05-21 17:25:03.798",
+      "dateStarted": "2020-05-22 09:03:09.585",
+      "dateFinished": "2020-05-22 09:03:10.290",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "val df:DataFrame \u003d sparkSession.read\n    .option(\"header\", \"true\")\n    .option(\"delimiter\",\",\")\n    .option(\"inferSchema\", \"true\")\n    .csv(hadoopmaster + \"/data/Covid-19-SG.csv\")",
+      "user": "anonymous",
+      "dateUpdated": "2020-05-22 09:42:13.548",
+      "config": {
+        "colWidth": 12.0,
+        "fontSize": 9.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "editorMode": "ace/mode/scala"
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "df: org.apache.spark.sql.DataFrame \u003d [Date: string, Daily Confirmed : int ... 8 more fields]\n"
+          }
+        ]
+      },
+      "apps": [],
+      "jobName": "paragraph_1590053160955_-872199283",
+      "id": "20200521-172600_915077806",
+      "dateCreated": "2020-05-21 17:26:00.955",
+      "dateStarted": "2020-05-22 09:42:13.561",
+      "dateFinished": "2020-05-22 09:42:14.165",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "df.show(5)",
+      "user": "anonymous",
+      "dateUpdated": "2020-05-22 09:42:17.829",
+      "config": {
+        "colWidth": 12.0,
+        "fontSize": 9.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {}
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "+------+----------------+----------------+-----------------------+------------+----------------------+--------------+------------------------+----------------------------------------+-------------------------------------------+\n|  Date|Daily Confirmed |Daily Discharged|Discharged to Isolation|Daily Deaths|Tested positive demise|Daily Imported|Daily Local transmission|Local cases residing in dorms MOH report|Local cases not residing in doms MOH report|\n+------+----------------+----------------+-----------------------+------------+----------------------+--------------+------------------------+----------------------------------------+-------------------------------------------+\n|23-Jan|               1|               0|                      0|           0|                     0|             1|                       0|                                    null|                                       null|\n|24-Jan|               2|               0|                      0|           0|                     0|             2|                       0|                                    null|                                       null|\n|25-Jan|               1|               0|                      0|           0|                     0|             1|                       0|                                    null|                                       null|\n|26-Jan|               0|               0|                      0|           0|                     0|             0|                       0|                                    null|                                       null|\n|27-Jan|               1|               0|                      0|           0|                     0|             1|                       0|                                    null|                                       null|\n+------+----------------+----------------+-----------------------+------------+----------------------+--------------+------------------------+----------------------------------------+-------------------------------------------+\nonly showing top 5 rows\n\n"
+          }
+        ]
+      },
+      "apps": [],
+      "jobName": "paragraph_1590109376221_387582694",
+      "id": "20200522-090256_1597244164",
+      "dateCreated": "2020-05-22 09:02:56.221",
+      "dateStarted": "2020-05-22 09:42:17.841",
+      "dateFinished": "2020-05-22 09:42:18.249",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "df.col(\"Date\")",
+      "user": "anonymous",
+      "dateUpdated": "2020-05-22 09:58:33.327",
+      "config": {
+        "colWidth": 12.0,
+        "fontSize": 9.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "editorMode": "ace/mode/scala"
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "ERROR",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "\u003cconsole\u003e:33: error: value show is not a member of org.apache.spark.sql.Column\n       df.col(\"Date\").show(5)\n                      ^\n"
+          }
+        ]
+      },
+      "apps": [],
+      "jobName": "paragraph_1590109410240_1445111972",
+      "id": "20200522-090330_1318912369",
+      "dateCreated": "2020-05-22 09:03:30.240",
+      "dateStarted": "2020-05-22 09:58:07.072",
+      "dateFinished": "2020-05-22 09:58:07.107",
+      "status": "ERROR",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "user": "anonymous",
+      "config": {},
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "apps": [],
+      "jobName": "paragraph_1590112599376_245669351",
+      "id": "20200522-095639_714390801",
+      "dateCreated": "2020-05-22 09:56:39.376",
+      "status": "READY",
+      "progressUpdateIntervalMs": 500
+    }
+  ],
+  "name": "Spark Dataframe (Scala)",
+  "id": "2F9D8KPF6",
+  "noteParams": {},
+  "noteForms": {},
+  "angularObjects": {
+    "md:shared_process": [],
+    "spark:shared_process": []
+  },
+  "config": {
+    "isZeppelinNotebookCronEnable": false
+  },
+  "info": {}
+}

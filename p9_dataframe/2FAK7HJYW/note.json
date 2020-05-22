@@ -1,0 +1,139 @@
+{
+  "paragraphs": [
+    {
+      "text": "%pyspark\n\nfrom pyspark.sql import SparkSession\n\nsparkmaster \u003d \"spark://Kennys-MBP:7077\"\nhadoopmaster \u003d \"hdfs://127.0.0.1:9000\"\nsparkSession \u003d SparkSession.builder.master(sparkmaster).appName(\"Spark Dataframe\").getOrCreate()\n\n",
+      "user": "anonymous",
+      "dateUpdated": "2020-05-22 18:11:21.861",
+      "config": {
+        "colWidth": 12.0,
+        "fontSize": 9.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "python",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "editorMode": "ace/mode/python"
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": []
+      },
+      "apps": [],
+      "jobName": "paragraph_1590141061436_-1707151618",
+      "id": "20200522-175101_1267738414",
+      "dateCreated": "2020-05-22 17:51:01.436",
+      "dateStarted": "2020-05-22 18:11:21.871",
+      "dateFinished": "2020-05-22 18:11:21.881",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "%pyspark\ndf \u003d sparkSession.read.option(\"header\", \"true\").option(\"delimiter\",\",\").option(\"inferSchema\", \"true\").csv(hadoopmaster + \"/data/Covid-19-SG.csv\")",
+      "user": "anonymous",
+      "dateUpdated": "2020-05-22 18:12:55.540",
+      "config": {
+        "colWidth": 12.0,
+        "fontSize": 9.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "python",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "editorMode": "ace/mode/python"
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": []
+      },
+      "apps": [],
+      "jobName": "paragraph_1590141286081_193180030",
+      "id": "20200522-175446_1690443780",
+      "dateCreated": "2020-05-22 17:54:46.081",
+      "dateStarted": "2020-05-22 18:12:25.091",
+      "dateFinished": "2020-05-22 18:12:25.626",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "%pyspark\ndf.show(5)",
+      "user": "anonymous",
+      "dateUpdated": "2020-05-22 18:12:41.212",
+      "config": {
+        "colWidth": 12.0,
+        "fontSize": 9.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "python",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "editorMode": "ace/mode/python"
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "+------+----------------+----------------+-----------------------+------------+----------------------+--------------+------------------------+----------------------------------------+-------------------------------------------+\n|  Date|Daily Confirmed |Daily Discharged|Discharged to Isolation|Daily Deaths|Tested positive demise|Daily Imported|Daily Local transmission|Local cases residing in dorms MOH report|Local cases not residing in doms MOH report|\n+------+----------------+----------------+-----------------------+------------+----------------------+--------------+------------------------+----------------------------------------+-------------------------------------------+\n|23-Jan|               1|               0|                      0|           0|                     0|             1|                       0|                                    null|                                       null|\n|24-Jan|               2|               0|                      0|           0|                     0|             2|                       0|                                    null|                                       null|\n|25-Jan|               1|               0|                      0|           0|                     0|             1|                       0|                                    null|                                       null|\n|26-Jan|               0|               0|                      0|           0|                     0|             0|                       0|                                    null|                                       null|\n|27-Jan|               1|               0|                      0|           0|                     0|             1|                       0|                                    null|                                       null|\n+------+----------------+----------------+-----------------------+------------+----------------------+--------------+------------------------+----------------------------------------+-------------------------------------------+\nonly showing top 5 rows\n\n"
+          }
+        ]
+      },
+      "apps": [],
+      "jobName": "paragraph_1590142285110_-1706799056",
+      "id": "20200522-181125_1108754746",
+      "dateCreated": "2020-05-22 18:11:25.110",
+      "dateStarted": "2020-05-22 18:12:41.224",
+      "dateFinished": "2020-05-22 18:12:41.328",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "%pyspark\n",
+      "user": "anonymous",
+      "dateUpdated": "2020-05-22 18:12:36.663",
+      "config": {},
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "apps": [],
+      "jobName": "paragraph_1590142356663_592326822",
+      "id": "20200522-181236_1581821174",
+      "dateCreated": "2020-05-22 18:12:36.663",
+      "status": "READY",
+      "progressUpdateIntervalMs": 500
+    }
+  ],
+  "name": "Spark Dataframe (Python)",
+  "id": "2FAK7HJYW",
+  "noteParams": {},
+  "noteForms": {},
+  "angularObjects": {
+    "md:shared_process": [],
+    "spark:shared_process": []
+  },
+  "config": {
+    "isZeppelinNotebookCronEnable": false
+  },
+  "info": {}
+}
