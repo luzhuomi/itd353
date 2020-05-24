@@ -1,9 +1,66 @@
 {
   "paragraphs": [
     {
-      "text": "%pyspark\n\nfrom pyspark.sql import SparkSession\n\nsparkmaster \u003d \"spark://Kennys-MBP:7077\"\nhadoopmaster \u003d \"hdfs://127.0.0.1:9000\"\nsparkSession \u003d SparkSession.builder.master(sparkmaster).appName(\"Spark Dataframe\").getOrCreate()\n\n",
+      "text": "%md\n\n# Practical 9 Part 1: Spark Dataframe \n",
       "user": "anonymous",
-      "dateUpdated": "2020-05-22 18:11:21.861",
+      "dateUpdated": "2020-05-23 22:52:33.785",
+      "config": {
+        "colWidth": 12.0,
+        "fontSize": 9.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "markdown",
+          "editOnDblClick": true,
+          "completionKey": "TAB",
+          "completionSupport": false
+        },
+        "editorMode": "ace/mode/markdown",
+        "editorHide": true,
+        "tableHide": false
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "\u003cdiv class\u003d\"markdown-body\"\u003e\n\u003ch1\u003ePractical 9 Part 1: Spark Dataframe\u003c/h1\u003e\n\u003c/div\u003e"
+          }
+        ]
+      },
+      "apps": [],
+      "jobName": "paragraph_1590219816009_-2008127068",
+      "id": "20200523-154336_1010448707",
+      "dateCreated": "2020-05-23 15:43:36.009",
+      "dateStarted": "2020-05-23 15:43:55.848",
+      "dateFinished": "2020-05-23 15:43:55.872",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "%md\n",
+      "user": "anonymous",
+      "dateUpdated": "2020-05-23 15:44:00.361",
+      "config": {},
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "apps": [],
+      "jobName": "paragraph_1590219840360_-706785396",
+      "id": "20200523-154400_333076066",
+      "dateCreated": "2020-05-23 15:44:00.360",
+      "status": "READY",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "%pyspark\n\nfrom pyspark.sql import SparkSession\n\nsparkmaster \u003d \"spark://pop-t540.localdomain:7077\"\nhadoopmaster \u003d \"hdfs://127.0.0.1:9000\"\nsparkSession \u003d SparkSession.builder.master(sparkmaster).appName(\"Spark Dataframe\").getOrCreate()\n\n",
+      "user": "anonymous",
+      "dateUpdated": "2020-05-23 15:35:32.771",
       "config": {
         "colWidth": 12.0,
         "fontSize": 9.0,
@@ -29,15 +86,15 @@
       "jobName": "paragraph_1590141061436_-1707151618",
       "id": "20200522-175101_1267738414",
       "dateCreated": "2020-05-22 17:51:01.436",
-      "dateStarted": "2020-05-22 18:11:21.871",
-      "dateFinished": "2020-05-22 18:11:21.881",
+      "dateStarted": "2020-05-23 15:35:32.863",
+      "dateFinished": "2020-05-23 15:35:57.617",
       "status": "FINISHED",
       "progressUpdateIntervalMs": 500
     },
     {
       "text": "%pyspark\ndf \u003d sparkSession.read.option(\"header\", \"true\").option(\"delimiter\",\",\").option(\"inferSchema\", \"true\").csv(hadoopmaster + \"/data/Covid-19-SG.csv\")",
       "user": "anonymous",
-      "dateUpdated": "2020-05-22 18:12:55.540",
+      "dateUpdated": "2020-05-23 15:36:14.969",
       "config": {
         "colWidth": 12.0,
         "fontSize": 9.0,
@@ -63,15 +120,15 @@
       "jobName": "paragraph_1590141286081_193180030",
       "id": "20200522-175446_1690443780",
       "dateCreated": "2020-05-22 17:54:46.081",
-      "dateStarted": "2020-05-22 18:12:25.091",
-      "dateFinished": "2020-05-22 18:12:25.626",
+      "dateStarted": "2020-05-23 15:36:15.022",
+      "dateFinished": "2020-05-23 15:36:23.172",
       "status": "FINISHED",
       "progressUpdateIntervalMs": 500
     },
     {
       "text": "%pyspark\ndf.show(5)",
       "user": "anonymous",
-      "dateUpdated": "2020-05-22 18:12:41.212",
+      "dateUpdated": "2020-05-23 15:36:30.574",
       "config": {
         "colWidth": 12.0,
         "fontSize": 9.0,
@@ -102,8 +159,8 @@
       "jobName": "paragraph_1590142285110_-1706799056",
       "id": "20200522-181125_1108754746",
       "dateCreated": "2020-05-22 18:11:25.110",
-      "dateStarted": "2020-05-22 18:12:41.224",
-      "dateFinished": "2020-05-22 18:12:41.328",
+      "dateStarted": "2020-05-23 15:36:30.611",
+      "dateFinished": "2020-05-23 15:36:31.514",
       "status": "FINISHED",
       "progressUpdateIntervalMs": 500
     },

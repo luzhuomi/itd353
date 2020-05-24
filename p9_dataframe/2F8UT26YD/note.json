@@ -1,0 +1,366 @@
+{
+  "paragraphs": [
+    {
+      "text": "%md\n# Practical 9 Part 2 Spark DataSet",
+      "user": "anonymous",
+      "dateUpdated": "2020-05-24 09:54:05.588",
+      "config": {
+        "colWidth": 12.0,
+        "fontSize": 9.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "markdown",
+          "editOnDblClick": true,
+          "completionKey": "TAB",
+          "completionSupport": false
+        },
+        "editorMode": "ace/mode/markdown",
+        "editorHide": true,
+        "tableHide": false
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "\u003cdiv class\u003d\"markdown-body\"\u003e\n\u003ch1\u003ePractical 9 Part 2 Spark DataSet\u003c/h1\u003e\n\u003c/div\u003e"
+          }
+        ]
+      },
+      "apps": [],
+      "jobName": "paragraph_1590285037328_-61189872",
+      "id": "20200524-095037_30066815",
+      "dateCreated": "2020-05-24 09:50:37.329",
+      "dateStarted": "2020-05-24 09:54:05.588",
+      "dateFinished": "2020-05-24 09:54:05.611",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "%md\n## Learning Objective \n\n* Use Spark dataset to perform data processing operations",
+      "user": "anonymous",
+      "dateUpdated": "2020-05-24 09:52:14.905",
+      "config": {
+        "colWidth": 12.0,
+        "fontSize": 9.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "markdown",
+          "editOnDblClick": true,
+          "completionKey": "TAB",
+          "completionSupport": false
+        },
+        "editorMode": "ace/mode/markdown",
+        "editorHide": true,
+        "tableHide": false
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "\u003cdiv class\u003d\"markdown-body\"\u003e\n\u003ch2\u003eLearning Objective\u003c/h2\u003e\n\u003cul\u003e\n  \u003cli\u003eUse Spark dataset to perform data processing operations\u003c/li\u003e\n\u003c/ul\u003e\n\u003c/div\u003e"
+          }
+        ]
+      },
+      "apps": [],
+      "jobName": "paragraph_1590285097575_1587430480",
+      "id": "20200524-095137_1204548636",
+      "dateCreated": "2020-05-24 09:51:37.575",
+      "dateStarted": "2020-05-24 09:52:14.915",
+      "dateFinished": "2020-05-24 09:52:14.930",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "import org.apache.spark._\nimport org.apache.spark.sql._\nimport org.apache.spark.rdd.RDD\n\nval sparkmaster \u003d \"spark://pop-t540.localdomain:7077\"\nval hadoopmaster \u003d \"hdfs://127.0.0.1:9000\"\n\nval sparkSession \u003d SparkSession.builder().master(sparkmaster).appName(\"dataframe notebook\").getOrCreate()\n",
+      "user": "anonymous",
+      "dateUpdated": "2020-05-24 09:52:44.768",
+      "config": {
+        "colWidth": 12.0,
+        "fontSize": 9.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "editorMode": "ace/mode/scala"
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "import org.apache.spark._\nimport org.apache.spark.sql._\nimport org.apache.spark.rdd.RDD\nsparkmaster: String \u003d spark://pop-t540.localdomain:7077\nhadoopmaster: String \u003d hdfs://127.0.0.1:9000\nsparkSession: org.apache.spark.sql.SparkSession \u003d org.apache.spark.sql.SparkSession@2f0aa0c2\n"
+          }
+        ]
+      },
+      "apps": [],
+      "jobName": "paragraph_1590285035897_1843689007",
+      "id": "20200524-095035_765433952",
+      "dateCreated": "2020-05-24 09:50:35.897",
+      "dateStarted": "2020-05-24 09:52:44.780",
+      "dateFinished": "2020-05-24 09:52:45.278",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "%md \n\n## Spark Dataset vs Dataframe\n\n\nSince Spark 2.0, DataSet was introduced to be a more general data processing structure compared to DataFrame. `DataFrame` in Spark is an alias of `DataSet[Row]`.\n\nRecall that\n",
+      "user": "anonymous",
+      "dateUpdated": "2020-05-24 10:39:34.243",
+      "config": {
+        "colWidth": 12.0,
+        "fontSize": 9.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "markdown",
+          "editOnDblClick": true,
+          "completionKey": "TAB",
+          "completionSupport": false
+        },
+        "editorMode": "ace/mode/markdown",
+        "editorHide": true,
+        "tableHide": false
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "\u003cdiv class\u003d\"markdown-body\"\u003e\n\u003ch2\u003eSpark Dataset vs Dataframe\u003c/h2\u003e\n\u003cp\u003eSince Spark 2.0, DataSet was introduced to be a more general data processing structure compared to DataFrame. \u003ccode\u003eDataFrame\u003c/code\u003e in Spark is an alias of \u003ccode\u003eDataSet[Row]\u003c/code\u003e.\u003c/p\u003e\n\u003cp\u003eRecall that\u003c/p\u003e\n\u003c/div\u003e"
+          }
+        ]
+      },
+      "apps": [],
+      "jobName": "paragraph_1590284988596_1346366852",
+      "id": "20200524-094948_1574049582",
+      "dateCreated": "2020-05-24 09:49:48.596",
+      "dateStarted": "2020-05-24 10:39:34.243",
+      "dateFinished": "2020-05-24 10:39:34.250",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "\nval df:DataFrame \u003d sparkSession.read\n    .option(\"header\", \"true\")\n    .option(\"delimiter\",\",\")\n    .option(\"inferSchema\", \"true\")\n    .csv(hadoopmaster + \"/data/Covid-19-SG.csv\")\n    \ndf.show(5)",
+      "user": "anonymous",
+      "dateUpdated": "2020-05-24 10:39:36.145",
+      "config": {
+        "colWidth": 12.0,
+        "fontSize": 9.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "editorMode": "ace/mode/scala"
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "+------+----------------+----------------+-----------------------+------------+----------------------+--------------+------------------------+----------------------------------------+-------------------------------------------+\n|  Date|Daily Confirmed |Daily Discharged|Discharged to Isolation|Daily Deaths|Tested positive demise|Daily Imported|Daily Local transmission|Local cases residing in dorms MOH report|Local cases not residing in doms MOH report|\n+------+----------------+----------------+-----------------------+------------+----------------------+--------------+------------------------+----------------------------------------+-------------------------------------------+\n|23-Jan|               1|               0|                      0|           0|                     0|             1|                       0|                                    null|                                       null|\n|24-Jan|               2|               0|                      0|           0|                     0|             2|                       0|                                    null|                                       null|\n|25-Jan|               1|               0|                      0|           0|                     0|             1|                       0|                                    null|                                       null|\n|26-Jan|               0|               0|                      0|           0|                     0|             0|                       0|                                    null|                                       null|\n|27-Jan|               1|               0|                      0|           0|                     0|             1|                       0|                                    null|                                       null|\n+------+----------------+----------------+-----------------------+------------+----------------------+--------------+------------------------+----------------------------------------+-------------------------------------------+\nonly showing top 5 rows\n\ndf: org.apache.spark.sql.DataFrame \u003d [Date: string, Daily Confirmed : int ... 8 more fields]\n"
+          }
+        ]
+      },
+      "apps": [],
+      "jobName": "paragraph_1590287928880_-335987775",
+      "id": "20200524-103848_706516164",
+      "dateCreated": "2020-05-24 10:38:48.881",
+      "dateStarted": "2020-05-24 10:39:36.154",
+      "dateFinished": "2020-05-24 10:39:37.505",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "%md \nWe can give a much more precise type schema to the structured data",
+      "user": "anonymous",
+      "dateUpdated": "2020-05-24 10:39:40.190",
+      "config": {
+        "colWidth": 12.0,
+        "fontSize": 9.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "markdown",
+          "editOnDblClick": true,
+          "completionKey": "TAB",
+          "completionSupport": false
+        },
+        "editorMode": "ace/mode/markdown",
+        "editorHide": true,
+        "tableHide": false
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "\u003cdiv class\u003d\"markdown-body\"\u003e\n\u003cp\u003eWe can give a much more precise type schema to the structured data\u003c/p\u003e\n\u003c/div\u003e"
+          }
+        ]
+      },
+      "apps": [],
+      "jobName": "paragraph_1590287956462_-50074932",
+      "id": "20200524-103916_543275350",
+      "dateCreated": "2020-05-24 10:39:16.462",
+      "dateStarted": "2020-05-24 10:39:40.193",
+      "dateFinished": "2020-05-24 10:39:40.199",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "import java.util.Date\n// import java.sql.Date\nimport java.sql.Timestamp\nimport scala.util.Try\nimport spark.implicits._\n\ncase class Record (date:java.sql.Timestamp, dailyConfirmed:Int, dailyDischarged:Int, dischargedToIsolation:Int, dailyDeaths:Int, testedPositiveDemise:Int, dailyImported:Int, dailyLocalTransimission:Int, localCasesResidingInDorms:Option[Int], localCasesNotResidinginDorms:Option[Int])\n\n\nval fmt \u003d new java.text.SimpleDateFormat(\"dd-MMM-yyyy\")\n\ndef parse(row:Row):Record \u003d {\n    val date \u003d new java.sql.Timestamp(fmt.parse(row(0).toString + \"-2020\").getTime)\n    val dailyConfirmed \u003d row(1).toString.toInt\n    val dailyDischarged \u003d row(2).toString.toInt\n    val dischargedToIsolation \u003d row(3).toString.toInt\n    val dailyDeaths \u003d row(4).toString.toInt\n    val testedPositiveDemise \u003d row(5).toString.toInt\n    val dailyImported \u003d row(6).toString.toInt\n    val dailyLocalTransimission \u003d row(7).toString.toInt\n    val localCasesResidingInDorms \u003d Try(row(8).toString.toInt).toOption\n    val localCasesNotResidinginDorms \u003d Try(row(9).toString.toInt).toOption\n    Record(date,dailyConfirmed, dailyDischarged, dischargedToIsolation, dailyDeaths, testedPositiveDemise, dailyImported, dailyLocalTransimission, localCasesResidingInDorms, localCasesNotResidinginDorms)\n}\n\n\nval ds:Dataset[Record] \u003d df.map( parse )\n",
+      "user": "anonymous",
+      "dateUpdated": "2020-05-24 10:55:25.347",
+      "config": {
+        "colWidth": 12.0,
+        "fontSize": 9.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "editorMode": "ace/mode/scala",
+        "editorHide": false,
+        "tableHide": false
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "import java.util.Date\nimport java.sql.Timestamp\nimport scala.util.Try\nimport spark.implicits._\ndefined class Record\nfmt: java.text.SimpleDateFormat \u003d java.text.SimpleDateFormat@541ff80d\nparse: (row: org.apache.spark.sql.Row)Record\nds: org.apache.spark.sql.Dataset[Record] \u003d [date: timestamp, dailyConfirmed: int ... 8 more fields]\n"
+          }
+        ]
+      },
+      "apps": [],
+      "jobName": "paragraph_1590285164768_2116908072",
+      "id": "20200524-095244_1628285256",
+      "dateCreated": "2020-05-24 09:52:44.768",
+      "dateStarted": "2020-05-24 10:55:13.058",
+      "dateFinished": "2020-05-24 10:55:15.059",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "ds.show()",
+      "user": "anonymous",
+      "dateUpdated": "2020-05-24 10:55:31.009",
+      "config": {
+        "colWidth": 12.0,
+        "fontSize": 9.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "editorMode": "ace/mode/scala"
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "+-------------------+--------------+---------------+---------------------+-----------+--------------------+-------------+-----------------------+-------------------------+----------------------------+\n|               date|dailyConfirmed|dailyDischarged|dischargedToIsolation|dailyDeaths|testedPositiveDemise|dailyImported|dailyLocalTransimission|localCasesResidingInDorms|localCasesNotResidinginDorms|\n+-------------------+--------------+---------------+---------------------+-----------+--------------------+-------------+-----------------------+-------------------------+----------------------------+\n|2020-01-23 00:00:00|             1|              0|                    0|          0|                   0|            1|                      0|                     null|                        null|\n|2020-01-24 00:00:00|             2|              0|                    0|          0|                   0|            2|                      0|                     null|                        null|\n|2020-01-25 00:00:00|             1|              0|                    0|          0|                   0|            1|                      0|                     null|                        null|\n|2020-01-26 00:00:00|             0|              0|                    0|          0|                   0|            0|                      0|                     null|                        null|\n|2020-01-27 00:00:00|             1|              0|                    0|          0|                   0|            1|                      0|                     null|                        null|\n|2020-01-28 00:00:00|             2|              0|                    0|          0|                   0|            2|                      0|                     null|                        null|\n|2020-01-29 00:00:00|             3|              0|                    0|          0|                   0|            3|                      0|                     null|                        null|\n|2020-01-30 00:00:00|             3|              0|                    0|          0|                   0|            3|                      0|                     null|                        null|\n|2020-01-31 00:00:00|             3|              0|                    0|          0|                   0|            3|                      0|                     null|                        null|\n|2020-02-01 00:00:00|             2|              0|                    0|          0|                   0|            2|                      0|                     null|                        null|\n|2020-02-02 00:00:00|             0|              0|                    0|          0|                   0|            0|                      0|                     null|                        null|\n|2020-02-03 00:00:00|             0|              0|                    0|          0|                   0|            0|                      0|                     null|                        null|\n|2020-02-04 00:00:00|             6|              1|                    0|          0|                   0|            2|                      4|                     null|                        null|\n|2020-02-05 00:00:00|             4|              0|                    0|          0|                   0|            1|                      3|                     null|                        null|\n|2020-02-06 00:00:00|             2|              0|                    0|          0|                   0|            0|                      2|                     null|                        null|\n|2020-02-07 00:00:00|             3|              1|                    0|          0|                   0|            0|                      3|                     null|                        null|\n|2020-02-08 00:00:00|             7|              0|                    0|          0|                   0|            0|                      7|                     null|                        null|\n|2020-02-09 00:00:00|             3|              4|                    0|          0|                   0|            0|                      3|                     null|                        null|\n|2020-02-10 00:00:00|             2|              1|                    0|          0|                   0|            1|                      1|                     null|                        null|\n|2020-02-11 00:00:00|             2|              2|                    0|          0|                   0|            0|                      2|                     null|                        null|\n+-------------------+--------------+---------------+---------------------+-----------+--------------------+-------------+-----------------------+-------------------------+----------------------------+\nonly showing top 20 rows\n\n"
+          }
+        ]
+      },
+      "apps": [],
+      "jobName": "paragraph_1590286557481_-1785415656",
+      "id": "20200524-101557_1867995807",
+      "dateCreated": "2020-05-24 10:15:57.481",
+      "dateStarted": "2020-05-24 10:55:31.027",
+      "dateFinished": "2020-05-24 10:55:31.937",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "",
+      "user": "anonymous",
+      "dateUpdated": "2020-05-24 10:59:02.272",
+      "config": {
+        "colWidth": 12.0,
+        "fontSize": 9.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "editorMode": "ace/mode/scala"
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "apps": [],
+      "jobName": "paragraph_1590288931009_1802839185",
+      "id": "20200524-105531_836460473",
+      "dateCreated": "2020-05-24 10:55:31.010",
+      "status": "READY",
+      "progressUpdateIntervalMs": 500
+    }
+  ],
+  "name": "Spark DataSet (Scala)",
+  "id": "2F8UT26YD",
+  "noteParams": {},
+  "noteForms": {},
+  "angularObjects": {
+    "md:shared_process": [],
+    "spark:shared_process": []
+  },
+  "config": {
+    "isZeppelinNotebookCronEnable": false
+  },
+  "info": {}
+}
