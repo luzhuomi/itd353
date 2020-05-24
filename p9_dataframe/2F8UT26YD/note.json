@@ -83,9 +83,9 @@
       "progressUpdateIntervalMs": 500
     },
     {
-      "text": "import org.apache.spark._\nimport org.apache.spark.sql._\nimport org.apache.spark.rdd.RDD\n\nval sparkmaster \u003d \"spark://pop-t540.localdomain:7077\"\nval hadoopmaster \u003d \"hdfs://127.0.0.1:9000\"\n\nval sparkSession \u003d SparkSession.builder().master(sparkmaster).appName(\"dataframe notebook\").getOrCreate()\n",
+      "text": "import org.apache.spark._\nimport org.apache.spark.sql._\nimport org.apache.spark.rdd.RDD\n\nimport java.util.Date\n// import java.sql.Date\nimport java.sql.Timestamp\nimport scala.util.Try\n\n\nval sparkmaster \u003d \"spark://pop-t540.localdomain:7077\"\nval hadoopmaster \u003d \"hdfs://127.0.0.1:9000\"\n\nval sparkSession \u003d SparkSession.builder().master(sparkmaster).appName(\"dataframe notebook\").getOrCreate()\n",
       "user": "anonymous",
-      "dateUpdated": "2020-05-24 09:52:44.768",
+      "dateUpdated": "2020-05-24 12:07:45.028",
       "config": {
         "colWidth": 12.0,
         "fontSize": 9.0,
@@ -108,7 +108,7 @@
         "msg": [
           {
             "type": "TEXT",
-            "data": "import org.apache.spark._\nimport org.apache.spark.sql._\nimport org.apache.spark.rdd.RDD\nsparkmaster: String \u003d spark://pop-t540.localdomain:7077\nhadoopmaster: String \u003d hdfs://127.0.0.1:9000\nsparkSession: org.apache.spark.sql.SparkSession \u003d org.apache.spark.sql.SparkSession@2f0aa0c2\n"
+            "data": "import org.apache.spark._\nimport org.apache.spark.sql._\nimport org.apache.spark.rdd.RDD\nimport java.util.Date\nimport java.sql.Timestamp\nimport scala.util.Try\nimport spark.implicits._\nsparkmaster: String \u003d spark://pop-t540.localdomain:7077\nhadoopmaster: String \u003d hdfs://127.0.0.1:9000\nsparkSession: org.apache.spark.sql.SparkSession \u003d org.apache.spark.sql.SparkSession@2f0aa0c2\n"
           }
         ]
       },
@@ -116,8 +116,8 @@
       "jobName": "paragraph_1590285035897_1843689007",
       "id": "20200524-095035_765433952",
       "dateCreated": "2020-05-24 09:50:35.897",
-      "dateStarted": "2020-05-24 09:52:44.780",
-      "dateFinished": "2020-05-24 09:52:45.278",
+      "dateStarted": "2020-05-24 12:07:22.487",
+      "dateFinished": "2020-05-24 12:07:24.222",
       "status": "FINISHED",
       "progressUpdateIntervalMs": 500
     },
@@ -165,7 +165,7 @@
     {
       "text": "\nval df:DataFrame \u003d sparkSession.read\n    .option(\"header\", \"true\")\n    .option(\"delimiter\",\",\")\n    .option(\"inferSchema\", \"true\")\n    .csv(hadoopmaster + \"/data/Covid-19-SG.csv\")\n    \ndf.show(5)",
       "user": "anonymous",
-      "dateUpdated": "2020-05-24 10:39:36.145",
+      "dateUpdated": "2020-05-24 12:07:26.691",
       "config": {
         "colWidth": 12.0,
         "fontSize": 9.0,
@@ -196,15 +196,15 @@
       "jobName": "paragraph_1590287928880_-335987775",
       "id": "20200524-103848_706516164",
       "dateCreated": "2020-05-24 10:38:48.881",
-      "dateStarted": "2020-05-24 10:39:36.154",
-      "dateFinished": "2020-05-24 10:39:37.505",
+      "dateStarted": "2020-05-24 12:07:26.714",
+      "dateFinished": "2020-05-24 12:07:27.900",
       "status": "FINISHED",
       "progressUpdateIntervalMs": 500
     },
     {
-      "text": "%md \nWe can give a much more precise type schema to the structured data",
+      "text": "%md \nWe can give a much more precise type schema to the structured data ",
       "user": "anonymous",
-      "dateUpdated": "2020-05-24 10:39:40.190",
+      "dateUpdated": "2020-05-24 12:07:59.316",
       "config": {
         "colWidth": 12.0,
         "fontSize": 9.0,
@@ -217,8 +217,8 @@
           "completionSupport": false
         },
         "editorMode": "ace/mode/markdown",
-        "editorHide": true,
-        "tableHide": false
+        "editorHide": false,
+        "tableHide": true
       },
       "settings": {
         "params": {},
@@ -243,9 +243,9 @@
       "progressUpdateIntervalMs": 500
     },
     {
-      "text": "import java.util.Date\n// import java.sql.Date\nimport java.sql.Timestamp\nimport scala.util.Try\nimport spark.implicits._\n\ncase class Record (date:java.sql.Timestamp, dailyConfirmed:Int, dailyDischarged:Int, dischargedToIsolation:Int, dailyDeaths:Int, testedPositiveDemise:Int, dailyImported:Int, dailyLocalTransimission:Int, localCasesResidingInDorms:Option[Int], localCasesNotResidinginDorms:Option[Int])\n\n\nval fmt \u003d new java.text.SimpleDateFormat(\"dd-MMM-yyyy\")\n\ndef parse(row:Row):Record \u003d {\n    val date \u003d new java.sql.Timestamp(fmt.parse(row(0).toString + \"-2020\").getTime)\n    val dailyConfirmed \u003d row(1).toString.toInt\n    val dailyDischarged \u003d row(2).toString.toInt\n    val dischargedToIsolation \u003d row(3).toString.toInt\n    val dailyDeaths \u003d row(4).toString.toInt\n    val testedPositiveDemise \u003d row(5).toString.toInt\n    val dailyImported \u003d row(6).toString.toInt\n    val dailyLocalTransimission \u003d row(7).toString.toInt\n    val localCasesResidingInDorms \u003d Try(row(8).toString.toInt).toOption\n    val localCasesNotResidinginDorms \u003d Try(row(9).toString.toInt).toOption\n    Record(date,dailyConfirmed, dailyDischarged, dischargedToIsolation, dailyDeaths, testedPositiveDemise, dailyImported, dailyLocalTransimission, localCasesResidingInDorms, localCasesNotResidinginDorms)\n}\n\n\nval ds:Dataset[Record] \u003d df.map( parse )\n",
+      "text": "\nimport spark.implicits._\n\n\ncase class Record (date:java.sql.Timestamp, dailyConfirmed:Int, dailyDischarged:Int, dischargedToIsolation:Int, dailyDeaths:Int, testedPositiveDemise:Int, dailyImported:Int, dailyLocalTransimission:Int, localCasesResidingInDorms:Option[Int], localCasesNotResidinginDorms:Option[Int])\n\n\nval fmt \u003d new java.text.SimpleDateFormat(\"dd-MMM-yyyy\")\n\ndef parse(row:Row):Record \u003d {\n    val date \u003d new java.sql.Timestamp(fmt.parse(row(0).toString + \"-2020\").getTime)\n    val dailyConfirmed \u003d row(1).toString.toInt\n    val dailyDischarged \u003d row(2).toString.toInt\n    val dischargedToIsolation \u003d row(3).toString.toInt\n    val dailyDeaths \u003d row(4).toString.toInt\n    val testedPositiveDemise \u003d row(5).toString.toInt\n    val dailyImported \u003d row(6).toString.toInt\n    val dailyLocalTransimission \u003d row(7).toString.toInt\n    val localCasesResidingInDorms \u003d Try(row(8).toString.toInt).toOption\n    val localCasesNotResidinginDorms \u003d Try(row(9).toString.toInt).toOption\n    Record(date,dailyConfirmed, dailyDischarged, dischargedToIsolation, dailyDeaths, testedPositiveDemise, dailyImported, dailyLocalTransimission, localCasesResidingInDorms, localCasesNotResidinginDorms)\n}\n\n\nval records:Dataset[Record] \u003d df.map( parse )\n\n",
       "user": "anonymous",
-      "dateUpdated": "2020-05-24 10:55:25.347",
+      "dateUpdated": "2020-05-24 12:08:00.982",
       "config": {
         "colWidth": 12.0,
         "fontSize": 9.0,
@@ -270,7 +270,7 @@
         "msg": [
           {
             "type": "TEXT",
-            "data": "import java.util.Date\nimport java.sql.Timestamp\nimport scala.util.Try\nimport spark.implicits._\ndefined class Record\nfmt: java.text.SimpleDateFormat \u003d java.text.SimpleDateFormat@541ff80d\nparse: (row: org.apache.spark.sql.Row)Record\nds: org.apache.spark.sql.Dataset[Record] \u003d [date: timestamp, dailyConfirmed: int ... 8 more fields]\n"
+            "data": "import spark.implicits._\ndefined class Record\nfmt: java.text.SimpleDateFormat \u003d java.text.SimpleDateFormat@541ff80d\nparse: (row: org.apache.spark.sql.Row)Record\nrecords: org.apache.spark.sql.Dataset[Record] \u003d [date: timestamp, dailyConfirmed: int ... 8 more fields]\n"
           }
         ]
       },
@@ -278,15 +278,97 @@
       "jobName": "paragraph_1590285164768_2116908072",
       "id": "20200524-095244_1628285256",
       "dateCreated": "2020-05-24 09:52:44.768",
-      "dateStarted": "2020-05-24 10:55:13.058",
-      "dateFinished": "2020-05-24 10:55:15.059",
+      "dateStarted": "2020-05-24 12:08:01.002",
+      "dateFinished": "2020-05-24 12:08:02.974",
       "status": "FINISHED",
       "progressUpdateIntervalMs": 500
     },
     {
-      "text": "ds.show()",
+      "text": "%md \n\n### Note\n\n`import spark.implicits._` is having a scope of a Zeppelin cell. We have to import it whenever we declare a new schema / case clsas.",
       "user": "anonymous",
-      "dateUpdated": "2020-05-24 10:55:31.009",
+      "dateUpdated": "2020-05-24 12:08:51.453",
+      "config": {
+        "colWidth": 12.0,
+        "fontSize": 9.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "markdown",
+          "editOnDblClick": true,
+          "completionKey": "TAB",
+          "completionSupport": false
+        },
+        "editorMode": "ace/mode/markdown",
+        "editorHide": true,
+        "tableHide": false
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "\u003cdiv class\u003d\"markdown-body\"\u003e\n\u003ch3\u003eNote\u003c/h3\u003e\n\u003cp\u003e\u003ccode\u003eimport spark.implicits._\u003c/code\u003e is having a scope of a Zeppelin cell. We have to import it whenever we declare a new schema / case clsas.\u003c/p\u003e\n\u003c/div\u003e"
+          }
+        ]
+      },
+      "apps": [],
+      "jobName": "paragraph_1590293283405_-674508521",
+      "id": "20200524-120803_1869127992",
+      "dateCreated": "2020-05-24 12:08:03.405",
+      "dateStarted": "2020-05-24 12:08:51.453",
+      "dateFinished": "2020-05-24 12:08:51.464",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "%md \n\nSpark Dataset has similar set of APIs as Dataframe\u0027s, such as `select` and `show`.",
+      "user": "anonymous",
+      "dateUpdated": "2020-05-24 11:34:26.264",
+      "config": {
+        "colWidth": 12.0,
+        "fontSize": 9.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "markdown",
+          "editOnDblClick": true,
+          "completionKey": "TAB",
+          "completionSupport": false
+        },
+        "editorMode": "ace/mode/markdown",
+        "editorHide": true,
+        "tableHide": false
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "\u003cdiv class\u003d\"markdown-body\"\u003e\n\u003cp\u003eSpark Dataset has similar set of APIs as Dataframe\u0026rsquo;s, such as \u003ccode\u003eselect\u003c/code\u003e and \u003ccode\u003eshow\u003c/code\u003e.\u003c/p\u003e\n\u003c/div\u003e"
+          }
+        ]
+      },
+      "apps": [],
+      "jobName": "paragraph_1590290395544_-1325072729",
+      "id": "20200524-111955_682360349",
+      "dateCreated": "2020-05-24 11:19:55.544",
+      "dateStarted": "2020-05-24 11:34:26.264",
+      "dateFinished": "2020-05-24 11:34:26.272",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "records.show(5)",
+      "user": "anonymous",
+      "dateUpdated": "2020-05-24 11:22:02.258",
       "config": {
         "colWidth": 12.0,
         "fontSize": 9.0,
@@ -309,7 +391,7 @@
         "msg": [
           {
             "type": "TEXT",
-            "data": "+-------------------+--------------+---------------+---------------------+-----------+--------------------+-------------+-----------------------+-------------------------+----------------------------+\n|               date|dailyConfirmed|dailyDischarged|dischargedToIsolation|dailyDeaths|testedPositiveDemise|dailyImported|dailyLocalTransimission|localCasesResidingInDorms|localCasesNotResidinginDorms|\n+-------------------+--------------+---------------+---------------------+-----------+--------------------+-------------+-----------------------+-------------------------+----------------------------+\n|2020-01-23 00:00:00|             1|              0|                    0|          0|                   0|            1|                      0|                     null|                        null|\n|2020-01-24 00:00:00|             2|              0|                    0|          0|                   0|            2|                      0|                     null|                        null|\n|2020-01-25 00:00:00|             1|              0|                    0|          0|                   0|            1|                      0|                     null|                        null|\n|2020-01-26 00:00:00|             0|              0|                    0|          0|                   0|            0|                      0|                     null|                        null|\n|2020-01-27 00:00:00|             1|              0|                    0|          0|                   0|            1|                      0|                     null|                        null|\n|2020-01-28 00:00:00|             2|              0|                    0|          0|                   0|            2|                      0|                     null|                        null|\n|2020-01-29 00:00:00|             3|              0|                    0|          0|                   0|            3|                      0|                     null|                        null|\n|2020-01-30 00:00:00|             3|              0|                    0|          0|                   0|            3|                      0|                     null|                        null|\n|2020-01-31 00:00:00|             3|              0|                    0|          0|                   0|            3|                      0|                     null|                        null|\n|2020-02-01 00:00:00|             2|              0|                    0|          0|                   0|            2|                      0|                     null|                        null|\n|2020-02-02 00:00:00|             0|              0|                    0|          0|                   0|            0|                      0|                     null|                        null|\n|2020-02-03 00:00:00|             0|              0|                    0|          0|                   0|            0|                      0|                     null|                        null|\n|2020-02-04 00:00:00|             6|              1|                    0|          0|                   0|            2|                      4|                     null|                        null|\n|2020-02-05 00:00:00|             4|              0|                    0|          0|                   0|            1|                      3|                     null|                        null|\n|2020-02-06 00:00:00|             2|              0|                    0|          0|                   0|            0|                      2|                     null|                        null|\n|2020-02-07 00:00:00|             3|              1|                    0|          0|                   0|            0|                      3|                     null|                        null|\n|2020-02-08 00:00:00|             7|              0|                    0|          0|                   0|            0|                      7|                     null|                        null|\n|2020-02-09 00:00:00|             3|              4|                    0|          0|                   0|            0|                      3|                     null|                        null|\n|2020-02-10 00:00:00|             2|              1|                    0|          0|                   0|            1|                      1|                     null|                        null|\n|2020-02-11 00:00:00|             2|              2|                    0|          0|                   0|            0|                      2|                     null|                        null|\n+-------------------+--------------+---------------+---------------------+-----------+--------------------+-------------+-----------------------+-------------------------+----------------------------+\nonly showing top 20 rows\n\n"
+            "data": "+-------------------+--------------+---------------+---------------------+-----------+--------------------+-------------+-----------------------+-------------------------+----------------------------+\n|               date|dailyConfirmed|dailyDischarged|dischargedToIsolation|dailyDeaths|testedPositiveDemise|dailyImported|dailyLocalTransimission|localCasesResidingInDorms|localCasesNotResidinginDorms|\n+-------------------+--------------+---------------+---------------------+-----------+--------------------+-------------+-----------------------+-------------------------+----------------------------+\n|2020-01-23 00:00:00|             1|              0|                    0|          0|                   0|            1|                      0|                     null|                        null|\n|2020-01-24 00:00:00|             2|              0|                    0|          0|                   0|            2|                      0|                     null|                        null|\n|2020-01-25 00:00:00|             1|              0|                    0|          0|                   0|            1|                      0|                     null|                        null|\n|2020-01-26 00:00:00|             0|              0|                    0|          0|                   0|            0|                      0|                     null|                        null|\n|2020-01-27 00:00:00|             1|              0|                    0|          0|                   0|            1|                      0|                     null|                        null|\n+-------------------+--------------+---------------+---------------------+-----------+--------------------+-------------+-----------------------+-------------------------+----------------------------+\nonly showing top 5 rows\n\n"
           }
         ]
       },
@@ -317,15 +399,56 @@
       "jobName": "paragraph_1590286557481_-1785415656",
       "id": "20200524-101557_1867995807",
       "dateCreated": "2020-05-24 10:15:57.481",
-      "dateStarted": "2020-05-24 10:55:31.027",
-      "dateFinished": "2020-05-24 10:55:31.937",
+      "dateStarted": "2020-05-24 11:22:02.270",
+      "dateFinished": "2020-05-24 11:22:03.165",
       "status": "FINISHED",
       "progressUpdateIntervalMs": 500
     },
     {
-      "text": "",
+      "text": "%md \nNote that all these operations return a dataframe instead of a dataset",
       "user": "anonymous",
-      "dateUpdated": "2020-05-24 10:59:02.272",
+      "dateUpdated": "2020-05-24 11:25:33.024",
+      "config": {
+        "colWidth": 12.0,
+        "fontSize": 9.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "markdown",
+          "editOnDblClick": true,
+          "completionKey": "TAB",
+          "completionSupport": false
+        },
+        "editorMode": "ace/mode/markdown",
+        "editorHide": true,
+        "tableHide": false
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "\u003cdiv class\u003d\"markdown-body\"\u003e\n\u003cp\u003eNote that all these operations return a dataframe instead of a dataset\u003c/p\u003e\n\u003c/div\u003e"
+          }
+        ]
+      },
+      "apps": [],
+      "jobName": "paragraph_1590290633000_-1428102961",
+      "id": "20200524-112353_1057297498",
+      "dateCreated": "2020-05-24 11:23:53.000",
+      "dateStarted": "2020-05-24 11:25:33.025",
+      "dateFinished": "2020-05-24 11:25:33.033",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "\nval df1 \u003d records.select(\"date\", \"dailyConfirmed\")",
+      "user": "anonymous",
+      "dateUpdated": "2020-05-24 11:23:51.453",
       "config": {
         "colWidth": 12.0,
         "fontSize": 9.0,
@@ -343,10 +466,585 @@
         "params": {},
         "forms": {}
       },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "res34: org.apache.spark.sql.DataFrame \u003d [date: timestamp, dailyConfirmed: int]\n"
+          }
+        ]
+      },
+      "apps": [],
+      "jobName": "paragraph_1590290438696_2122280911",
+      "id": "20200524-112038_1356732343",
+      "dateCreated": "2020-05-24 11:20:38.696",
+      "dateStarted": "2020-05-24 11:23:06.199",
+      "dateFinished": "2020-05-24 11:23:06.615",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "%md\n\nWithout any surprise, SQL query is also supported.",
+      "user": "anonymous",
+      "dateUpdated": "2020-05-24 11:26:59.191",
+      "config": {
+        "colWidth": 12.0,
+        "fontSize": 9.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "markdown",
+          "editOnDblClick": true,
+          "completionKey": "TAB",
+          "completionSupport": false
+        },
+        "editorMode": "ace/mode/markdown",
+        "editorHide": true,
+        "tableHide": false
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "\u003cdiv class\u003d\"markdown-body\"\u003e\n\u003cp\u003eWithout any surprise, SQL query is also supported.\u003c/p\u003e\n\u003c/div\u003e"
+          }
+        ]
+      },
+      "apps": [],
+      "jobName": "paragraph_1590290736786_-421380053",
+      "id": "20200524-112536_2075055849",
+      "dateCreated": "2020-05-24 11:25:36.786",
+      "dateStarted": "2020-05-24 11:26:59.192",
+      "dateFinished": "2020-05-24 11:26:59.217",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "records.toDF.createOrReplaceTempView(\"SingaporeCovid19\")\n",
+      "user": "anonymous",
+      "dateUpdated": "2020-05-24 11:30:15.127",
+      "config": {
+        "colWidth": 12.0,
+        "fontSize": 9.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "editorMode": "ace/mode/scala"
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": []
+      },
+      "apps": [],
+      "jobName": "paragraph_1590290823711_293494381",
+      "id": "20200524-112703_663822767",
+      "dateCreated": "2020-05-24 11:27:03.712",
+      "dateStarted": "2020-05-24 11:30:15.148",
+      "dateFinished": "2020-05-24 11:30:15.449",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "%sql \n\nSELECT * FROM SingaporeCovid19",
+      "user": "anonymous",
+      "dateUpdated": "2020-05-24 11:30:52.686",
+      "config": {
+        "colWidth": 12.0,
+        "fontSize": 9.0,
+        "enabled": true,
+        "results": {
+          "0": {
+            "graph": {
+              "mode": "table",
+              "height": 300.0,
+              "optionOpen": false,
+              "setting": {
+                "table": {
+                  "tableGridState": {},
+                  "tableColumnTypeState": {
+                    "names": {
+                      "date": "string",
+                      "dailyConfirmed": "string",
+                      "dailyDischarged": "string",
+                      "dischargedToIsolation": "string",
+                      "dailyDeaths": "string",
+                      "testedPositiveDemise": "string",
+                      "dailyImported": "string",
+                      "dailyLocalTransimission": "string",
+                      "localCasesResidingInDorms": "string",
+                      "localCasesNotResidinginDorms": "string"
+                    },
+                    "updated": false
+                  },
+                  "tableOptionSpecHash": "[{\"name\":\"useFilter\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable filter for columns\"},{\"name\":\"showPagination\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable pagination for better navigation\"},{\"name\":\"showAggregationFooter\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable a footer for displaying aggregated values\"}]",
+                  "tableOptionValue": {
+                    "useFilter": false,
+                    "showPagination": false,
+                    "showAggregationFooter": false
+                  },
+                  "updated": false,
+                  "initialized": false
+                },
+                "lineChart": {
+                  "rotate": {
+                    "degree": "-45"
+                  },
+                  "xLabelStatus": "default"
+                },
+                "stackedAreaChart": {
+                  "rotate": {
+                    "degree": "-45"
+                  },
+                  "xLabelStatus": "default"
+                },
+                "multiBarChart": {
+                  "rotate": {
+                    "degree": "-45"
+                  },
+                  "xLabelStatus": "default"
+                }
+              },
+              "commonSetting": {},
+              "keys": [
+                {
+                  "name": "date",
+                  "index": 0.0,
+                  "aggr": "sum"
+                }
+              ],
+              "groups": [],
+              "values": [
+                {
+                  "name": "dailyConfirmed",
+                  "index": 1.0,
+                  "aggr": "sum"
+                }
+              ]
+            },
+            "helium": {}
+          }
+        },
+        "editorSetting": {
+          "language": "sql",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "editorMode": "ace/mode/sql"
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TABLE",
+            "data": "date\tdailyConfirmed\tdailyDischarged\tdischargedToIsolation\tdailyDeaths\ttestedPositiveDemise\tdailyImported\tdailyLocalTransimission\tlocalCasesResidingInDorms\tlocalCasesNotResidinginDorms\n2020-01-23 00:00:00.0\t1\t0\t0\t0\t0\t1\t0\tnull\tnull\n2020-01-24 00:00:00.0\t2\t0\t0\t0\t0\t2\t0\tnull\tnull\n2020-01-25 00:00:00.0\t1\t0\t0\t0\t0\t1\t0\tnull\tnull\n2020-01-26 00:00:00.0\t0\t0\t0\t0\t0\t0\t0\tnull\tnull\n2020-01-27 00:00:00.0\t1\t0\t0\t0\t0\t1\t0\tnull\tnull\n2020-01-28 00:00:00.0\t2\t0\t0\t0\t0\t2\t0\tnull\tnull\n2020-01-29 00:00:00.0\t3\t0\t0\t0\t0\t3\t0\tnull\tnull\n2020-01-30 00:00:00.0\t3\t0\t0\t0\t0\t3\t0\tnull\tnull\n2020-01-31 00:00:00.0\t3\t0\t0\t0\t0\t3\t0\tnull\tnull\n2020-02-01 00:00:00.0\t2\t0\t0\t0\t0\t2\t0\tnull\tnull\n2020-02-02 00:00:00.0\t0\t0\t0\t0\t0\t0\t0\tnull\tnull\n2020-02-03 00:00:00.0\t0\t0\t0\t0\t0\t0\t0\tnull\tnull\n2020-02-04 00:00:00.0\t6\t1\t0\t0\t0\t2\t4\tnull\tnull\n2020-02-05 00:00:00.0\t4\t0\t0\t0\t0\t1\t3\tnull\tnull\n2020-02-06 00:00:00.0\t2\t0\t0\t0\t0\t0\t2\tnull\tnull\n2020-02-07 00:00:00.0\t3\t1\t0\t0\t0\t0\t3\tnull\tnull\n2020-02-08 00:00:00.0\t7\t0\t0\t0\t0\t0\t7\tnull\tnull\n2020-02-09 00:00:00.0\t3\t4\t0\t0\t0\t0\t3\tnull\tnull\n2020-02-10 00:00:00.0\t2\t1\t0\t0\t0\t1\t1\tnull\tnull\n2020-02-11 00:00:00.0\t2\t2\t0\t0\t0\t0\t2\tnull\tnull\n2020-02-12 00:00:00.0\t3\t6\t0\t0\t0\t0\t3\tnull\tnull\n2020-02-13 00:00:00.0\t8\t0\t0\t0\t0\t0\t8\tnull\tnull\n2020-02-14 00:00:00.0\t9\t2\t0\t0\t0\t0\t9\tnull\tnull\n2020-02-15 00:00:00.0\t5\t1\t0\t0\t0\t0\t5\tnull\tnull\n2020-02-16 00:00:00.0\t3\t1\t0\t0\t0\t0\t3\tnull\tnull\n2020-02-17 00:00:00.0\t2\t5\t0\t0\t0\t1\t1\tnull\tnull\n2020-02-18 00:00:00.0\t4\t5\t0\t0\t0\t0\t4\tnull\tnull\n2020-02-19 00:00:00.0\t3\t5\t0\t0\t0\t0\t3\tnull\tnull\n2020-02-20 00:00:00.0\t1\t3\t0\t0\t0\t0\t1\tnull\tnull\n2020-02-21 00:00:00.0\t1\t10\t0\t0\t0\t0\t1\tnull\tnull\n2020-02-22 00:00:00.0\t3\t2\t0\t0\t0\t1\t2\tnull\tnull\n2020-02-23 00:00:00.0\t0\t2\t0\t0\t0\t0\t0\tnull\tnull\n2020-02-24 00:00:00.0\t1\t2\t0\t0\t0\t0\t1\tnull\tnull\n2020-02-25 00:00:00.0\t1\t5\t0\t0\t0\t0\t1\tnull\tnull\n2020-02-26 00:00:00.0\t2\t4\t0\t0\t0\t0\t2\tnull\tnull\n2020-02-27 00:00:00.0\t3\t4\t0\t0\t0\t0\t3\tnull\tnull\n2020-02-28 00:00:00.0\t2\t3\t0\t0\t0\t0\t2\tnull\tnull\n2020-02-29 00:00:00.0\t4\t3\t0\t0\t0\t0\t4\tnull\tnull\n2020-03-01 00:00:00.0\t4\t2\t0\t0\t0\t0\t4\tnull\tnull\n2020-03-02 00:00:00.0\t2\t4\t0\t0\t0\t0\t2\tnull\tnull\n2020-03-03 00:00:00.0\t2\t0\t0\t0\t0\t0\t2\tnull\tnull\n2020-03-04 00:00:00.0\t2\t1\t0\t0\t0\t0\t2\tnull\tnull\n2020-03-05 00:00:00.0\t5\t2\t0\t0\t0\t1\t4\tnull\tnull\n2020-03-06 00:00:00.0\t13\t1\t0\t0\t0\t2\t11\tnull\tnull\n2020-03-07 00:00:00.0\t8\t8\t0\t0\t0\t2\t6\tnull\tnull\n2020-03-08 00:00:00.0\t12\t0\t0\t0\t0\t1\t11\tnull\tnull\n2020-03-09 00:00:00.0\t10\t3\t0\t0\t0\t3\t7\tnull\tnull\n2020-03-10 00:00:00.0\t6\t0\t0\t0\t0\t0\t6\tnull\tnull\n2020-03-11 00:00:00.0\t12\t3\t0\t0\t0\t8\t4\tnull\tnull\n2020-03-12 00:00:00.0\t9\t0\t0\t0\t0\t5\t4\tnull\tnull\n2020-03-13 00:00:00.0\t13\t1\t0\t0\t0\t9\t4\tnull\tnull\n2020-03-14 00:00:00.0\t12\t8\t0\t0\t0\t9\t3\tnull\tnull\n2020-03-15 00:00:00.0\t14\t0\t0\t0\t0\t9\t5\tnull\tnull\n2020-03-16 00:00:00.0\t17\t4\t0\t0\t0\t11\t6\tnull\tnull\n2020-03-17 00:00:00.0\t23\t5\t0\t0\t0\t17\t6\tnull\tnull\n2020-03-18 00:00:00.0\t47\t3\t0\t0\t0\t33\t14\tnull\tnull\n2020-03-19 00:00:00.0\t32\t7\t0\t0\t0\t24\t8\tnull\tnull\n2020-03-20 00:00:00.0\t40\t7\t0\t0\t0\t30\t10\tnull\tnull\n2020-03-21 00:00:00.0\t47\t9\t0\t2\t0\t39\t8\tnull\tnull\n2020-03-22 00:00:00.0\t23\t4\t0\t0\t0\t18\t5\tnull\tnull\n2020-03-23 00:00:00.0\t54\t8\t0\t0\t0\t48\t6\tnull\tnull\n2020-03-24 00:00:00.0\t49\t3\t0\t0\t0\t32\t17\tnull\tnull\n2020-03-25 00:00:00.0\t73\t5\t65\t0\t0\t38\t35\tnull\tnull\n2020-03-26 00:00:00.0\t52\t12\t87\t0\t0\t28\t24\tnull\tnull\n2020-03-27 00:00:00.0\t49\t11\t115\t0\t0\t22\t27\tnull\tnull\n2020-03-28 00:00:00.0\t70\t15\t182\t0\t0\t41\t29\tnull\tnull\n2020-03-29 00:00:00.0\t42\t14\t206\t1\t0\t24\t18\t2\t17\n2020-03-30 00:00:00.0\t35\t16\t228\t0\t0\t9\t26\t3\t22\n2020-03-31 00:00:00.0\t47\t12\t260\t0\t0\t16\t31\t6\t25\n2020-04-01 00:00:00.0\t74\t5\t291\t0\t0\t20\t54\t11\t43\n2020-04-02 00:00:00.0\t49\t21\t315\t1\t0\t8\t41\t7\t34\n2020-04-03 00:00:00.0\t65\t16\t354\t1\t0\t9\t56\t22\t34\n2020-04-04 00:00:00.0\t75\t15\t386\t1\t0\t6\t69\t23\t45\n2020-04-05 00:00:00.0\t120\t23\t414\t0\t0\t4\t116\t57\t59\n2020-04-06 00:00:00.0\t66\t24\t454\t0\t0\t1\t65\t38\t27\n2020-04-07 00:00:00.0\t106\t33\t471\t0\t0\t3\t103\t46\t57\n2020-04-08 00:00:00.0\t142\t29\t542\t0\t0\t2\t140\t65\t75\n2020-04-09 00:00:00.0\t287\t54\t559\t0\t0\t3\t284\t214\t70\n2020-04-10 00:00:00.0\t198\t32\t734\t1\t0\t0\t198\t141\t57\n2020-04-11 00:00:00.0\t191\t35\t820\t1\t0\t0\t191\t152\t39\n2020-04-12 00:00:00.0\t233\t32\t988\t0\t0\t0\t233\t188\t45\n2020-04-13 00:00:00.0\t386\t26\t1165\t1\t0\t0\t386\t334\t52\n2020-04-14 00:00:00.0\t334\t25\t1316\t1\t0\t0\t334\t275\t59\n2020-04-15 00:00:00.0\t447\t41\t1540\t0\t1\t0\t447\t406\t41\n2020-04-16 00:00:00.0\t728\t31\t1848\t0\t0\t0\t728\t676\t52\n2020-04-17 00:00:00.0\t623\t25\t2218\t1\t0\t1\t622\t559\t63\n2020-04-18 00:00:00.0\t942\t38\t2678\t0\t0\t0\t942\t893\t49\n2020-04-19 00:00:00.0\t596\t26\t2888\t0\t0\t0\t596\t544\t52\n2020-04-20 00:00:00.0\t1426\t33\t3782\t0\t0\t0\t1426\t1371\t55\n2020-04-21 00:00:00.0\t1111\t39\t4682\t0\t0\t0\t1111\t1050\t61\n2020-04-22 00:00:00.0\t1016\t57\t4999\t1\t0\t0\t1016\t967\t49\n2020-04-23 00:00:00.0\t1037\t36\t8874\t0\t0\t0\t1037\t982\t55\n2020-04-24 00:00:00.0\t897\t38\t9878\t0\t0\t0\t897\t852\t45\n2020-04-25 00:00:00.0\t618\t46\t10465\t0\t0\t0\t618\t597\t21\n2020-04-26 00:00:00.0\t931\t58\t11241\t0\t0\t2\t929\t886\t43\n2020-04-27 00:00:00.0\t799\t35\t11863\t2\t0\t0\t799\t764\t35\n2020-04-28 00:00:00.0\t528\t33\t12120\t0\t0\t0\t528\t511\t17\n2020-04-29 00:00:00.0\t690\t62\t12725\t0\t0\t0\t690\t660\t30\n2020-04-30 00:00:00.0\t528\t56\t13202\t1\t0\t0\t528\t488\t40\n2020-05-01 00:00:00.0\t932\t24\t14053\t1\t0\t0\t932\t905\t27\n2020-05-02 00:00:00.0\t447\t79\t14474\t1\t1\t0\t447\t431\t16\n2020-05-03 00:00:00.0\t657\t61\t15149\t1\t0\t0\t657\t626\t31\n2020-05-04 00:00:00.0\t573\t49\t15812\t0\t0\t0\t573\t560\t13\n2020-05-05 00:00:00.0\t632\t62\t16289\t0\t0\t0\t632\t605\t27\n2020-05-06 00:00:00.0\t788\t115\t17082\t2\t0\t0\t788\t760\t28\n2020-05-07 00:00:00.0\t741\t78\t17831\t0\t0\t0\t741\t725\t16\n2020-05-08 00:00:00.0\t768\t328\t18402\t0\t0\t0\t768\t750\t18\n2020-05-09 00:00:00.0\t753\t256\t19020\t0\t0\t0\t753\t739\t14\n2020-05-10 00:00:00.0\t876\t425\t19498\t0\t0\t1\t875\t860\t15\n2020-05-11 00:00:00.0\t486\t504\t19448\t1\t1\t0\t486\t481\t5\n2020-05-12 00:00:00.0\t884\t626\t19667\t0\t2\t0\t884\t877\t7\n2020-05-13 00:00:00.0\t675\t958\t19479\t0\t0\t0\t675\t671\t4\n2020-05-14 00:00:00.0\t752\t1164\t19032\t0\t0\t0\t752\t750\t2\n2020-05-15 00:00:00.0\t793\t1275\t18498\t0\t0\t0\t793\t791\t2\n2020-05-16 00:00:00.0\t465\t1094\t17881\t1\t0\t0\t465\t457\t8\n2020-05-17 00:00:00.0\t682\t998\t17466\t0\t0\t0\t682\t673\t9\n2020-05-18 00:00:00.0\t305\t495\t17450\t0\t0\t0\t305\t303\t2\n2020-05-19 00:00:00.0\t451\t530\t17403\t0\t0\t0\t451\t450\t1\n2020-05-20 00:00:00.0\t570\t842\t17181\t0\t0\t0\t570\t562\t8\n"
+          },
+          {
+            "type": "TEXT",
+            "data": ""
+          }
+        ]
+      },
       "apps": [],
       "jobName": "paragraph_1590288931009_1802839185",
       "id": "20200524-105531_836460473",
       "dateCreated": "2020-05-24 10:55:31.010",
+      "dateStarted": "2020-05-24 11:30:32.070",
+      "dateFinished": "2020-05-24 11:30:32.750",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "%md \n\n\n## User Defined Function (UDF)\n\n\nUDF for dataset comes almost for free thanks to the `.map()`, `filter()` and `groupBy()`. ",
+      "user": "anonymous",
+      "dateUpdated": "2020-05-24 11:33:57.095",
+      "config": {
+        "colWidth": 12.0,
+        "fontSize": 9.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "markdown",
+          "editOnDblClick": true,
+          "completionKey": "TAB",
+          "completionSupport": false
+        },
+        "editorMode": "ace/mode/markdown",
+        "editorHide": false,
+        "tableHide": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "\u003cdiv class\u003d\"markdown-body\"\u003e\n\u003ch2\u003eUser Defined Function (UDF)\u003c/h2\u003e\n\u003cp\u003eUDF for dataset comes almost for free thanks to the \u003ccode\u003e.map()\u003c/code\u003e, \u003ccode\u003efilter()\u003c/code\u003e and \u003ccode\u003egroupBy()\u003c/code\u003e.\u003c/p\u003e\n\u003c/div\u003e"
+          }
+        ]
+      },
+      "apps": [],
+      "jobName": "paragraph_1590291028330_1578776147",
+      "id": "20200524-113028_1894875977",
+      "dateCreated": "2020-05-24 11:30:28.330",
+      "dateStarted": "2020-05-24 11:33:14.482",
+      "dateFinished": "2020-05-24 11:33:14.495",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "%md\n### Filter",
+      "user": "anonymous",
+      "dateUpdated": "2020-05-24 12:16:46.044",
+      "config": {
+        "colWidth": 12.0,
+        "fontSize": 9.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "markdown",
+          "editOnDblClick": true,
+          "completionKey": "TAB",
+          "completionSupport": false
+        },
+        "editorMode": "ace/mode/markdown",
+        "editorHide": true,
+        "tableHide": false
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "\u003cdiv class\u003d\"markdown-body\"\u003e\n\u003ch3\u003eFilter\u003c/h3\u003e\n\u003c/div\u003e"
+          }
+        ]
+      },
+      "apps": [],
+      "jobName": "paragraph_1590293772869_83275965",
+      "id": "20200524-121612_1000696991",
+      "dateCreated": "2020-05-24 12:16:12.869",
+      "dateStarted": "2020-05-24 12:16:46.044",
+      "dateFinished": "2020-05-24 12:16:46.050",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "records.filter( r \u003d\u003e r.dailyDeaths \u003e 0).show()\n",
+      "user": "anonymous",
+      "dateUpdated": "2020-05-24 11:36:06.380",
+      "config": {
+        "colWidth": 12.0,
+        "fontSize": 9.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "editorMode": "ace/mode/scala"
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "+-------------------+--------------+---------------+---------------------+-----------+--------------------+-------------+-----------------------+-------------------------+----------------------------+\n|               date|dailyConfirmed|dailyDischarged|dischargedToIsolation|dailyDeaths|testedPositiveDemise|dailyImported|dailyLocalTransimission|localCasesResidingInDorms|localCasesNotResidinginDorms|\n+-------------------+--------------+---------------+---------------------+-----------+--------------------+-------------+-----------------------+-------------------------+----------------------------+\n|2020-03-21 00:00:00|            47|              9|                    0|          2|                   0|           39|                      8|                     null|                        null|\n|2020-03-29 00:00:00|            42|             14|                  206|          1|                   0|           24|                     18|                        2|                          17|\n|2020-04-02 00:00:00|            49|             21|                  315|          1|                   0|            8|                     41|                        7|                          34|\n|2020-04-03 00:00:00|            65|             16|                  354|          1|                   0|            9|                     56|                       22|                          34|\n|2020-04-04 00:00:00|            75|             15|                  386|          1|                   0|            6|                     69|                       23|                          45|\n|2020-04-10 00:00:00|           198|             32|                  734|          1|                   0|            0|                    198|                      141|                          57|\n|2020-04-11 00:00:00|           191|             35|                  820|          1|                   0|            0|                    191|                      152|                          39|\n|2020-04-13 00:00:00|           386|             26|                 1165|          1|                   0|            0|                    386|                      334|                          52|\n|2020-04-14 00:00:00|           334|             25|                 1316|          1|                   0|            0|                    334|                      275|                          59|\n|2020-04-17 00:00:00|           623|             25|                 2218|          1|                   0|            1|                    622|                      559|                          63|\n|2020-04-22 00:00:00|          1016|             57|                 4999|          1|                   0|            0|                   1016|                      967|                          49|\n|2020-04-27 00:00:00|           799|             35|                11863|          2|                   0|            0|                    799|                      764|                          35|\n|2020-04-30 00:00:00|           528|             56|                13202|          1|                   0|            0|                    528|                      488|                          40|\n|2020-05-01 00:00:00|           932|             24|                14053|          1|                   0|            0|                    932|                      905|                          27|\n|2020-05-02 00:00:00|           447|             79|                14474|          1|                   1|            0|                    447|                      431|                          16|\n|2020-05-03 00:00:00|           657|             61|                15149|          1|                   0|            0|                    657|                      626|                          31|\n|2020-05-06 00:00:00|           788|            115|                17082|          2|                   0|            0|                    788|                      760|                          28|\n|2020-05-11 00:00:00|           486|            504|                19448|          1|                   1|            0|                    486|                      481|                           5|\n|2020-05-16 00:00:00|           465|           1094|                17881|          1|                   0|            0|                    465|                      457|                           8|\n+-------------------+--------------+---------------+---------------------+-----------+--------------------+-------------+-----------------------+-------------------------+----------------------------+\n\n"
+          }
+        ]
+      },
+      "apps": [],
+      "jobName": "paragraph_1590291194467_223484289",
+      "id": "20200524-113314_59727675",
+      "dateCreated": "2020-05-24 11:33:14.467",
+      "dateStarted": "2020-05-24 11:36:06.405",
+      "dateFinished": "2020-05-24 11:36:07.120",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "%md \n### Map",
+      "user": "anonymous",
+      "dateUpdated": "2020-05-24 12:16:36.887",
+      "config": {
+        "colWidth": 12.0,
+        "fontSize": 9.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "markdown",
+          "editOnDblClick": true,
+          "completionKey": "TAB",
+          "completionSupport": false
+        },
+        "editorMode": "ace/mode/markdown",
+        "editorHide": true,
+        "tableHide": false
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "\u003cdiv class\u003d\"markdown-body\"\u003e\n\u003ch3\u003eMap\u003c/h3\u003e\n\u003c/div\u003e"
+          }
+        ]
+      },
+      "apps": [],
+      "jobName": "paragraph_1590293787926_1228164509",
+      "id": "20200524-121627_1277309519",
+      "dateCreated": "2020-05-24 12:16:27.926",
+      "dateStarted": "2020-05-24 12:16:36.887",
+      "dateFinished": "2020-05-24 12:16:36.895",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "import spark.implicits._\n\n\ncase class CleanRecord (date:java.sql.Timestamp, dailyConfirmed:Int, dailyDischarged:Int, dischargedToIsolation:Int, dailyDeaths:Int, testedPositiveDemise:Int, dailyImported:Int, dailyLocalTransimission:Int, localCasesResidingInDorms:Int, localCasesNotResidinginDorms:Int)\n\n\ndef noneIs0(o:Option[Int]) : Int \u003d o match { \n    case Some(v) \u003d\u003e v\n    case None \u003d\u003e 0\n}\n\ndef clean(r:Record): CleanRecord \u003d r match {\n    case Record(date, dailyConfirmed, dailyDischarged, dischargedToIsolation, dailyDeaths, testedPositiveDemise, dailyImported, dailyLocalTransimission, localCasesResidingInDorms, localCasesNotResidinginDorms) \u003d\u003e {\n        CleanRecord(date, dailyConfirmed, dailyDischarged, dischargedToIsolation, dailyDeaths, testedPositiveDemise, dailyImported, dailyLocalTransimission, noneIs0(localCasesResidingInDorms), noneIs0(localCasesNotResidinginDorms))\n    }\n}\n\nrecords.map( clean ).show()\n    \n",
+      "user": "anonymous",
+      "dateUpdated": "2020-05-24 12:09:02.635",
+      "config": {
+        "colWidth": 12.0,
+        "fontSize": 9.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "editorMode": "ace/mode/scala"
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "+-------------------+--------------+---------------+---------------------+-----------+--------------------+-------------+-----------------------+-------------------------+----------------------------+\n|               date|dailyConfirmed|dailyDischarged|dischargedToIsolation|dailyDeaths|testedPositiveDemise|dailyImported|dailyLocalTransimission|localCasesResidingInDorms|localCasesNotResidinginDorms|\n+-------------------+--------------+---------------+---------------------+-----------+--------------------+-------------+-----------------------+-------------------------+----------------------------+\n|2020-01-23 00:00:00|             1|              0|                    0|          0|                   0|            1|                      0|                        0|                           0|\n|2020-01-24 00:00:00|             2|              0|                    0|          0|                   0|            2|                      0|                        0|                           0|\n|2020-01-25 00:00:00|             1|              0|                    0|          0|                   0|            1|                      0|                        0|                           0|\n|2020-01-26 00:00:00|             0|              0|                    0|          0|                   0|            0|                      0|                        0|                           0|\n|2020-01-27 00:00:00|             1|              0|                    0|          0|                   0|            1|                      0|                        0|                           0|\n|2020-01-28 00:00:00|             2|              0|                    0|          0|                   0|            2|                      0|                        0|                           0|\n|2020-01-29 00:00:00|             3|              0|                    0|          0|                   0|            3|                      0|                        0|                           0|\n|2020-01-30 00:00:00|             3|              0|                    0|          0|                   0|            3|                      0|                        0|                           0|\n|2020-01-31 00:00:00|             3|              0|                    0|          0|                   0|            3|                      0|                        0|                           0|\n|2020-02-01 00:00:00|             2|              0|                    0|          0|                   0|            2|                      0|                        0|                           0|\n|2020-02-02 00:00:00|             0|              0|                    0|          0|                   0|            0|                      0|                        0|                           0|\n|2020-02-03 00:00:00|             0|              0|                    0|          0|                   0|            0|                      0|                        0|                           0|\n|2020-02-04 00:00:00|             6|              1|                    0|          0|                   0|            2|                      4|                        0|                           0|\n|2020-02-05 00:00:00|             4|              0|                    0|          0|                   0|            1|                      3|                        0|                           0|\n|2020-02-06 00:00:00|             2|              0|                    0|          0|                   0|            0|                      2|                        0|                           0|\n|2020-02-07 00:00:00|             3|              1|                    0|          0|                   0|            0|                      3|                        0|                           0|\n|2020-02-08 00:00:00|             7|              0|                    0|          0|                   0|            0|                      7|                        0|                           0|\n|2020-02-09 00:00:00|             3|              4|                    0|          0|                   0|            0|                      3|                        0|                           0|\n|2020-02-10 00:00:00|             2|              1|                    0|          0|                   0|            1|                      1|                        0|                           0|\n|2020-02-11 00:00:00|             2|              2|                    0|          0|                   0|            0|                      2|                        0|                           0|\n+-------------------+--------------+---------------+---------------------+-----------+--------------------+-------------+-----------------------+-------------------------+----------------------------+\nonly showing top 20 rows\n\nimport spark.implicits._\ndefined class CleanRecord\nnoneIs0: (o: Option[Int])Int\nclean: (r: Record)CleanRecord\n"
+          }
+        ]
+      },
+      "apps": [],
+      "jobName": "paragraph_1590291228774_1291355057",
+      "id": "20200524-113348_1431860289",
+      "dateCreated": "2020-05-24 11:33:48.774",
+      "dateStarted": "2020-05-24 12:09:02.652",
+      "dateFinished": "2020-05-24 12:09:05.676",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "%md \n\n### GroupByKey\n\n",
+      "user": "anonymous",
+      "dateUpdated": "2020-05-24 12:42:00.670",
+      "config": {
+        "colWidth": 12.0,
+        "fontSize": 9.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "markdown",
+          "editOnDblClick": true,
+          "completionKey": "TAB",
+          "completionSupport": false
+        },
+        "editorMode": "ace/mode/markdown",
+        "editorHide": true,
+        "tableHide": false
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "\u003cdiv class\u003d\"markdown-body\"\u003e\n\u003ch3\u003eGroupByKey\u003c/h3\u003e\n\u003c/div\u003e"
+          }
+        ]
+      },
+      "apps": [],
+      "jobName": "paragraph_1590294050171_1533442831",
+      "id": "20200524-122050_35304767",
+      "dateCreated": "2020-05-24 12:20:50.171",
+      "dateStarted": "2020-05-24 12:42:00.675",
+      "dateFinished": "2020-05-24 12:42:00.686",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "import spark.implicits._\n\nval grouped: KeyValueGroupedDataset[Int,Record] \u003d records.groupByKey((r:Record) \u003d\u003e r.date.getMonth)\n\ngrouped.mapGroups((key:Int,records:Iterator[Record]) \u003d\u003e (key, records.map(r\u003d\u003er.dailyConfirmed).sum)).show()",
+      "user": "anonymous",
+      "dateUpdated": "2020-05-24 12:46:44.558",
+      "config": {
+        "colWidth": 12.0,
+        "fontSize": 9.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "editorMode": "ace/mode/scala"
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "warning: there was one deprecation warning; re-run with -deprecation for details\n+---+-----+\n| _1|   _2|\n+---+-----+\n|  1|   86|\n|  3|15243|\n|  4|13230|\n|  2|  824|\n|  0|   16|\n+---+-----+\n\nimport spark.implicits._\ngrouped: org.apache.spark.sql.KeyValueGroupedDataset[Int,Record] \u003d KeyValueGroupedDataset: [key: [value: int], value: [date: timestamp, dailyConfirmed: int ... 8 more field(s)]]\n"
+          }
+        ]
+      },
+      "apps": [],
+      "jobName": "paragraph_1590294063092_1164202320",
+      "id": "20200524-122103_1403149532",
+      "dateCreated": "2020-05-24 12:21:03.093",
+      "dateStarted": "2020-05-24 12:46:44.579",
+      "dateFinished": "2020-05-24 12:46:49.140",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "%md\n### Reduce",
+      "user": "anonymous",
+      "dateUpdated": "2020-05-24 12:18:11.005",
+      "config": {
+        "colWidth": 12.0,
+        "fontSize": 9.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "markdown",
+          "editOnDblClick": true,
+          "completionKey": "TAB",
+          "completionSupport": false
+        },
+        "editorMode": "ace/mode/markdown",
+        "editorHide": true,
+        "tableHide": false
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "\u003cdiv class\u003d\"markdown-body\"\u003e\n\u003ch3\u003eReduce\u003c/h3\u003e\n\u003c/div\u003e"
+          }
+        ]
+      },
+      "apps": [],
+      "jobName": "paragraph_1590291784531_-1525826924",
+      "id": "20200524-114304_1455786478",
+      "dateCreated": "2020-05-24 11:43:04.531",
+      "dateStarted": "2020-05-24 12:18:11.012",
+      "dateFinished": "2020-05-24 12:18:11.021",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "\n\nrecords.reduce((r1:Record, r2:Record) \u003d\u003e { r1.copy(dailyConfirmed \u003d r1.dailyConfirmed + r2.dailyConfirmed) } )\n",
+      "user": "anonymous",
+      "dateUpdated": "2020-05-24 12:50:12.661",
+      "config": {
+        "colWidth": 12.0,
+        "fontSize": 9.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "editorMode": "ace/mode/scala"
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "ERROR",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "org.apache.spark.SparkException: Job aborted due to stage failure: Task 0.0 in stage 86.0 (TID 1232) had a not serializable result: org.apache.spark.sql.catalyst.expressions.GeneratedClass$SpecificUnsafeProjection\nSerialization stack:\n\t- object not serializable (class: org.apache.spark.sql.catalyst.expressions.GeneratedClass$SpecificUnsafeProjection, value: \u003cfunction1\u003e)\n\t- field (class: org.apache.spark.sql.execution.datasources.FileFormat$$anon$1, name: appendPartitionColumns, type: class org.apache.spark.sql.catalyst.expressions.UnsafeProjection)\n\t- object (class org.apache.spark.sql.execution.datasources.FileFormat$$anon$1, \u003cfunction1\u003e)\n\t- field (class: org.apache.spark.sql.execution.datasources.FileScanRDD, name: org$apache$spark$sql$execution$datasources$FileScanRDD$$readFunction, type: interface scala.Function1)\n\t- object (class org.apache.spark.sql.execution.datasources.FileScanRDD, FileScanRDD[170] at )\n\t- field (class: org.apache.spark.NarrowDependency, name: _rdd, type: class org.apache.spark.rdd.RDD)\n\t- object (class org.apache.spark.OneToOneDependency, org.apache.spark.OneToOneDependency@2ca2a738)\n\t- writeObject data (class: scala.collection.immutable.List$SerializationProxy)\n\t- object (class scala.collection.immutable.List$SerializationProxy, scala.collection.immutable.List$SerializationProxy@49f9a6ee)\n\t- writeReplace data (class: scala.collection.immutable.List$SerializationProxy)\n\t- object (class scala.collection.immutable.$colon$colon, List(org.apache.spark.OneToOneDependency@2ca2a738))\n\t- field (class: org.apache.spark.rdd.RDD, name: org$apache$spark$rdd$RDD$$dependencies_, type: interface scala.collection.Seq)\n\t- object (class org.apache.spark.rdd.MapPartitionsRDD, MapPartitionsRDD[171] at )\n\t- field (class: org.apache.spark.NarrowDependency, name: _rdd, type: class org.apache.spark.rdd.RDD)\n\t- object (class org.apache.spark.OneToOneDependency, org.apache.spark.OneToOneDependency@111c1dd4)\n\t- writeObject data (class: scala.collection.immutable.List$SerializationProxy)\n\t- object (class scala.collection.immutable.List$SerializationProxy, scala.collection.immutable.List$SerializationProxy@21c8bd4)\n\t- writeReplace data (class: scala.collection.immutable.List$SerializationProxy)\n\t- object (class scala.collection.immutable.$colon$colon, List(org.apache.spark.OneToOneDependency@111c1dd4))\n\t- field (class: org.apache.spark.rdd.RDD, name: org$apache$spark$rdd$RDD$$dependencies_, type: interface scala.collection.Seq)\n\t- object (class org.apache.spark.rdd.MapPartitionsRDD, MapPartitionsRDD[172] at )\n\t- field (class: org.apache.spark.NarrowDependency, name: _rdd, type: class org.apache.spark.rdd.RDD)\n\t- object (class org.apache.spark.OneToOneDependency, org.apache.spark.OneToOneDependency@7c301548)\n\t- writeObject data (class: scala.collection.immutable.List$SerializationProxy)\n\t- object (class scala.collection.immutable.List$SerializationProxy, scala.collection.immutable.List$SerializationProxy@5e75e0c)\n\t- writeReplace data (class: scala.collection.immutable.List$SerializationProxy)\n\t- object (class scala.collection.immutable.$colon$colon, List(org.apache.spark.OneToOneDependency@7c301548))\n\t- field (class: org.apache.spark.rdd.RDD, name: org$apache$spark$rdd$RDD$$dependencies_, type: interface scala.collection.Seq)\n\t- object (class org.apache.spark.rdd.MapPartitionsRDD, MapPartitionsRDD[173] at )\n\t- field (class: org.apache.spark.NarrowDependency, name: _rdd, type: class org.apache.spark.rdd.RDD)\n\t- object (class org.apache.spark.OneToOneDependency, org.apache.spark.OneToOneDependency@e68fe1f)\n\t- writeObject data (class: scala.collection.immutable.List$SerializationProxy)\n\t- object (class scala.collection.immutable.List$SerializationProxy, scala.collection.immutable.List$SerializationProxy@5d0daf15)\n\t- writeReplace data (class: scala.collection.immutable.List$SerializationProxy)\n\t- object (class scala.collection.immutable.$colon$colon, List(org.apache.spark.OneToOneDependency@e68fe1f))\n\t- field (class: org.apache.spark.rdd.RDD, name: org$apache$spark$rdd$RDD$$dependencies_, type: interface scala.collection.Seq)\n\t- object (class org.apache.spark.sql.execution.SQLExecutionRDD, SQLExecutionRDD[174] at )\n\t- field (class: org.apache.spark.NarrowDependency, name: _rdd, type: class org.apache.spark.rdd.RDD)\n\t- object (class org.apache.spark.OneToOneDependency, org.apache.spark.OneToOneDependency@60c5f050)\n\t- writeObject data (class: scala.collection.immutable.List$SerializationProxy)\n\t- object (class scala.collection.immutable.List$SerializationProxy, scala.collection.immutable.List$SerializationProxy@3685e9d5)\n\t- writeReplace data (class: scala.collection.immutable.List$SerializationProxy)\n\t- object (class scala.collection.immutable.$colon$colon, List(org.apache.spark.OneToOneDependency@60c5f050))\n\t- field (class: org.apache.spark.rdd.RDD, name: org$apache$spark$rdd$RDD$$dependencies_, type: interface scala.collection.Seq)\n\t- object (class org.apache.spark.rdd.MapPartitionsRDD, MapPartitionsRDD[175] at )\n\t- field (class: org.apache.spark.sql.Dataset, name: rdd, type: class org.apache.spark.rdd.RDD)\n\t- object (class org.apache.spark.sql.Dataset, Invalid tree; null:\nnull)\n\t- field (class: $iw, name: records, type: class org.apache.spark.sql.Dataset)\n\t- object (class $iw, $iw@7920939)\n\t- field (class: Record, name: $outer, type: class $iw)\n\t- object (class Record, Record(2020-01-23 00:00:00.0,29399,0,0,0,0,1,0,None,None))\n\t- field (class: scala.Some, name: x, type: class java.lang.Object)\n\t- object (class scala.Some, Some(Record(2020-01-23 00:00:00.0,29399,0,0,0,0,1,0,None,None)))\n  at org.apache.spark.scheduler.DAGScheduler.org$apache$spark$scheduler$DAGScheduler$$failJobAndIndependentStages(DAGScheduler.scala:1891)\n  at org.apache.spark.scheduler.DAGScheduler$$anonfun$abortStage$1.apply(DAGScheduler.scala:1879)\n  at org.apache.spark.scheduler.DAGScheduler$$anonfun$abortStage$1.apply(DAGScheduler.scala:1878)\n  at scala.collection.mutable.ResizableArray$class.foreach(ResizableArray.scala:59)\n  at scala.collection.mutable.ArrayBuffer.foreach(ArrayBuffer.scala:48)\n  at org.apache.spark.scheduler.DAGScheduler.abortStage(DAGScheduler.scala:1878)\n  at org.apache.spark.scheduler.DAGScheduler$$anonfun$handleTaskSetFailed$1.apply(DAGScheduler.scala:927)\n  at org.apache.spark.scheduler.DAGScheduler$$anonfun$handleTaskSetFailed$1.apply(DAGScheduler.scala:927)\n  at scala.Option.foreach(Option.scala:257)\n  at org.apache.spark.scheduler.DAGScheduler.handleTaskSetFailed(DAGScheduler.scala:927)\n  at org.apache.spark.scheduler.DAGSchedulerEventProcessLoop.doOnReceive(DAGScheduler.scala:2112)\n  at org.apache.spark.scheduler.DAGSchedulerEventProcessLoop.onReceive(DAGScheduler.scala:2061)\n  at org.apache.spark.scheduler.DAGSchedulerEventProcessLoop.onReceive(DAGScheduler.scala:2050)\n  at org.apache.spark.util.EventLoop$$anon$1.run(EventLoop.scala:49)\n  at org.apache.spark.scheduler.DAGScheduler.runJob(DAGScheduler.scala:738)\n  at org.apache.spark.SparkContext.runJob(SparkContext.scala:2061)\n  at org.apache.spark.SparkContext.runJob(SparkContext.scala:2158)\n  at org.apache.spark.rdd.RDD$$anonfun$reduce$1.apply(RDD.scala:1080)\n  at org.apache.spark.rdd.RDDOperationScope$.withScope(RDDOperationScope.scala:151)\n  at org.apache.spark.rdd.RDDOperationScope$.withScope(RDDOperationScope.scala:112)\n  at org.apache.spark.rdd.RDD.withScope(RDD.scala:385)\n  at org.apache.spark.rdd.RDD.reduce(RDD.scala:1062)\n  at org.apache.spark.sql.Dataset$$anonfun$reduce$1.apply(Dataset.scala:1643)\n  at org.apache.spark.sql.Dataset$$anonfun$withNewRDDExecutionId$1.apply(Dataset.scala:3355)\n  at org.apache.spark.sql.execution.SQLExecution$$anonfun$withNewExecutionId$1.apply(SQLExecution.scala:80)\n  at org.apache.spark.sql.execution.SQLExecution$.withSQLConfPropagated(SQLExecution.scala:127)\n  at org.apache.spark.sql.execution.SQLExecution$.withNewExecutionId(SQLExecution.scala:75)\n  at org.apache.spark.sql.Dataset.withNewRDDExecutionId(Dataset.scala:3351)\n  at org.apache.spark.sql.Dataset.reduce(Dataset.scala:1642)\n  ... 82 elided\n"
+          }
+        ]
+      },
+      "apps": [],
+      "jobName": "paragraph_1590293885499_1919732500",
+      "id": "20200524-121805_152485116",
+      "dateCreated": "2020-05-24 12:18:05.499",
+      "dateStarted": "2020-05-24 12:50:12.684",
+      "dateFinished": "2020-05-24 12:50:14.452",
+      "status": "ERROR",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "user": "anonymous",
+      "config": {},
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "apps": [],
+      "jobName": "paragraph_1590293926580_853172170",
+      "id": "20200524-121846_326490940",
+      "dateCreated": "2020-05-24 12:18:46.580",
       "status": "READY",
       "progressUpdateIntervalMs": 500
     }

@@ -1068,7 +1068,7 @@
     {
       "text": "%md \n\n## SQL queries over DataFrame\n\n\nDataframe provides a unified approach for data manipulation. It allows SQL style queries to be perform on the data residing in the dataframe with parallization mechanism.\n\nFirstly, we need to register the dataframe as a temporary view.",
       "user": "anonymous",
-      "dateUpdated": "2020-05-24 09:16:26.674",
+      "dateUpdated": "2020-05-24 11:29:42.986",
       "config": {
         "colWidth": 12.0,
         "fontSize": 9.0,
@@ -1081,8 +1081,8 @@
           "completionSupport": false
         },
         "editorMode": "ace/mode/markdown",
-        "editorHide": false,
-        "tableHide": true
+        "editorHide": true,
+        "tableHide": false
       },
       "settings": {
         "params": {},
@@ -1093,7 +1093,7 @@
         "msg": [
           {
             "type": "HTML",
-            "data": "\u003cdiv class\u003d\"markdown-body\"\u003e\n\u003ch2\u003eSQL queries over DataFrame\u003c/h2\u003e\n\u003cp\u003eDataframe provides a unified approach for data manipulation. It allows SQL style queries to be perform on the data residing in the dataframe with parallization mechanism.\u003c/p\u003e\n\u003c/div\u003e"
+            "data": "\u003cdiv class\u003d\"markdown-body\"\u003e\n\u003ch2\u003eSQL queries over DataFrame\u003c/h2\u003e\n\u003cp\u003eDataframe provides a unified approach for data manipulation. It allows SQL style queries to be perform on the data residing in the dataframe with parallization mechanism.\u003c/p\u003e\n\u003cp\u003eFirstly, we need to register the dataframe as a temporary view.\u003c/p\u003e\n\u003c/div\u003e"
           }
         ]
       },
@@ -1101,8 +1101,8 @@
       "jobName": "paragraph_1590282371250_1589318648",
       "id": "20200524-090611_1601014836",
       "dateCreated": "2020-05-24 09:06:11.251",
-      "dateStarted": "2020-05-24 09:15:01.996",
-      "dateFinished": "2020-05-24 09:15:02.014",
+      "dateStarted": "2020-05-24 11:29:42.989",
+      "dateFinished": "2020-05-24 11:29:43.020",
       "status": "FINISHED",
       "progressUpdateIntervalMs": 500
     },
@@ -1329,9 +1329,9 @@
       "progressUpdateIntervalMs": 500
     },
     {
-      "text": "%md \n\n## Exericse 3\n\nUsing Spark SQL, generate a bar chart for Singapore Covid19 daily cases after 1st Mar 2020.\n",
+      "text": "%md \n\n## Exericse 3\n\nUsing Spark SQL, generate a bar chart for `Discharged To Isolation` after 1st Mar 2020.\n",
       "user": "anonymous",
-      "dateUpdated": "2020-05-24 09:25:30.715",
+      "dateUpdated": "2020-05-24 11:37:45.548",
       "config": {
         "colWidth": 12.0,
         "fontSize": 9.0,
@@ -1356,7 +1356,7 @@
         "msg": [
           {
             "type": "HTML",
-            "data": "\u003cdiv class\u003d\"markdown-body\"\u003e\n\u003ch2\u003eExericse 3\u003c/h2\u003e\n\u003cp\u003eUsing Spark SQL, generate a bar chart for Singapore Covid19 daily cases after 1st Mar 2020.\u003c/p\u003e\n\u003c/div\u003e"
+            "data": "\u003cdiv class\u003d\"markdown-body\"\u003e\n\u003ch2\u003eExericse 3\u003c/h2\u003e\n\u003cp\u003eUsing Spark SQL, generate a bar chart for \u003ccode\u003eDischarged To Isolation\u003c/code\u003e after 1st Mar 2020.\u003c/p\u003e\n\u003c/div\u003e"
           }
         ]
       },
@@ -1364,8 +1364,8 @@
       "jobName": "paragraph_1590283194229_1846137650",
       "id": "20200524-091954_1739312923",
       "dateCreated": "2020-05-24 09:19:54.230",
-      "dateStarted": "2020-05-24 09:25:30.715",
-      "dateFinished": "2020-05-24 09:25:30.735",
+      "dateStarted": "2020-05-24 11:37:45.549",
+      "dateFinished": "2020-05-24 11:37:45.565",
       "status": "FINISHED",
       "progressUpdateIntervalMs": 500
     },
@@ -1405,6 +1405,47 @@
       "dateCreated": "2020-05-24 09:21:07.759",
       "dateStarted": "2020-05-24 09:21:18.361",
       "dateFinished": "2020-05-24 09:21:18.376",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "%md \n\n## User Defined Function (UDF)\n\n\nhttps://docs.databricks.com/spark/latest/spark-sql/udf-python.html",
+      "user": "anonymous",
+      "dateUpdated": "2020-05-24 12:11:07.513",
+      "config": {
+        "colWidth": 12.0,
+        "fontSize": 9.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "markdown",
+          "editOnDblClick": true,
+          "completionKey": "TAB",
+          "completionSupport": false
+        },
+        "editorMode": "ace/mode/markdown",
+        "editorHide": true,
+        "tableHide": false
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "\u003cdiv class\u003d\"markdown-body\"\u003e\n\u003ch2\u003eUser Defined Function (UDF)\u003c/h2\u003e\n\u003cp\u003e\u003ca href\u003d\"https://docs.databricks.com/spark/latest/spark-sql/udf-python.html\"\u003ehttps://docs.databricks.com/spark/latest/spark-sql/udf-python.html\u003c/a\u003e\u003c/p\u003e\n\u003c/div\u003e"
+          }
+        ]
+      },
+      "apps": [],
+      "jobName": "paragraph_1590290938976_-2051938859",
+      "id": "20200524-112858_1007823102",
+      "dateCreated": "2020-05-24 11:28:58.976",
+      "dateStarted": "2020-05-24 12:11:07.513",
+      "dateFinished": "2020-05-24 12:11:07.527",
       "status": "FINISHED",
       "progressUpdateIntervalMs": 500
     },
