@@ -1,0 +1,1020 @@
+{
+  "paragraphs": [
+    {
+      "text": "import org.apache.spark._\nimport org.apache.spark.sql._\nimport org.apache.spark.rdd.RDD\n\nval sparkmaster \u003d \"spark://Kenny-MBP:7077\"\nval hadoopmaster \u003d \"hdfs://127.0.0.1:9000\"\n\nval spark \u003d SparkSession.builder().master(sparkmaster).appName(\"lecture examples\").getOrCreate()",
+      "user": "anonymous",
+      "dateUpdated": "2020-05-25 16:38:36.373",
+      "config": {
+        "colWidth": 12.0,
+        "fontSize": 9.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "editorMode": "ace/mode/scala"
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "import org.apache.spark._\nimport org.apache.spark.sql._\nimport org.apache.spark.rdd.RDD\nsparkmaster: String \u003d spark://Kenny-MBP:7077\nhadoopmaster: String \u003d hdfs://127.0.0.1:9000\nspark: org.apache.spark.sql.SparkSession \u003d org.apache.spark.sql.SparkSession@31f0da6e\n"
+          }
+        ]
+      },
+      "apps": [],
+      "jobName": "paragraph_1590374727999_-119654558",
+      "id": "20200525-104527_1377775412",
+      "dateCreated": "2020-05-25 10:45:27.999",
+      "dateStarted": "2020-05-25 16:38:36.439",
+      "dateFinished": "2020-05-25 16:38:46.136",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "val data \u003d Array((\"20A2020\", \"Kenny\", \"itd353\", 90),\n                 (\"20B1919\", \"Tommy\", \"itd352\", 95),\n                 (\"20C0000\", \"Karen\", \"itd353\", 80))\nval distData \u003d sc.parallelize(data)\nval df \u003d distData.toDF(\"adminno\", \"name\",\n                          \"module\", \"score\")\n\n",
+      "user": "anonymous",
+      "dateUpdated": "2020-05-25 16:38:46.198",
+      "config": {
+        "colWidth": 12.0,
+        "fontSize": 9.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "editorMode": "ace/mode/scala"
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "data: Array[(String, String, String, Int)] \u003d Array((20A2020,Kenny,itd353,90), (20B1919,Tommy,itd352,95), (20C0000,Karen,itd353,80))\ndistData: org.apache.spark.rdd.RDD[(String, String, String, Int)] \u003d ParallelCollectionRDD[0] at parallelize at \u003cconsole\u003e:35\ndf: org.apache.spark.sql.DataFrame \u003d [adminno: string, name: string ... 2 more fields]\n"
+          }
+        ]
+      },
+      "apps": [],
+      "jobName": "paragraph_1590374950511_-1508935453",
+      "id": "20200525-104910_758981345",
+      "dateCreated": "2020-05-25 10:49:10.512",
+      "dateStarted": "2020-05-25 16:38:46.255",
+      "dateFinished": "2020-05-25 16:38:47.805",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "%md\nAlternatively, load it from a CSV file.",
+      "user": "anonymous",
+      "dateUpdated": "2020-05-25 16:38:47.890",
+      "config": {
+        "colWidth": 12.0,
+        "fontSize": 9.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "markdown",
+          "editOnDblClick": true,
+          "completionKey": "TAB",
+          "completionSupport": false
+        },
+        "editorMode": "ace/mode/markdown",
+        "editorHide": true,
+        "tableHide": false
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "\u003cdiv class\u003d\"markdown-body\"\u003e\n\u003cp\u003eAlternatively, load it from a CSV file.\u003c/p\u003e\n\u003c/div\u003e"
+          }
+        ]
+      },
+      "apps": [],
+      "jobName": "paragraph_1590375402081_-913997431",
+      "id": "20200525-105642_182644440",
+      "dateCreated": "2020-05-25 10:56:42.081",
+      "dateStarted": "2020-05-25 16:38:47.921",
+      "dateFinished": "2020-05-25 16:38:50.187",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "/*\nval df:DataFrame \u003d sparkSession.read\n    .option(\"header\", \"true\")\n    .option(\"delimiter\",\",\")\n    .option(\"inferSchema\", \"true\")\n    .csv(hadoopmaster + \"/data/example.csv\")\n*/",
+      "user": "anonymous",
+      "dateUpdated": "2020-05-25 16:38:50.264",
+      "config": {
+        "colWidth": 12.0,
+        "fontSize": 9.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "editorMode": "ace/mode/scala"
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": []
+      },
+      "apps": [],
+      "jobName": "paragraph_1590375470934_-616558558",
+      "id": "20200525-105750_1468373510",
+      "dateCreated": "2020-05-25 10:57:50.934",
+      "dateStarted": "2020-05-25 16:38:50.294",
+      "dateFinished": "2020-05-25 16:38:50.480",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "df.show()",
+      "user": "anonymous",
+      "dateUpdated": "2020-05-25 16:38:50.497",
+      "config": {
+        "colWidth": 12.0,
+        "fontSize": 9.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "editorMode": "ace/mode/scala"
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "+-------+-----+------+-----+\n|adminno| name|module|score|\n+-------+-----+------+-----+\n|20A2020|Kenny|itd353|   90|\n|20B1919|Tommy|itd352|   95|\n|20C0000|Karen|itd353|   80|\n+-------+-----+------+-----+\n\n"
+          }
+        ]
+      },
+      "apps": [],
+      "jobName": "paragraph_1590375525988_236516816",
+      "id": "20200525-105845_1371721819",
+      "dateCreated": "2020-05-25 10:58:45.988",
+      "dateStarted": "2020-05-25 16:38:50.528",
+      "dateFinished": "2020-05-25 16:38:51.962",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "df.select( $\"adminno\", $\"score\").show()\n\n// df.select( col(\"adminno\"), col(\"score\")).show()",
+      "user": "anonymous",
+      "dateUpdated": "2020-05-25 16:38:52.050",
+      "config": {
+        "colWidth": 12.0,
+        "fontSize": 9.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "editorMode": "ace/mode/scala"
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "+-------+-----+\n|adminno|score|\n+-------+-----+\n|20A2020|   90|\n|20B1919|   95|\n|20C0000|   80|\n+-------+-----+\n\n"
+          }
+        ]
+      },
+      "apps": [],
+      "jobName": "paragraph_1590375780080_-1140663089",
+      "id": "20200525-110300_2117958394",
+      "dateCreated": "2020-05-25 11:03:00.080",
+      "dateStarted": "2020-05-25 16:38:52.067",
+      "dateFinished": "2020-05-25 16:38:52.473",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "df.select(concat(col(\"adminno\"), lit(\"@mymail.nyp.edu.sg\")).alias(\"email\")).show()",
+      "user": "anonymous",
+      "dateUpdated": "2020-05-25 16:38:52.570",
+      "config": {
+        "colWidth": 12.0,
+        "fontSize": 9.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "editorMode": "ace/mode/scala"
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "+--------------------+\n|               email|\n+--------------------+\n|20A2020@mymail.ny...|\n|20B1919@mymail.ny...|\n|20C0000@mymail.ny...|\n+--------------------+\n\n"
+          }
+        ]
+      },
+      "apps": [],
+      "jobName": "paragraph_1590379036915_111623217",
+      "id": "20200525-115716_631003601",
+      "dateCreated": "2020-05-25 11:57:16.915",
+      "dateStarted": "2020-05-25 16:38:52.584",
+      "dateFinished": "2020-05-25 16:38:52.959",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "df.withColumn(\"email\", concat(col(\"adminno\"), lit(\"@mymail.nyp.edu.sg\"))).show()",
+      "user": "anonymous",
+      "dateUpdated": "2020-05-25 16:39:27.524",
+      "config": {
+        "colWidth": 12.0,
+        "fontSize": 9.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "editorMode": "ace/mode/scala"
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "+-------+-----+------+-----+--------------------+\n|adminno| name|module|score|               email|\n+-------+-----+------+-----+--------------------+\n|20A2020|Kenny|itd353|   90|20A2020@mymail.ny...|\n|20B1919|Tommy|itd352|   95|20B1919@mymail.ny...|\n|20C0000|Karen|itd353|   80|20C0000@mymail.ny...|\n+-------+-----+------+-----+--------------------+\n\n"
+          }
+        ]
+      },
+      "apps": [],
+      "jobName": "paragraph_1590379578189_-18940214",
+      "id": "20200525-120618_1538945871",
+      "dateCreated": "2020-05-25 12:06:18.190",
+      "dateStarted": "2020-05-25 16:39:27.541",
+      "dateFinished": "2020-05-25 16:39:27.957",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "df.filter(col(\"module\") \u003d\u003d\u003d lit(\"itd353\")).show()\n",
+      "user": "anonymous",
+      "dateUpdated": "2020-05-25 17:04:38.404",
+      "config": {
+        "colWidth": 12.0,
+        "fontSize": 9.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "editorMode": "ace/mode/scala"
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "+-------+-----+------+-----+\n|adminno| name|module|score|\n+-------+-----+------+-----+\n|20A2020|Kenny|itd353|   90|\n|20C0000|Karen|itd353|   80|\n+-------+-----+------+-----+\n\n"
+          }
+        ]
+      },
+      "apps": [],
+      "jobName": "paragraph_1590395950067_-664319291",
+      "id": "20200525-163910_796716132",
+      "dateCreated": "2020-05-25 16:39:10.067",
+      "dateStarted": "2020-05-25 17:04:38.415",
+      "dateFinished": "2020-05-25 17:04:38.660",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "df.groupBy(\"module\").avg().show()",
+      "user": "anonymous",
+      "dateUpdated": "2020-05-25 17:41:23.112",
+      "config": {
+        "colWidth": 12.0,
+        "fontSize": 9.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "editorMode": "ace/mode/scala"
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "+------+----------+\n|module|avg(score)|\n+------+----------+\n|itd353|      85.0|\n|itd352|      95.0|\n+------+----------+\n\n"
+          }
+        ]
+      },
+      "apps": [],
+      "jobName": "paragraph_1590397252237_-1910890320",
+      "id": "20200525-170052_112535031",
+      "dateCreated": "2020-05-25 17:00:52.237",
+      "dateStarted": "2020-05-25 17:41:23.124",
+      "dateFinished": "2020-05-25 17:41:24.170",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "val moddata \u003d Array((\"itd353\", \"Parallel Computing for Big Data\"),\n                 (\"itd352\", \"Infrastructure System for Big Data Processing\"))\nval distmodData \u003d sc.parallelize(moddata)\nval moddf \u003d distmodData.toDF(\"module\", \"modname\")\n\ndf.join(moddf, df(\"module\") \u003d\u003d\u003d moddf(\"module\"), \"inner\").show()\n",
+      "user": "anonymous",
+      "dateUpdated": "2020-05-25 17:59:28.750",
+      "config": {
+        "colWidth": 12.0,
+        "fontSize": 9.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "editorMode": "ace/mode/scala"
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "+-------+-----+------+-----+------+--------------------+\n|adminno| name|module|score|module|             modname|\n+-------+-----+------+-----+------+--------------------+\n|20A2020|Kenny|itd353|   90|itd353|Parallel Computin...|\n|20C0000|Karen|itd353|   80|itd353|Parallel Computin...|\n|20B1919|Tommy|itd352|   95|itd352|Infrastructure Sy...|\n+-------+-----+------+-----+------+--------------------+\n\nmoddata: Array[(String, String)] \u003d Array((itd353,Parallel Computing for Big Data), (itd352,Infrastructure System for Big Data Processing))\ndistmodData: org.apache.spark.rdd.RDD[(String, String)] \u003d ParallelCollectionRDD[159] at parallelize at \u003cconsole\u003e:40\nmoddf: org.apache.spark.sql.DataFrame \u003d [module: string, modname: string]\n"
+          }
+        ]
+      },
+      "apps": [],
+      "jobName": "paragraph_1590399683112_1090457852",
+      "id": "20200525-174123_1450104317",
+      "dateCreated": "2020-05-25 17:41:23.112",
+      "dateStarted": "2020-05-25 17:57:13.569",
+      "dateFinished": "2020-05-25 17:57:14.078",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "df.createOrReplaceTempView(\"students\")\nspark.sql(\"SELECT * FROM students\").show()\n",
+      "user": "anonymous",
+      "dateUpdated": "2020-05-26 08:04:57.439",
+      "config": {
+        "colWidth": 12.0,
+        "fontSize": 9.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "editorMode": "ace/mode/scala"
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "+-------+-----+------+-----+\n|adminno| name|module|score|\n+-------+-----+------+-----+\n|20A2020|Kenny|itd353|   90|\n|20B1919|Tommy|itd352|   95|\n|20C0000|Karen|itd353|   80|\n+-------+-----+------+-----+\n\n"
+          }
+        ]
+      },
+      "apps": [],
+      "jobName": "paragraph_1590400107491_1195215185",
+      "id": "20200525-174827_1028428227",
+      "dateCreated": "2020-05-25 17:48:27.491",
+      "dateStarted": "2020-05-26 08:04:57.474",
+      "dateFinished": "2020-05-26 08:04:57.741",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "df.coalesce(1).write.mode(\"overwrite\")\n   .option(\"header\",\"true\")\n   .csv(hadoopmaster + \"/output/df.csv\")",
+      "user": "anonymous",
+      "dateUpdated": "2020-05-26 08:11:54.250",
+      "config": {
+        "colWidth": 12.0,
+        "fontSize": 9.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "editorMode": "ace/mode/scala"
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": []
+      },
+      "apps": [],
+      "jobName": "paragraph_1590451497439_-363606358",
+      "id": "20200526-080457_2140920254",
+      "dateCreated": "2020-05-26 08:04:57.439",
+      "dateStarted": "2020-05-26 08:11:54.284",
+      "dateFinished": "2020-05-26 08:11:56.275",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "val rdd \u003d df.rdd.map(r\u003d\u003e(r.getAs[String](0),\n                        r.getAs[String](1),\n                        r.getAs[String](2),\n                        r.getAs[Int](3)))\nval df2 \u003d rdd.toDF(\"adminno\", \"name\",\"module\", \"score\")\ndf2.show()",
+      "user": "anonymous",
+      "dateUpdated": "2020-05-26 08:30:21.389",
+      "config": {
+        "colWidth": 12.0,
+        "fontSize": 9.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "editorMode": "ace/mode/scala"
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "+-------+-----+------+-----+\n|adminno| name|module|score|\n+-------+-----+------+-----+\n|20A2020|Kenny|itd353|   90|\n|20B1919|Tommy|itd352|   95|\n|20C0000|Karen|itd353|   80|\n+-------+-----+------+-----+\n\nrdd: org.apache.spark.rdd.RDD[(String, String, String, Int)] \u003d MapPartitionsRDD[283] at map at \u003cconsole\u003e:35\ndf2: org.apache.spark.sql.DataFrame \u003d [adminno: string, name: string ... 2 more fields]\n"
+          }
+        ]
+      },
+      "apps": [],
+      "jobName": "paragraph_1590451880968_-723642872",
+      "id": "20200526-081120_331807008",
+      "dateCreated": "2020-05-26 08:11:20.968",
+      "dateStarted": "2020-05-26 08:30:21.400",
+      "dateFinished": "2020-05-26 08:30:21.749",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "import spark.implicits._ \ncase class Student(adminno:String,\n                   name:String,\n                   module:String,\n                   score:Int)\nval students \u003d df.as[Student]\nstudents.show()",
+      "user": "anonymous",
+      "dateUpdated": "2020-05-26 08:39:49.950",
+      "config": {
+        "colWidth": 12.0,
+        "fontSize": 9.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "editorMode": "ace/mode/scala"
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "+-------+-----+------+-----+\n|adminno| name|module|score|\n+-------+-----+------+-----+\n|20A2020|Kenny|itd353|   90|\n|20B1919|Tommy|itd352|   95|\n|20C0000|Karen|itd353|   80|\n+-------+-----+------+-----+\n\nimport spark.implicits._\ndefined class Student\nstudents: org.apache.spark.sql.Dataset[Student] \u003d [adminno: string, name: string ... 2 more fields]\n"
+          }
+        ]
+      },
+      "apps": [],
+      "jobName": "paragraph_1590452115072_1478011457",
+      "id": "20200526-081515_402659788",
+      "dateCreated": "2020-05-26 08:15:15.072",
+      "dateStarted": "2020-05-26 08:39:49.962",
+      "dateFinished": "2020-05-26 08:39:50.581",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "import spark.implicits._ \ncase class Email(email:String, name:String)\nval emails \u003d students.map(\n    s \u003d\u003e Email(s.adminno + \"@mymail.nyp.edu.sg\", s.name))\nemails.show()",
+      "user": "anonymous",
+      "dateUpdated": "2020-05-26 09:10:23.911",
+      "config": {
+        "colWidth": 12.0,
+        "fontSize": 9.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "editorMode": "ace/mode/scala"
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "+--------------------+-----+\n|               email| name|\n+--------------------+-----+\n|20A2020@mymail.ny...|Kenny|\n|20B1919@mymail.ny...|Tommy|\n|20C0000@mymail.ny...|Karen|\n+--------------------+-----+\n\nimport spark.implicits._\ndefined class Email\nemails: org.apache.spark.sql.Dataset[Email] \u003d [email: string, name: string]\n"
+          }
+        ]
+      },
+      "apps": [],
+      "jobName": "paragraph_1590453309632_-1143956716",
+      "id": "20200526-083509_485778455",
+      "dateCreated": "2020-05-26 08:35:09.632",
+      "dateStarted": "2020-05-26 09:08:58.451",
+      "dateFinished": "2020-05-26 09:08:59.237",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "val itd353students \u003d students.filter(\n    s \u003d\u003e s.module \u003d\u003d \"itd353\")\nitd353students.show()",
+      "user": "anonymous",
+      "dateUpdated": "2020-05-26 09:24:10.019",
+      "config": {
+        "colWidth": 12.0,
+        "fontSize": 9.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "editorMode": "ace/mode/scala"
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "+-------+-----+------+-----+\n|adminno| name|module|score|\n+-------+-----+------+-----+\n|20A2020|Kenny|itd353|   90|\n|20C0000|Karen|itd353|   80|\n+-------+-----+------+-----+\n\nitd353students: org.apache.spark.sql.Dataset[Student] \u003d [adminno: string, name: string ... 2 more fields]\n"
+          }
+        ]
+      },
+      "apps": [],
+      "jobName": "paragraph_1590455315687_312323544",
+      "id": "20200526-090835_615033791",
+      "dateCreated": "2020-05-26 09:08:35.687",
+      "dateStarted": "2020-05-26 09:24:10.035",
+      "dateFinished": "2020-05-26 09:24:10.257",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "import spark.implicits._ \ncase class ModuleAvg(module:String, avg:Float)\nval grouped \u003d students.groupByKey(s \u003d\u003e s.module)\nval moduleavg \u003d grouped.mapGroups(\n    (key:String,students:Iterator[Student]) \u003d\u003e {\n        val l \u003d students.toList\n        ModuleAvg(key, l.map(s\u003d\u003es.score).sum/l.size)\n    })\nmoduleavg.show()\n",
+      "user": "anonymous",
+      "dateUpdated": "2020-05-26 09:25:11.974",
+      "config": {
+        "colWidth": 12.0,
+        "fontSize": 9.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "editorMode": "ace/mode/scala"
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "+------+----+\n|module| avg|\n+------+----+\n|itd353|85.0|\n|itd352|95.0|\n+------+----+\n\nimport spark.implicits._\ndefined class ModuleAvg\ngrouped: org.apache.spark.sql.KeyValueGroupedDataset[String,Student] \u003d KeyValueGroupedDataset: [key: [value: string], value: [adminno: string, name: string ... 2 more field(s)]]\nmoduleavg: org.apache.spark.sql.Dataset[ModuleAvg] \u003d [module: string, avg: float]\n"
+          }
+        ]
+      },
+      "apps": [],
+      "jobName": "paragraph_1590455739789_-1552419260",
+      "id": "20200526-091539_143837866",
+      "dateCreated": "2020-05-26 09:15:39.790",
+      "dateStarted": "2020-05-26 09:25:11.987",
+      "dateFinished": "2020-05-26 09:25:12.837",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "import spark.implicits._ \ncase class Module(module:String, modname:String)\nval modules:Dataset[Module] \u003d moddf.as[Module]\nval joined \u003d moduleavg.joinWith(modules, moduleavg(\"module\") \u003d\u003d\u003d modules(\"module\"), \"inner\")\n\n// joined.show()\n\n",
+      "user": "anonymous",
+      "dateUpdated": "2020-05-26 10:50:54.454",
+      "config": {
+        "colWidth": 12.0,
+        "fontSize": 9.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "editorMode": "ace/mode/scala"
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "import spark.implicits._\ndefined class Module\nmodules: org.apache.spark.sql.Dataset[Module] \u003d [module: string, modname: string]\njoined: org.apache.spark.sql.Dataset[(ModuleAvg, Module)] \u003d [_1: struct\u003cmodule: string, avg: float\u003e, _2: struct\u003cmodule: string, modname: string\u003e]\n"
+          }
+        ]
+      },
+      "apps": [],
+      "jobName": "paragraph_1590456088142_-265816052",
+      "id": "20200526-092128_1870286480",
+      "dateCreated": "2020-05-26 09:21:28.142",
+      "dateStarted": "2020-05-26 10:50:54.469",
+      "dateFinished": "2020-05-26 10:50:55.196",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "// /* unstable join API in version 2.4.5, this must be in different cell.\nimport spark.implicits._ \ncase class ModuleAvgName(module:String, modname:String, avg:Float)\n\nval moduleavgname:Dataset[ModuleAvgName] \u003d joined.map{\n    p \u003d\u003e p match {\n        case (modavg,mod) \u003d\u003e\n            ModuleAvgName(mod.module, mod.modname, modavg.avg)\n        }\n    }\n\n// val moduleavgname \u003d joined.selectExpr(\"nvl(_1.module, \u0027 \u0027) as module\", \"nvl(_2.modname, \u0027 \u0027) as modname\", \"nvl(_1.avg, 0) as avg\").as[ModuleAvgName] \nmoduleavgname.show()",
+      "user": "anonymous",
+      "dateUpdated": "2020-05-26 10:52:50.347",
+      "config": {
+        "colWidth": 12.0,
+        "fontSize": 9.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "editorMode": "ace/mode/scala"
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "+------+--------------------+----+\n|module|             modname| avg|\n+------+--------------------+----+\n|itd353|Parallel Computin...|85.0|\n|itd352|Infrastructure Sy...|95.0|\n+------+--------------------+----+\n\nimport spark.implicits._\ndefined class ModuleAvgName\nmoduleavgname: org.apache.spark.sql.Dataset[ModuleAvgName] \u003d [module: string, modname: string ... 1 more field]\n"
+          }
+        ]
+      },
+      "apps": [],
+      "jobName": "paragraph_1590460807223_-480238407",
+      "id": "20200526-104007_1784150187",
+      "dateCreated": "2020-05-26 10:40:07.224",
+      "dateStarted": "2020-05-26 10:52:50.361",
+      "dateFinished": "2020-05-26 10:52:51.671",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "val rdd \u003d students.rdd\nval students2 \u003d rdd.toDS()\nval df3 \u003d students.toDF\nval students3 \u003d df3.as[Student]",
+      "user": "anonymous",
+      "dateUpdated": "2020-05-26 10:28:19.182",
+      "config": {
+        "colWidth": 12.0,
+        "fontSize": 9.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "editorMode": "ace/mode/scala"
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "rdd: org.apache.spark.rdd.RDD[Student] \u003d MapPartitionsRDD[475] at rdd at \u003cconsole\u003e:80\nstudents2: org.apache.spark.sql.Dataset[Student] \u003d [adminno: string, name: string ... 2 more fields]\ndf3: org.apache.spark.sql.DataFrame \u003d [adminno: string, name: string ... 2 more fields]\nstudents3: org.apache.spark.sql.Dataset[Student] \u003d [adminno: string, name: string ... 2 more fields]\n"
+          }
+        ]
+      },
+      "apps": [],
+      "jobName": "paragraph_1590456530308_98317607",
+      "id": "20200526-092850_1853596481",
+      "dateCreated": "2020-05-26 09:28:50.308",
+      "dateStarted": "2020-05-26 10:28:19.196",
+      "dateFinished": "2020-05-26 10:28:19.590",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "students.coalesce(1).write.mode(\"overwrite\") \n   .option(\"header\",\"true\") \n   .csv(hadoopmaster + \"/output/ds.csv\")",
+      "user": "anonymous",
+      "dateUpdated": "2020-05-26 10:30:54.091",
+      "config": {
+        "colWidth": 12.0,
+        "fontSize": 9.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "editorMode": "ace/mode/scala"
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": []
+      },
+      "apps": [],
+      "jobName": "paragraph_1590460016787_331617936",
+      "id": "20200526-102656_2013802448",
+      "dateCreated": "2020-05-26 10:26:56.787",
+      "dateStarted": "2020-05-26 10:30:54.106",
+      "dateFinished": "2020-05-26 10:30:54.519",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "val staffDirRDD \u003d spark.sparkContext.makeRDD(\n  \"\"\"{\"name\":\"Kenny\", \"email\":\"kenny_lu@nyp.edu.sg\", \n     \"phone\": {\"did\":\"6550-1696\",\"mobile\":\"90123456\"} }\"\"\" :: Nil)\nval staffDirDF \u003d spark.read.json(staffDirRDD)\nstaffDirDF.show()",
+      "user": "anonymous",
+      "dateUpdated": "2020-05-26 12:00:24.216",
+      "config": {
+        "colWidth": 12.0,
+        "fontSize": 9.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "editorMode": "ace/mode/scala"
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "warning: there was one deprecation warning; re-run with -deprecation for details\n+-------------------+-----+--------------------+\n|              email| name|               phone|\n+-------------------+-----+--------------------+\n|kenny_lu@nyp.edu.sg|Kenny|[6550-1696, 90123...|\n+-------------------+-----+--------------------+\n\nstaffDirRDD: org.apache.spark.rdd.RDD[String] \u003d ParallelCollectionRDD[818] at makeRDD at \u003cconsole\u003e:110\nstaffDirDF: org.apache.spark.sql.DataFrame \u003d [email: string, name: string ... 1 more field]\n"
+          }
+        ]
+      },
+      "apps": [],
+      "jobName": "paragraph_1590460254091_-1933063366",
+      "id": "20200526-103054_1976602438",
+      "dateCreated": "2020-05-26 10:30:54.091",
+      "dateStarted": "2020-05-26 12:00:24.232",
+      "dateFinished": "2020-05-26 12:00:24.680",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "",
+      "user": "anonymous",
+      "dateUpdated": "2020-05-26 12:00:54.868",
+      "config": {
+        "colWidth": 12.0,
+        "fontSize": 9.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "editorMode": "ace/mode/scala"
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "apps": [],
+      "jobName": "paragraph_1590465635655_638761711",
+      "id": "20200526-120035_1440524100",
+      "dateCreated": "2020-05-26 12:00:35.656",
+      "status": "READY",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "import spark.implicits._ \ncase class Staff(name:String, email:String, phone:Phone)\ncase class Phone(did:String, mobile:String)\n\nval staffDirDS \u003d  spark.read.json(staffDirRDD).as[Staff]\n\nstaffDirDS.show()",
+      "user": "anonymous",
+      "dateUpdated": "2020-05-26 12:00:27.043",
+      "config": {
+        "colWidth": 12.0,
+        "fontSize": 9.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "editorMode": "ace/mode/scala"
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "warning: there was one deprecation warning; re-run with -deprecation for details\n+-------------------+-----+--------------------+\n|              email| name|               phone|\n+-------------------+-----+--------------------+\n|kenny_lu@nyp.edu.sg|Kenny|[6550-1696, 90123...|\n+-------------------+-----+--------------------+\n\nimport spark.implicits._\ndefined class Staff\ndefined class Phone\nstaffDirDS: org.apache.spark.sql.Dataset[Staff] \u003d [email: string, name: string ... 1 more field]\n"
+          }
+        ]
+      },
+      "apps": [],
+      "jobName": "paragraph_1590464669950_1668960262",
+      "id": "20200526-114429_434141347",
+      "dateCreated": "2020-05-26 11:44:29.950",
+      "dateStarted": "2020-05-26 12:00:27.059",
+      "dateFinished": "2020-05-26 12:00:28.303",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "staffDirDS.flatMap(staff \u003d\u003e List((staff.name,staff.phone.did), (staff.name,staff.phone.mobile))).show()",
+      "user": "anonymous",
+      "dateUpdated": "2020-05-26 12:02:32.422",
+      "config": {
+        "colWidth": 12.0,
+        "fontSize": 9.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "editorMode": "ace/mode/scala"
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "+-----+---------+\n|   _1|       _2|\n+-----+---------+\n|Kenny|6550-1696|\n|Kenny| 90123456|\n+-----+---------+\n\n"
+          }
+        ]
+      },
+      "apps": [],
+      "jobName": "paragraph_1590465144452_-892145569",
+      "id": "20200526-115224_1101680970",
+      "dateCreated": "2020-05-26 11:52:24.452",
+      "dateStarted": "2020-05-26 12:02:32.439",
+      "dateFinished": "2020-05-26 12:02:32.922",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "user": "anonymous",
+      "config": {},
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "apps": [],
+      "jobName": "paragraph_1590465747206_-1656786083",
+      "id": "20200526-120227_1788678528",
+      "dateCreated": "2020-05-26 12:02:27.206",
+      "status": "READY",
+      "progressUpdateIntervalMs": 500
+    }
+  ],
+  "name": "Lecture Examples (Scala)",
+  "id": "2F8JPHS2N",
+  "noteParams": {},
+  "noteForms": {},
+  "angularObjects": {
+    "md:shared_process": [],
+    "spark:shared_process": []
+  },
+  "config": {
+    "isZeppelinNotebookCronEnable": false
+  },
+  "info": {}
+}
