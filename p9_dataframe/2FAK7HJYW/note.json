@@ -3,7 +3,7 @@
     {
       "text": "%md\n\n# Practical 9 Part 1: Spark Dataframe \n",
       "user": "anonymous",
-      "dateUpdated": "2020-05-24 16:21:12.733",
+      "dateUpdated": "2020-06-11 07:22:40.420",
       "config": {
         "colWidth": 12.0,
         "fontSize": 9.0,
@@ -36,15 +36,15 @@
       "jobName": "paragraph_1590219816009_-2008127068",
       "id": "20200523-154336_1010448707",
       "dateCreated": "2020-05-23 15:43:36.009",
-      "dateStarted": "2020-05-24 16:21:12.733",
-      "dateFinished": "2020-05-24 16:21:12.736",
+      "dateStarted": "2020-06-11 07:22:40.446",
+      "dateFinished": "2020-06-11 07:22:40.451",
       "status": "FINISHED",
       "progressUpdateIntervalMs": 500
     },
     {
       "text": "%md\n\n## Learning Objectives\n\nBy the end of this lesson, you should be able to \n\n* Use Spark dataframe to perform data processing operations",
       "user": "anonymous",
-      "dateUpdated": "2020-05-24 15:53:22.451",
+      "dateUpdated": "2020-06-11 07:22:40.546",
       "config": {
         "colWidth": 12.0,
         "fontSize": 9.0,
@@ -77,9 +77,93 @@
       "jobName": "paragraph_1590219840360_-706785396",
       "id": "20200523-154400_333076066",
       "dateCreated": "2020-05-23 15:44:00.360",
-      "dateStarted": "2020-05-24 15:53:22.451",
-      "dateFinished": "2020-05-24 15:53:22.454",
+      "dateStarted": "2020-06-11 07:22:40.568",
+      "dateFinished": "2020-06-11 07:22:40.571",
       "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "%md\n## Copy data into HDFS\n",
+      "user": "anonymous",
+      "dateUpdated": "2020-06-11 07:22:40.668",
+      "config": {
+        "colWidth": 12.0,
+        "fontSize": 9.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "markdown",
+          "editOnDblClick": true,
+          "completionKey": "TAB",
+          "completionSupport": false
+        },
+        "editorMode": "ace/mode/markdown",
+        "editorHide": true,
+        "tableHide": false
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "\u003cdiv class\u003d\"markdown-body\"\u003e\n\u003ch2\u003eCopy data into HDFS\u003c/h2\u003e\n\u003c/div\u003e"
+          }
+        ]
+      },
+      "apps": [],
+      "jobName": "paragraph_1591831225015_-788920219",
+      "id": "20200611-072025_129351795",
+      "dateCreated": "2020-06-11 07:20:25.015",
+      "dateStarted": "2020-06-11 07:22:40.693",
+      "dateFinished": "2020-06-11 07:22:40.696",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "%sh\n\nhdfs dfs -mkdir -p /data\nhdfs dfs -put ~/git/itd353/p9_dataframe/data/Covid-19-SG.csv /data/Covid-19-SG.csv\n",
+      "user": "anonymous",
+      "dateUpdated": "2020-06-11 07:22:40.793",
+      "config": {
+        "colWidth": 12.0,
+        "fontSize": 9.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "sh",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": false
+        },
+        "editorMode": "ace/mode/sh"
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "ERROR",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "put: `/data/Covid-19-SG.csv\u0027: File exists\n"
+          },
+          {
+            "type": "TEXT",
+            "data": "ExitValue: 1"
+          }
+        ]
+      },
+      "apps": [],
+      "jobName": "paragraph_1591831231121_555061490",
+      "id": "20200611-072031_1073253396",
+      "dateCreated": "2020-06-11 07:20:31.121",
+      "dateStarted": "2020-06-11 07:22:40.821",
+      "dateFinished": "2020-06-11 07:22:43.517",
+      "status": "ERROR",
       "progressUpdateIntervalMs": 500
     },
     {
@@ -124,9 +208,9 @@
       "progressUpdateIntervalMs": 500
     },
     {
-      "text": "%pyspark\n\nfrom pyspark.sql import SparkSession\n\nsparkmaster \u003d \"spark://Kenny-MBP:7077\"\nhadoopmaster \u003d \"hdfs://127.0.0.1:9000\"\nsparkSession \u003d SparkSession.builder.master(sparkmaster).appName(\"Spark Dataframe\").getOrCreate()\n\n",
+      "text": "%pyspark\n\nfrom pyspark.sql import SparkSession\n\nsparkmaster \u003d \"spark://pop-t540.localdomain:7077\" # change this according to your machine domain name, check out https://localhost:8080\nhadoopmaster \u003d \"hdfs://127.0.0.1:9000\"\nsparkSession \u003d SparkSession.builder.master(sparkmaster).appName(\"Spark Dataframe\").getOrCreate()\n\n",
       "user": "anonymous",
-      "dateUpdated": "2020-05-24 15:53:55.920",
+      "dateUpdated": "2020-06-11 07:21:00.102",
       "config": {
         "colWidth": 12.0,
         "fontSize": 9.0,
@@ -152,8 +236,8 @@
       "jobName": "paragraph_1590141061436_-1707151618",
       "id": "20200522-175101_1267738414",
       "dateCreated": "2020-05-22 17:51:01.436",
-      "dateStarted": "2020-05-24 15:53:55.927",
-      "dateFinished": "2020-05-24 15:53:56.817",
+      "dateStarted": "2020-06-11 07:21:00.130",
+      "dateFinished": "2020-06-11 07:21:00.141",
       "status": "FINISHED",
       "progressUpdateIntervalMs": 500
     },
@@ -201,7 +285,7 @@
     {
       "text": "%pyspark\ndf \u003d sparkSession.read.option(\"header\", \"true\").option(\"delimiter\",\",\").option(\"inferSchema\", \"true\").csv(hadoopmaster + \"/data/Covid-19-SG.csv\")",
       "user": "anonymous",
-      "dateUpdated": "2020-05-24 15:54:01.515",
+      "dateUpdated": "2020-06-11 07:21:04.569",
       "config": {
         "colWidth": 12.0,
         "fontSize": 9.0,
@@ -227,8 +311,8 @@
       "jobName": "paragraph_1590141286081_193180030",
       "id": "20200522-175446_1690443780",
       "dateCreated": "2020-05-22 17:54:46.081",
-      "dateStarted": "2020-05-24 15:54:01.523",
-      "dateFinished": "2020-05-24 15:54:01.703",
+      "dateStarted": "2020-06-11 07:21:04.596",
+      "dateFinished": "2020-06-11 07:21:04.728",
       "status": "FINISHED",
       "progressUpdateIntervalMs": 500
     },
@@ -276,7 +360,7 @@
     {
       "text": "%pyspark\ndf.show(5)",
       "user": "anonymous",
-      "dateUpdated": "2020-05-24 15:54:49.563",
+      "dateUpdated": "2020-06-11 07:21:07.509",
       "config": {
         "colWidth": 12.0,
         "fontSize": 9.0,
@@ -307,8 +391,8 @@
       "jobName": "paragraph_1590142285110_-1706799056",
       "id": "20200522-181125_1108754746",
       "dateCreated": "2020-05-22 18:11:25.110",
-      "dateStarted": "2020-05-24 15:54:49.571",
-      "dateFinished": "2020-05-24 15:54:49.632",
+      "dateStarted": "2020-06-11 07:21:07.537",
+      "dateFinished": "2020-06-11 07:21:07.634",
       "status": "FINISHED",
       "progressUpdateIntervalMs": 500
     },
@@ -436,7 +520,7 @@
     {
       "text": "%pyspark\ndfDailyConfirmed \u003d df.select(\"Date\", \"Daily Confirmed \")\n\ndfDailyConfirmed",
       "user": "anonymous",
-      "dateUpdated": "2020-05-24 16:00:03.989",
+      "dateUpdated": "2020-06-11 07:23:10.661",
       "config": {
         "colWidth": 12.0,
         "fontSize": 9.0,
@@ -467,15 +551,15 @@
       "jobName": "paragraph_1590306937846_-1161605829",
       "id": "20200524-155537_1319917553",
       "dateCreated": "2020-05-24 15:55:37.846",
-      "dateStarted": "2020-05-24 16:00:03.999",
-      "dateFinished": "2020-05-24 16:00:04.019",
+      "dateStarted": "2020-06-11 07:23:10.689",
+      "dateFinished": "2020-06-11 07:23:10.700",
       "status": "FINISHED",
       "progressUpdateIntervalMs": 500
     },
     {
-      "text": "%md\n\n## Exercise 1\n\nNote that it does not show the data, it returns a new dataframe. To show the data, we can apply the `.Show()` method to the new dataframe. Call the `show()` function to show the first 5 rows in the data frame. \n\n\n",
+      "text": "%md\n\n## Exercise 1\n\nNote that it does not show the data, it returns a new dataframe. To show the data, we can apply the `.Show()` method to the new dataframe. Call the `show()` function to show the first 5 rows in the data frame. \n\n\n\u003cstyle\u003e\n    div.hidecode + pre {display: none}\n\u003c/style\u003e\n\u003cscript\u003e\ndoclick\u003dfunction(e) {\n    e.nextSibling.nextSibling.style.display\u003d\"block\";\n}\n\u003c/script\u003e\n\n\u003cdiv class\u003d\"hidecode\" onclick\u003d\"doclick(this);\"\u003e[Show Hint]\u003c/div\u003e\n```python\ndfDailyConfirmed.show(5)\n```",
       "user": "anonymous",
-      "dateUpdated": "2020-05-24 16:01:03.242",
+      "dateUpdated": "2020-06-11 07:21:44.180",
       "config": {
         "colWidth": 12.0,
         "fontSize": 9.0,
@@ -500,7 +584,7 @@
         "msg": [
           {
             "type": "HTML",
-            "data": "\u003cdiv class\u003d\"markdown-body\"\u003e\n\u003ch2\u003eExercise 1\u003c/h2\u003e\n\u003cp\u003eNote that it does not show the data, it returns a new dataframe. To show the data, we can apply the \u003ccode\u003e.Show()\u003c/code\u003e method to the new dataframe. Call the \u003ccode\u003eshow()\u003c/code\u003e function to show the first 5 rows in the data frame.\u003c/p\u003e\n\u003c/div\u003e"
+            "data": "\u003cdiv class\u003d\"markdown-body\"\u003e\n\u003ch2\u003eExercise 1\u003c/h2\u003e\n\u003cp\u003eNote that it does not show the data, it returns a new dataframe. To show the data, we can apply the \u003ccode\u003e.Show()\u003c/code\u003e method to the new dataframe. Call the \u003ccode\u003eshow()\u003c/code\u003e function to show the first 5 rows in the data frame. \u003c/p\u003e\n\u003cstyle\u003e\n    div.hidecode + pre {display: none}\n\u003c/style\u003e\n\u003cscript\u003e\ndoclick\u003dfunction(e) {\n    e.nextSibling.nextSibling.style.display\u003d\"block\";\n}\n\u003c/script\u003e\n\u003cdiv class\u003d\"hidecode\" onclick\u003d\"doclick(this);\"\u003e[Show Hint]\u003c/div\u003e\n\u003cpre\u003e\u003ccode class\u003d\"python\"\u003edfDailyConfirmed.show(5)\n\u003c/code\u003e\u003c/pre\u003e\n\u003c/div\u003e"
           }
         ]
       },
@@ -508,15 +592,15 @@
       "jobName": "paragraph_1590306989316_-997111734",
       "id": "20200524-155629_1347020813",
       "dateCreated": "2020-05-24 15:56:29.316",
-      "dateStarted": "2020-05-24 16:01:03.242",
-      "dateFinished": "2020-05-24 16:01:03.246",
+      "dateStarted": "2020-06-11 07:21:44.183",
+      "dateFinished": "2020-06-11 07:21:44.187",
       "status": "FINISHED",
       "progressUpdateIntervalMs": 500
     },
     {
-      "text": "%pyspark\n\n# TODO:",
+      "text": "%pyspark\n\n# TODO:\n",
       "user": "anonymous",
-      "dateUpdated": "2020-05-24 16:01:15.438",
+      "dateUpdated": "2020-06-11 07:21:43.623",
       "config": {
         "colWidth": 12.0,
         "fontSize": 9.0,
@@ -536,14 +620,19 @@
       },
       "results": {
         "code": "SUCCESS",
-        "msg": []
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "+------+----------------+\n|  Date|Daily Confirmed |\n+------+----------------+\n|23-Jan|               1|\n|24-Jan|               2|\n|25-Jan|               1|\n|26-Jan|               0|\n|27-Jan|               1|\n+------+----------------+\nonly showing top 5 rows\n\n"
+          }
+        ]
       },
       "apps": [],
       "jobName": "paragraph_1590307263231_808563590",
       "id": "20200524-160103_94579613",
       "dateCreated": "2020-05-24 16:01:03.231",
-      "dateStarted": "2020-05-24 16:01:15.450",
-      "dateFinished": "2020-05-24 16:01:15.454",
+      "dateStarted": "2020-06-11 07:21:39.898",
+      "dateFinished": "2020-06-11 07:21:39.962",
       "status": "FINISHED",
       "progressUpdateIntervalMs": 500
     },
@@ -591,7 +680,7 @@
     {
       "text": "%pyspark\n\nfrom pyspark.sql.functions import concat, col, lit\n\ndf.select(concat(df[\"Date\"], lit(\"-2020\")).alias(\"Date\"), df[\"Daily Confirmed \"]+ 0.0).show(5)",
       "user": "anonymous",
-      "dateUpdated": "2020-05-24 16:07:12.887",
+      "dateUpdated": "2020-06-11 07:23:17.457",
       "config": {
         "colWidth": 12.0,
         "fontSize": 9.0,
@@ -622,8 +711,8 @@
       "jobName": "paragraph_1590307275438_719613923",
       "id": "20200524-160115_1581264181",
       "dateCreated": "2020-05-24 16:01:15.438",
-      "dateStarted": "2020-05-24 16:04:23.552",
-      "dateFinished": "2020-05-24 16:04:23.617",
+      "dateStarted": "2020-06-11 07:23:17.483",
+      "dateFinished": "2020-06-11 07:23:17.586",
       "status": "FINISHED",
       "progressUpdateIntervalMs": 500
     },
@@ -671,7 +760,7 @@
     {
       "text": "%pyspark\n\ndfDateWithYear \u003d df.withColumn(\"Date\", concat(col(\"Date\"),lit(\"-2020\")))\n\ndfDateWithYear.show(5)\n",
       "user": "anonymous",
-      "dateUpdated": "2020-05-24 16:05:45.137",
+      "dateUpdated": "2020-06-11 07:23:20.319",
       "config": {
         "colWidth": 12.0,
         "fontSize": 9.0,
@@ -702,8 +791,8 @@
       "jobName": "paragraph_1590307498287_1861336401",
       "id": "20200524-160458_1893258160",
       "dateCreated": "2020-05-24 16:04:58.288",
-      "dateStarted": "2020-05-24 16:05:45.151",
-      "dateFinished": "2020-05-24 16:05:45.214",
+      "dateStarted": "2020-06-11 07:23:20.349",
+      "dateFinished": "2020-06-11 07:23:20.426",
       "status": "FINISHED",
       "progressUpdateIntervalMs": 500
     },
@@ -751,7 +840,7 @@
     {
       "text": "%pyspark\nfrom pyspark.sql.functions import concat, col, lit, to_date\ndfDateParsed \u003d dfDateWithYear.withColumn(\"Date\", to_date(col(\"Date\"), \"dd-MMM-yyyy\"))\n\ndfDateParsed.show(5)",
       "user": "anonymous",
-      "dateUpdated": "2020-05-24 16:07:35.763",
+      "dateUpdated": "2020-06-11 07:23:23.751",
       "config": {
         "colWidth": 12.0,
         "fontSize": 9.0,
@@ -784,8 +873,8 @@
       "jobName": "paragraph_1590307581551_313277552",
       "id": "20200524-160621_735373135",
       "dateCreated": "2020-05-24 16:06:21.551",
-      "dateStarted": "2020-05-24 16:07:35.776",
-      "dateFinished": "2020-05-24 16:07:35.840",
+      "dateStarted": "2020-06-11 07:23:23.777",
+      "dateFinished": "2020-06-11 07:23:23.871",
       "status": "FINISHED",
       "progressUpdateIntervalMs": 500
     },
@@ -833,7 +922,7 @@
     {
       "text": "%pyspark\n\ndfAfterApril5 \u003d dfDateParsed.filter(col(\"Date\") \u003e\u003d to_date(lit(\"05-Apr-2020\"), \"dd-MMM-yyyy\"))\n\ndfAfterApril5.show(5)\n",
       "user": "anonymous",
-      "dateUpdated": "2020-05-24 16:21:50.863",
+      "dateUpdated": "2020-06-11 07:23:29.660",
       "config": {
         "colWidth": 12.0,
         "fontSize": 9.0,
@@ -864,15 +953,15 @@
       "jobName": "paragraph_1590308472755_-1579957369",
       "id": "20200524-162112_1498572152",
       "dateCreated": "2020-05-24 16:21:12.755",
-      "dateStarted": "2020-05-24 16:21:50.878",
-      "dateFinished": "2020-05-24 16:21:50.947",
+      "dateStarted": "2020-06-11 07:23:29.688",
+      "dateFinished": "2020-06-11 07:23:29.801",
       "status": "FINISHED",
       "progressUpdateIntervalMs": 500
     },
     {
-      "text": "%md \n\n## Exercise 2\n\nCan you fiter out rows whose `Daily Deaths` is greater than 0?",
+      "text": "%md \n\n## Exercise 2\n\nCan you fiter out rows whose `Daily Deaths` is greater than 0?\n\n\n\u003cstyle\u003e\n    div.hidecode + pre {display: none}\n\u003c/style\u003e\n\u003cscript\u003e\ndoclick\u003dfunction(e) {\n    e.nextSibling.nextSibling.style.display\u003d\"block\";\n}\n\u003c/script\u003e\n\n\u003cdiv class\u003d\"hidecode\" onclick\u003d\"doclick(this);\"\u003e[Show Hint]\u003c/div\u003e\n```python\ndfWithDailyDeaths \u003d dfDateParsed.filter(col(\"Daily Deaths\") \u003e 0)\n\ndfWithDailyDeaths.show(5)\n```",
       "user": "anonymous",
-      "dateUpdated": "2020-05-24 16:22:28.430",
+      "dateUpdated": "2020-06-11 07:22:32.712",
       "config": {
         "colWidth": 12.0,
         "fontSize": 9.0,
@@ -897,7 +986,7 @@
         "msg": [
           {
             "type": "HTML",
-            "data": "\u003cdiv class\u003d\"markdown-body\"\u003e\n\u003ch2\u003eExercise 2\u003c/h2\u003e\n\u003cp\u003eCan you fiter out rows whose \u003ccode\u003eDaily Deaths\u003c/code\u003e is greater than 0?\u003c/p\u003e\n\u003c/div\u003e"
+            "data": "\u003cdiv class\u003d\"markdown-body\"\u003e\n\u003ch2\u003eExercise 2\u003c/h2\u003e\n\u003cp\u003eCan you fiter out rows whose \u003ccode\u003eDaily Deaths\u003c/code\u003e is greater than 0?\u003c/p\u003e\n\u003cstyle\u003e\n    div.hidecode + pre {display: none}\n\u003c/style\u003e\n\u003cscript\u003e\ndoclick\u003dfunction(e) {\n    e.nextSibling.nextSibling.style.display\u003d\"block\";\n}\n\u003c/script\u003e\n\u003cdiv class\u003d\"hidecode\" onclick\u003d\"doclick(this);\"\u003e[Show Hint]\u003c/div\u003e\n\u003cpre\u003e\u003ccode class\u003d\"python\"\u003edfWithDailyDeaths \u003d dfDateParsed.filter(col(\u0026quot;Daily Deaths\u0026quot;) \u0026gt; 0)\n\ndfWithDailyDeaths.show(5)\n\u003c/code\u003e\u003c/pre\u003e\n\u003c/div\u003e"
           }
         ]
       },
@@ -905,15 +994,15 @@
       "jobName": "paragraph_1590308510863_-613306911",
       "id": "20200524-162150_1013478033",
       "dateCreated": "2020-05-24 16:21:50.863",
-      "dateStarted": "2020-05-24 16:22:28.439",
-      "dateFinished": "2020-05-24 16:22:28.459",
+      "dateStarted": "2020-06-11 07:22:32.712",
+      "dateFinished": "2020-06-11 07:22:32.717",
       "status": "FINISHED",
       "progressUpdateIntervalMs": 500
     },
     {
       "text": "%pyspark\n\n# TODO\n",
       "user": "anonymous",
-      "dateUpdated": "2020-05-24 16:22:36.926",
+      "dateUpdated": "2020-06-11 07:23:41.101",
       "config": {
         "colWidth": 12.0,
         "fontSize": 9.0,
@@ -939,8 +1028,8 @@
       "jobName": "paragraph_1590308548410_-1646715436",
       "id": "20200524-162228_1952068035",
       "dateCreated": "2020-05-24 16:22:28.411",
-      "dateStarted": "2020-05-24 16:22:36.944",
-      "dateFinished": "2020-05-24 16:22:36.950",
+      "dateStarted": "2020-06-11 07:23:41.127",
+      "dateFinished": "2020-06-11 07:23:41.130",
       "status": "FINISHED",
       "progressUpdateIntervalMs": 500
     },
@@ -988,7 +1077,7 @@
     {
       "text": "%pyspark\nfrom pyspark.sql.functions import concat, col, lit, month\n\ndfWithMonth \u003d dfDateParsed.withColumn(\"Month\", month(col(\"Date\")))\n\ndfWithMonth.show(5)",
       "user": "anonymous",
-      "dateUpdated": "2020-05-24 16:24:26.932",
+      "dateUpdated": "2020-06-11 07:23:51.954",
       "config": {
         "colWidth": 12.0,
         "fontSize": 9.0,
@@ -1019,15 +1108,15 @@
       "jobName": "paragraph_1590308573824_555182076",
       "id": "20200524-162253_2050117373",
       "dateCreated": "2020-05-24 16:22:53.824",
-      "dateStarted": "2020-05-24 16:24:26.948",
-      "dateFinished": "2020-05-24 16:24:27.023",
+      "dateStarted": "2020-06-11 07:23:51.983",
+      "dateFinished": "2020-06-11 07:23:52.066",
       "status": "FINISHED",
       "progressUpdateIntervalMs": 500
     },
     {
       "text": "%pyspark\ndfGroupByMonth \u003d dfWithMonth.groupBy(\"Month\").sum()\ndfGroupByMonth.show(5)",
       "user": "anonymous",
-      "dateUpdated": "2020-05-24 16:24:44.403",
+      "dateUpdated": "2020-06-11 07:23:56.713",
       "config": {
         "colWidth": 12.0,
         "fontSize": 9.0,
@@ -1058,8 +1147,8 @@
       "jobName": "paragraph_1590308603522_1582567510",
       "id": "20200524-162323_354174453",
       "dateCreated": "2020-05-24 16:23:23.522",
-      "dateStarted": "2020-05-24 16:24:44.421",
-      "dateFinished": "2020-05-24 16:24:44.762",
+      "dateStarted": "2020-06-11 07:23:56.739",
+      "dateFinished": "2020-06-11 07:23:57.421",
       "status": "FINISHED",
       "progressUpdateIntervalMs": 500
     },
@@ -1107,7 +1196,7 @@
     {
       "text": "%pyspark\n\ndfDateParsed.createOrReplaceTempView(\"SingaporeCovid19\")\n\nsqlDF \u003d spark.sql(\"SELECT * FROM SingaporeCovid19\")\nsqlDF.show()\n",
       "user": "anonymous",
-      "dateUpdated": "2020-05-24 16:25:30.183",
+      "dateUpdated": "2020-06-11 07:24:06.125",
       "config": {
         "colWidth": 12.0,
         "fontSize": 9.0,
@@ -1140,8 +1229,8 @@
       "jobName": "paragraph_1590308703774_1384123805",
       "id": "20200524-162503_64038344",
       "dateCreated": "2020-05-24 16:25:03.774",
-      "dateStarted": "2020-05-24 16:25:30.183",
-      "dateFinished": "2020-05-24 16:25:30.256",
+      "dateStarted": "2020-06-11 07:24:06.152",
+      "dateFinished": "2020-06-11 07:24:06.242",
       "status": "FINISHED",
       "progressUpdateIntervalMs": 500
     },
@@ -1189,7 +1278,7 @@
     {
       "text": "%sql\n\n\nSelect * from SingaporeCovid19\n",
       "user": "anonymous",
-      "dateUpdated": "2020-05-24 16:26:09.163",
+      "dateUpdated": "2020-06-11 07:24:16.614",
       "config": {
         "colWidth": 12.0,
         "fontSize": 9.0,
@@ -1261,15 +1350,15 @@
       "jobName": "paragraph_1590308751621_-1141930508",
       "id": "20200524-162551_1172437228",
       "dateCreated": "2020-05-24 16:25:51.621",
-      "dateStarted": "2020-05-24 16:26:08.007",
-      "dateFinished": "2020-05-24 16:26:08.073",
+      "dateStarted": "2020-06-11 07:24:16.641",
+      "dateFinished": "2020-06-11 07:24:16.709",
       "status": "FINISHED",
       "progressUpdateIntervalMs": 500
     },
     {
-      "text": "%md \n\n## Exericse 3\n\nUsing Spark SQL, generate a bar chart for `Discharged To Isolation` after 1st Mar 2020.",
+      "text": "%md \n\n## Exericse 3\n\nUsing Spark SQL, generate a bar chart for `Discharged To Isolation` after 1st Mar 2020.\n\n\u003cstyle\u003e\n    div.hidecode + pre {display: none}\n\u003c/style\u003e\n\u003cscript\u003e\ndoclick\u003dfunction(e) {\n    e.nextSibling.nextSibling.style.display\u003d\"block\";\n}\n\u003c/script\u003e\n\n\u003cdiv class\u003d\"hidecode\" onclick\u003d\"doclick(this);\"\u003e[Show Hint]\u003c/div\u003e\n```sql\n\nSelect Date, `Discharged To Isolation` from SingaporeCovid19 where Date \u003e\u003d \u00272020-03-01\u0027\n-- In the `settings` dropdown, you might need to put `Date` in the `keys` field, and `Discharged To Isolation` to the `values` field.\n```\n",
       "user": "anonymous",
-      "dateUpdated": "2020-05-24 16:26:40.786",
+      "dateUpdated": "2020-06-11 07:24:49.124",
       "config": {
         "colWidth": 12.0,
         "fontSize": 9.0,
@@ -1294,7 +1383,7 @@
         "msg": [
           {
             "type": "HTML",
-            "data": "\u003cdiv class\u003d\"markdown-body\"\u003e\n\u003ch2\u003eExericse 3\u003c/h2\u003e\n\u003cp\u003eUsing Spark SQL, generate a bar chart for \u003ccode\u003eDischarged To Isolation\u003c/code\u003e after 1st Mar 2020.\u003c/p\u003e\n\u003c/div\u003e"
+            "data": "\u003cdiv class\u003d\"markdown-body\"\u003e\n\u003ch2\u003eExericse 3\u003c/h2\u003e\n\u003cp\u003eUsing Spark SQL, generate a bar chart for \u003ccode\u003eDischarged To Isolation\u003c/code\u003e after 1st Mar 2020.\u003c/p\u003e\n\u003cstyle\u003e\n    div.hidecode + pre {display: none}\n\u003c/style\u003e\n\u003cscript\u003e\ndoclick\u003dfunction(e) {\n    e.nextSibling.nextSibling.style.display\u003d\"block\";\n}\n\u003c/script\u003e\n\u003cdiv class\u003d\"hidecode\" onclick\u003d\"doclick(this);\"\u003e[Show Hint]\u003c/div\u003e\n\u003cpre\u003e\u003ccode class\u003d\"sql\"\u003e\u003cbr/\u003eSelect Date, `Discharged To Isolation` from SingaporeCovid19 where Date \u0026gt;\u003d \u0026#39;2020-03-01\u0026#39;\n-- In the `settings` dropdown, you might need to put `Date` in the `keys` field, and `Discharged To Isolation` to the `values` field.\n\u003c/code\u003e\u003c/pre\u003e\n\u003c/div\u003e"
           }
         ]
       },
@@ -1302,20 +1391,71 @@
       "jobName": "paragraph_1590308767986_-528973710",
       "id": "20200524-162607_1226404762",
       "dateCreated": "2020-05-24 16:26:07.986",
-      "dateStarted": "2020-05-24 16:26:40.786",
-      "dateFinished": "2020-05-24 16:26:40.789",
+      "dateStarted": "2020-06-11 07:24:49.124",
+      "dateFinished": "2020-06-11 07:24:49.127",
       "status": "FINISHED",
       "progressUpdateIntervalMs": 500
     },
     {
-      "text": "%sql\n\n",
+      "text": "%sql\n-- TODO\n",
       "user": "anonymous",
-      "dateUpdated": "2020-05-24 16:26:49.074",
+      "dateUpdated": "2020-06-11 07:25:19.630",
       "config": {
         "colWidth": 12.0,
         "fontSize": 9.0,
         "enabled": true,
-        "results": {},
+        "results": {
+          "0": {
+            "graph": {
+              "mode": "table",
+              "height": 300.0,
+              "optionOpen": false,
+              "setting": {
+                "table": {
+                  "tableGridState": {},
+                  "tableColumnTypeState": {
+                    "names": {
+                      "Date": "string",
+                      "Discharged To Isolation": "string"
+                    },
+                    "updated": false
+                  },
+                  "tableOptionSpecHash": "[{\"name\":\"useFilter\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable filter for columns\"},{\"name\":\"showPagination\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable pagination for better navigation\"},{\"name\":\"showAggregationFooter\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable a footer for displaying aggregated values\"}]",
+                  "tableOptionValue": {
+                    "useFilter": false,
+                    "showPagination": false,
+                    "showAggregationFooter": false
+                  },
+                  "updated": false,
+                  "initialized": false
+                },
+                "lineChart": {
+                  "rotate": {
+                    "degree": "-45"
+                  },
+                  "xLabelStatus": "default"
+                }
+              },
+              "commonSetting": {},
+              "keys": [
+                {
+                  "name": "Date",
+                  "index": 0.0,
+                  "aggr": "sum"
+                }
+              ],
+              "groups": [],
+              "values": [
+                {
+                  "name": "Discharged To Isolation",
+                  "index": 1.0,
+                  "aggr": "sum"
+                }
+              ]
+            },
+            "helium": {}
+          }
+        },
         "editorSetting": {
           "language": "sql",
           "editOnDblClick": false,
@@ -1328,11 +1468,22 @@
         "params": {},
         "forms": {}
       },
+      "results": {
+        "code": "ERROR",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "\nmismatched input \u0027\u003cEOF\u003e\u0027 expecting {\u0027(\u0027, \u0027SELECT\u0027, \u0027FROM\u0027, \u0027ADD\u0027, \u0027DESC\u0027, \u0027WITH\u0027, \u0027VALUES\u0027, \u0027CREATE\u0027, \u0027TABLE\u0027, \u0027INSERT\u0027, \u0027DELETE\u0027, \u0027DESCRIBE\u0027, \u0027EXPLAIN\u0027, \u0027SHOW\u0027, \u0027USE\u0027, \u0027DROP\u0027, \u0027ALTER\u0027, \u0027MAP\u0027, \u0027SET\u0027, \u0027RESET\u0027, \u0027START\u0027, \u0027COMMIT\u0027, \u0027ROLLBACK\u0027, \u0027REDUCE\u0027, \u0027REFRESH\u0027, \u0027CLEAR\u0027, \u0027CACHE\u0027, \u0027UNCACHE\u0027, \u0027DFS\u0027, \u0027TRUNCATE\u0027, \u0027ANALYZE\u0027, \u0027LIST\u0027, \u0027REVOKE\u0027, \u0027GRANT\u0027, \u0027LOCK\u0027, \u0027UNLOCK\u0027, \u0027MSCK\u0027, \u0027EXPORT\u0027, \u0027IMPORT\u0027, \u0027LOAD\u0027}(line 1, pos 7)\n\n\u003d\u003d SQL \u003d\u003d\n-- TODO\n-------^^^\n\nset zeppelin.spark.sql.stacktrace \u003d true to see full stacktrace"
+          }
+        ]
+      },
       "apps": [],
       "jobName": "paragraph_1590308800766_1824366930",
       "id": "20200524-162640_257806609",
       "dateCreated": "2020-05-24 16:26:40.766",
-      "status": "FINISHED",
+      "dateStarted": "2020-06-11 07:25:19.658",
+      "dateFinished": "2020-06-11 07:25:19.662",
+      "status": "ERROR",
       "progressUpdateIntervalMs": 500
     },
     {
@@ -1379,7 +1530,7 @@
     {
       "text": "%pyspark\n\ndef isZero(s):\n  return s \u003d\u003d 0\n  \nspark.udf.register(\"isZero\", isZero)\n",
       "user": "anonymous",
-      "dateUpdated": "2020-05-24 16:31:46.448",
+      "dateUpdated": "2020-06-11 07:26:10.898",
       "config": {
         "colWidth": 12.0,
         "fontSize": 9.0,
@@ -1402,7 +1553,7 @@
         "msg": [
           {
             "type": "TEXT",
-            "data": "\u003cfunction isZero at 0x10f7d4aa0\u003e\n"
+            "data": "\u003cfunction isZero at 0x7f120169eb50\u003e\n"
           }
         ]
       },
@@ -1410,20 +1561,49 @@
       "jobName": "paragraph_1590308882827_1308725409",
       "id": "20200524-162802_172671542",
       "dateCreated": "2020-05-24 16:28:02.827",
-      "dateStarted": "2020-05-24 16:31:46.472",
-      "dateFinished": "2020-05-24 16:31:46.505",
+      "dateStarted": "2020-06-11 07:26:10.924",
+      "dateFinished": "2020-06-11 07:26:10.965",
       "status": "FINISHED",
       "progressUpdateIntervalMs": 500
     },
     {
       "text": "\n%sql\n\nselect `Daily Discharged`, isZero(`Daily Discharged`) From SingaporeCovid19",
       "user": "anonymous",
-      "dateUpdated": "2020-05-24 16:31:49.180",
+      "dateUpdated": "2020-06-11 07:26:14.256",
       "config": {
         "colWidth": 12.0,
         "fontSize": 9.0,
         "enabled": true,
-        "results": {},
+        "results": {
+          "0": {
+            "graph": {
+              "mode": "table",
+              "height": 300.0,
+              "optionOpen": false,
+              "setting": {
+                "table": {
+                  "tableGridState": {},
+                  "tableColumnTypeState": {
+                    "names": {
+                      "Daily Discharged": "string",
+                      "isZero(Daily Discharged)": "string"
+                    },
+                    "updated": false
+                  },
+                  "tableOptionSpecHash": "[{\"name\":\"useFilter\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable filter for columns\"},{\"name\":\"showPagination\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable pagination for better navigation\"},{\"name\":\"showAggregationFooter\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable a footer for displaying aggregated values\"}]",
+                  "tableOptionValue": {
+                    "useFilter": false,
+                    "showPagination": false,
+                    "showAggregationFooter": false
+                  },
+                  "updated": false,
+                  "initialized": false
+                }
+              },
+              "commonSetting": {}
+            }
+          }
+        },
         "editorSetting": {
           "language": "sql",
           "editOnDblClick": false,
@@ -1437,11 +1617,15 @@
         "forms": {}
       },
       "results": {
-        "code": "ERROR",
+        "code": "SUCCESS",
         "msg": [
           {
+            "type": "TABLE",
+            "data": "Daily Discharged\tisZero(Daily Discharged)\n0\ttrue\n0\ttrue\n0\ttrue\n0\ttrue\n0\ttrue\n0\ttrue\n0\ttrue\n0\ttrue\n0\ttrue\n0\ttrue\n0\ttrue\n0\ttrue\n1\tfalse\n0\ttrue\n0\ttrue\n1\tfalse\n0\ttrue\n4\tfalse\n1\tfalse\n2\tfalse\n6\tfalse\n0\ttrue\n2\tfalse\n1\tfalse\n1\tfalse\n5\tfalse\n5\tfalse\n5\tfalse\n3\tfalse\n10\tfalse\n2\tfalse\n2\tfalse\n2\tfalse\n5\tfalse\n4\tfalse\n4\tfalse\n3\tfalse\n3\tfalse\n2\tfalse\n4\tfalse\n0\ttrue\n1\tfalse\n2\tfalse\n1\tfalse\n8\tfalse\n0\ttrue\n3\tfalse\n0\ttrue\n3\tfalse\n0\ttrue\n1\tfalse\n8\tfalse\n0\ttrue\n4\tfalse\n5\tfalse\n3\tfalse\n7\tfalse\n7\tfalse\n9\tfalse\n4\tfalse\n8\tfalse\n3\tfalse\n5\tfalse\n12\tfalse\n11\tfalse\n15\tfalse\n14\tfalse\n16\tfalse\n12\tfalse\n5\tfalse\n21\tfalse\n16\tfalse\n15\tfalse\n23\tfalse\n24\tfalse\n33\tfalse\n29\tfalse\n54\tfalse\n32\tfalse\n35\tfalse\n32\tfalse\n26\tfalse\n25\tfalse\n41\tfalse\n31\tfalse\n25\tfalse\n38\tfalse\n26\tfalse\n33\tfalse\n39\tfalse\n57\tfalse\n36\tfalse\n38\tfalse\n46\tfalse\n58\tfalse\n35\tfalse\n33\tfalse\n62\tfalse\n56\tfalse\n24\tfalse\n79\tfalse\n61\tfalse\n49\tfalse\n62\tfalse\n115\tfalse\n78\tfalse\n328\tfalse\n256\tfalse\n425\tfalse\n504\tfalse\n626\tfalse\n958\tfalse\n1164\tfalse\n1275\tfalse\n1094\tfalse\n998\tfalse\n495\tfalse\n530\tfalse\n842\tfalse\n"
+          },
+          {
             "type": "TEXT",
-            "data": "java.lang.IllegalArgumentException: Unsupported class file major version 58\n\tat org.apache.xbean.asm6.ClassReader.\u003cinit\u003e(ClassReader.java:166)\n\tat org.apache.xbean.asm6.ClassReader.\u003cinit\u003e(ClassReader.java:148)\n\tat org.apache.xbean.asm6.ClassReader.\u003cinit\u003e(ClassReader.java:136)\n\tat org.apache.xbean.asm6.ClassReader.\u003cinit\u003e(ClassReader.java:237)\n\tat org.apache.spark.util.ClosureCleaner$.getClassReader(ClosureCleaner.scala:49)\n\tat org.apache.spark.util.FieldAccessFinder$$anon$3$$anonfun$visitMethodInsn$2.apply(ClosureCleaner.scala:517)\n\tat org.apache.spark.util.FieldAccessFinder$$anon$3$$anonfun$visitMethodInsn$2.apply(ClosureCleaner.scala:500)\n\tat scala.collection.TraversableLike$WithFilter$$anonfun$foreach$1.apply(TraversableLike.scala:733)\n\tat scala.collection.mutable.HashMap$$anon$1$$anonfun$foreach$2.apply(HashMap.scala:134)\n\tat scala.collection.mutable.HashMap$$anon$1$$anonfun$foreach$2.apply(HashMap.scala:134)\n\tat scala.collection.mutable.HashTable$class.foreachEntry(HashTable.scala:236)\n\tat scala.collection.mutable.HashMap.foreachEntry(HashMap.scala:40)\n\tat scala.collection.mutable.HashMap$$anon$1.foreach(HashMap.scala:134)\n\tat scala.collection.TraversableLike$WithFilter.foreach(TraversableLike.scala:732)\n\tat org.apache.spark.util.FieldAccessFinder$$anon$3.visitMethodInsn(ClosureCleaner.scala:500)\n\tat org.apache.xbean.asm6.ClassReader.readCode(ClassReader.java:2175)\n\tat org.apache.xbean.asm6.ClassReader.readMethod(ClassReader.java:1238)\n\tat org.apache.xbean.asm6.ClassReader.accept(ClassReader.java:631)\n\tat org.apache.xbean.asm6.ClassReader.accept(ClassReader.java:355)\n\tat org.apache.spark.util.ClosureCleaner$$anonfun$org$apache$spark$util$ClosureCleaner$$clean$14.apply(ClosureCleaner.scala:307)\n\tat org.apache.spark.util.ClosureCleaner$$anonfun$org$apache$spark$util$ClosureCleaner$$clean$14.apply(ClosureCleaner.scala:306)\n\tat scala.collection.immutable.List.foreach(List.scala:392)\n\tat org.apache.spark.util.ClosureCleaner$.org$apache$spark$util$ClosureCleaner$$clean(ClosureCleaner.scala:306)\n\tat org.apache.spark.util.ClosureCleaner$.clean(ClosureCleaner.scala:162)\n\tat org.apache.spark.SparkContext.clean(SparkContext.scala:2326)\n\tat org.apache.spark.rdd.RDD$$anonfun$mapPartitions$1.apply(RDD.scala:820)\n\tat org.apache.spark.rdd.RDD$$anonfun$mapPartitions$1.apply(RDD.scala:819)\n\tat org.apache.spark.rdd.RDDOperationScope$.withScope(RDDOperationScope.scala:151)\n\tat org.apache.spark.rdd.RDDOperationScope$.withScope(RDDOperationScope.scala:112)\n\tat org.apache.spark.rdd.RDD.withScope(RDD.scala:385)\n\tat org.apache.spark.rdd.RDD.mapPartitions(RDD.scala:819)\n\tat org.apache.spark.sql.execution.python.EvalPythonExec.doExecute(EvalPythonExec.scala:89)\n\tat org.apache.spark.sql.execution.SparkPlan$$anonfun$execute$1.apply(SparkPlan.scala:131)\n\tat org.apache.spark.sql.execution.SparkPlan$$anonfun$execute$1.apply(SparkPlan.scala:127)\n\tat org.apache.spark.sql.execution.SparkPlan$$anonfun$executeQuery$1.apply(SparkPlan.scala:155)\n\tat org.apache.spark.rdd.RDDOperationScope$.withScope(RDDOperationScope.scala:151)\n\tat org.apache.spark.sql.execution.SparkPlan.executeQuery(SparkPlan.scala:152)\n\tat org.apache.spark.sql.execution.SparkPlan.execute(SparkPlan.scala:127)\n\tat org.apache.spark.sql.execution.InputAdapter.inputRDDs(WholeStageCodegenExec.scala:391)\n\tat org.apache.spark.sql.execution.ProjectExec.inputRDDs(basicPhysicalOperators.scala:43)\n\tat org.apache.spark.sql.execution.WholeStageCodegenExec.doExecute(WholeStageCodegenExec.scala:627)\n\tat org.apache.spark.sql.execution.SparkPlan$$anonfun$execute$1.apply(SparkPlan.scala:131)\n\tat org.apache.spark.sql.execution.SparkPlan$$anonfun$execute$1.apply(SparkPlan.scala:127)\n\tat org.apache.spark.sql.execution.SparkPlan$$anonfun$executeQuery$1.apply(SparkPlan.scala:155)\n\tat org.apache.spark.rdd.RDDOperationScope$.withScope(RDDOperationScope.scala:151)\n\tat org.apache.spark.sql.execution.SparkPlan.executeQuery(SparkPlan.scala:152)\n\tat org.apache.spark.sql.execution.SparkPlan.execute(SparkPlan.scala:127)\n\tat org.apache.spark.sql.execution.SparkPlan.getByteArrayRdd(SparkPlan.scala:247)\n\tat org.apache.spark.sql.execution.SparkPlan.executeTake(SparkPlan.scala:339)\n\tat org.apache.spark.sql.execution.CollectLimitExec.executeCollect(limit.scala:38)\n\tat org.apache.spark.sql.Dataset.org$apache$spark$sql$Dataset$$collectFromPlan(Dataset.scala:3389)\n\tat org.apache.spark.sql.Dataset$$anonfun$head$1.apply(Dataset.scala:2550)\n\tat org.apache.spark.sql.Dataset$$anonfun$head$1.apply(Dataset.scala:2550)\n\tat org.apache.spark.sql.Dataset$$anonfun$52.apply(Dataset.scala:3370)\n\tat org.apache.spark.sql.execution.SQLExecution$$anonfun$withNewExecutionId$1.apply(SQLExecution.scala:80)\n\tat org.apache.spark.sql.execution.SQLExecution$.withSQLConfPropagated(SQLExecution.scala:127)\n\tat org.apache.spark.sql.execution.SQLExecution$.withNewExecutionId(SQLExecution.scala:75)\n\tat org.apache.spark.sql.Dataset.withAction(Dataset.scala:3369)\n\tat org.apache.spark.sql.Dataset.head(Dataset.scala:2550)\n\tat org.apache.spark.sql.Dataset.take(Dataset.scala:2764)\n\tat java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)\n\tat java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)\n\tat java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)\n\tat java.base/java.lang.reflect.Method.invoke(Method.java:564)\n\tat org.apache.zeppelin.spark.SparkZeppelinContext.showData(SparkZeppelinContext.java:108)\n\tat org.apache.zeppelin.spark.SparkSqlInterpreter.interpret(SparkSqlInterpreter.java:136)\n\tat org.apache.zeppelin.interpreter.LazyOpenInterpreter.interpret(LazyOpenInterpreter.java:103)\n\tat org.apache.zeppelin.interpreter.remote.RemoteInterpreterServer$InterpretJob.jobRun(RemoteInterpreterServer.java:632)\n\tat org.apache.zeppelin.scheduler.Job.run(Job.java:188)\n\tat org.apache.zeppelin.scheduler.FIFOScheduler$1.run(FIFOScheduler.java:140)\n\tat java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:515)\n\tat java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)\n\tat java.base/java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.run(ScheduledThreadPoolExecutor.java:304)\n\tat java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1130)\n\tat java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:630)\n\tat java.base/java.lang.Thread.run(Thread.java:832)\n"
+            "data": ""
           }
         ]
       },
@@ -1449,9 +1633,9 @@
       "jobName": "paragraph_1590309100357_-1432322872",
       "id": "20200524-163140_982622910",
       "dateCreated": "2020-05-24 16:31:40.357",
-      "dateStarted": "2020-05-24 16:31:49.203",
-      "dateFinished": "2020-05-24 16:31:49.283",
-      "status": "ERROR",
+      "dateStarted": "2020-06-11 07:26:13.300",
+      "dateFinished": "2020-06-11 07:26:14.013",
+      "status": "FINISHED",
       "progressUpdateIntervalMs": 500
     },
     {
@@ -1539,7 +1723,7 @@
     {
       "text": "%pyspark\n\nx \u003d dfDateParsed.select(col(\"Daily Discharged\"), isZero(col(\"Daily Discharged\")))\nx.show()",
       "user": "anonymous",
-      "dateUpdated": "2020-05-24 16:35:56.138",
+      "dateUpdated": "2020-06-11 07:26:19.099",
       "config": {
         "colWidth": 12.0,
         "fontSize": 9.0,
@@ -1570,8 +1754,8 @@
       "jobName": "paragraph_1590309109180_-1949939301",
       "id": "20200524-163149_1351444530",
       "dateCreated": "2020-05-24 16:31:49.180",
-      "dateStarted": "2020-05-24 16:35:56.165",
-      "dateFinished": "2020-05-24 16:35:56.224",
+      "dateStarted": "2020-06-11 07:26:19.127",
+      "dateFinished": "2020-06-11 07:26:19.237",
       "status": "FINISHED",
       "progressUpdateIntervalMs": 500
     },
@@ -1664,6 +1848,7 @@
   "noteForms": {},
   "angularObjects": {
     "md:shared_process": [],
+    "sh:shared_process": [],
     "spark:shared_process": []
   },
   "config": {

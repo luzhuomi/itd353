@@ -3,7 +3,7 @@
     {
       "text": "%md\n\n# Practical 9 Part 1: Spark Dataframe ",
       "user": "anonymous",
-      "dateUpdated": "2020-05-24 15:53:14.460",
+      "dateUpdated": "2020-06-11 07:12:51.136",
       "config": {
         "colWidth": 12.0,
         "fontSize": 9.0,
@@ -36,15 +36,15 @@
       "jobName": "paragraph_1590053074592_-336601275",
       "id": "20200521-172434_1587067134",
       "dateCreated": "2020-05-21 17:24:34.592",
-      "dateStarted": "2020-05-24 15:53:14.460",
-      "dateFinished": "2020-05-24 15:53:14.462",
+      "dateStarted": "2020-06-11 07:12:51.159",
+      "dateFinished": "2020-06-11 07:12:51.161",
       "status": "FINISHED",
       "progressUpdateIntervalMs": 500
     },
     {
       "text": "%md\n\n## Learning Objectives\n\nBy the end of this lesson, you should be able to \n\n* Use Spark dataframe to perform data processing operations",
       "user": "anonymous",
-      "dateUpdated": "2020-05-24 15:53:27.065",
+      "dateUpdated": "2020-06-11 07:12:51.259",
       "config": {
         "colWidth": 12.0,
         "fontSize": 9.0,
@@ -77,15 +77,99 @@
       "jobName": "paragraph_1590219505396_260530615",
       "id": "20200523-153825_1707099325",
       "dateCreated": "2020-05-23 15:38:25.396",
-      "dateStarted": "2020-05-24 15:53:27.065",
-      "dateFinished": "2020-05-24 15:53:27.068",
+      "dateStarted": "2020-06-11 07:12:51.282",
+      "dateFinished": "2020-06-11 07:12:51.285",
       "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "%md\n## Copy data into HDFS\n",
+      "user": "anonymous",
+      "dateUpdated": "2020-06-11 07:20:52.204",
+      "config": {
+        "colWidth": 12.0,
+        "fontSize": 9.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "markdown",
+          "editOnDblClick": true,
+          "completionKey": "TAB",
+          "completionSupport": false
+        },
+        "editorMode": "ace/mode/markdown",
+        "editorHide": true,
+        "tableHide": false
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "\u003cdiv class\u003d\"markdown-body\"\u003e\n\u003ch2\u003eCopy data into HDFS\u003c/h2\u003e\n\u003c/div\u003e"
+          }
+        ]
+      },
+      "apps": [],
+      "jobName": "paragraph_1591831034218_-786933515",
+      "id": "20200611-071714_1232231607",
+      "dateCreated": "2020-06-11 07:17:14.218",
+      "dateStarted": "2020-06-11 07:20:52.204",
+      "dateFinished": "2020-06-11 07:20:52.207",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "%sh\nhdfs dfs -mkdir -p /data\nhdfs dfs -put ~/git/itd353/p9_dataframe/data/Covid-19-SG.csv /data/Covid-19-SG.csv\n",
+      "user": "anonymous",
+      "dateUpdated": "2020-06-11 07:20:08.422",
+      "config": {
+        "colWidth": 12.0,
+        "fontSize": 9.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "sh",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": false
+        },
+        "editorMode": "ace/mode/sh"
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "ERROR",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "put: `/data/Covid-19-SG.csv\u0027: File exists\n"
+          },
+          {
+            "type": "TEXT",
+            "data": "ExitValue: 1"
+          }
+        ]
+      },
+      "apps": [],
+      "jobName": "paragraph_1591831031951_-692055212",
+      "id": "20200611-071711_265808060",
+      "dateCreated": "2020-06-11 07:17:11.951",
+      "dateStarted": "2020-06-11 07:20:08.450",
+      "dateFinished": "2020-06-11 07:20:12.317",
+      "status": "ERROR",
       "progressUpdateIntervalMs": 500
     },
     {
       "text": "%md\n\n## Starting with a Spark Session\n\nTo get started, we need to load a Spark Sessoin from the configuration. ",
       "user": "anonymous",
-      "dateUpdated": "2020-05-24 16:36:53.940",
+      "dateUpdated": "2020-06-11 07:12:51.381",
       "config": {
         "colWidth": 12.0,
         "fontSize": 9.0,
@@ -118,15 +202,15 @@
       "jobName": "paragraph_1590219660960_630136216",
       "id": "20200523-154100_735292476",
       "dateCreated": "2020-05-23 15:41:00.960",
-      "dateStarted": "2020-05-24 16:36:53.940",
-      "dateFinished": "2020-05-24 16:36:53.942",
+      "dateStarted": "2020-06-11 07:12:51.408",
+      "dateFinished": "2020-06-11 07:12:51.411",
       "status": "FINISHED",
       "progressUpdateIntervalMs": 500
     },
     {
-      "text": "import org.apache.spark._\nimport org.apache.spark.sql._\nimport org.apache.spark.rdd.RDD\n\nval sparkmaster \u003d \"spark://Kenny-MBP:7077\"\nval hadoopmaster \u003d \"hdfs://127.0.0.1:9000\"\n\nval sparkSession \u003d SparkSession.builder().master(sparkmaster).appName(\"dataframe notebook\").getOrCreate()\n\n",
+      "text": "import org.apache.spark._\nimport org.apache.spark.sql._\nimport org.apache.spark.rdd.RDD\n\nval sparkmaster \u003d \"spark://pop-t540.localdomain:7077\" // change this according to your machine domain name, check out https://localhost:8080\nval hadoopmaster \u003d \"hdfs://127.0.0.1:9000\"\n\nval sparkSession \u003d SparkSession.builder().master(sparkmaster).appName(\"dataframe notebook\").getOrCreate()\n\n",
       "user": "anonymous",
-      "dateUpdated": "2020-05-24 15:14:47.497",
+      "dateUpdated": "2020-06-11 07:13:44.939",
       "config": {
         "colWidth": 12.0,
         "fontSize": 9.0,
@@ -149,7 +233,7 @@
         "msg": [
           {
             "type": "TEXT",
-            "data": "import org.apache.spark._\nimport org.apache.spark.sql._\nimport org.apache.spark.rdd.RDD\nsparkmaster: String \u003d spark://Kenny-MBP:7077\nhadoopmaster: String \u003d hdfs://127.0.0.1:9000\nsparkSession: org.apache.spark.sql.SparkSession \u003d org.apache.spark.sql.SparkSession@44e75ff4\n"
+            "data": "import org.apache.spark._\nimport org.apache.spark.sql._\nimport org.apache.spark.rdd.RDD\nsparkmaster: String \u003d spark://pop-t540.localdomain:7077\nhadoopmaster: String \u003d hdfs://127.0.0.1:9000\nsparkSession: org.apache.spark.sql.SparkSession \u003d org.apache.spark.sql.SparkSession@7ba800a8\n"
           }
         ]
       },
@@ -157,15 +241,15 @@
       "jobName": "paragraph_1590053103798_945027404",
       "id": "20200521-172503_953106042",
       "dateCreated": "2020-05-21 17:25:03.798",
-      "dateStarted": "2020-05-24 15:14:47.519",
-      "dateFinished": "2020-05-24 15:14:47.724",
+      "dateStarted": "2020-06-11 07:12:51.544",
+      "dateFinished": "2020-06-11 07:12:51.713",
       "status": "FINISHED",
       "progressUpdateIntervalMs": 500
     },
     {
       "text": "%md \n\n## Reading data\n\nWe read from a CSV file located in the HDFS.",
       "user": "anonymous",
-      "dateUpdated": "2020-05-24 15:54:16.788",
+      "dateUpdated": "2020-06-11 07:12:51.744",
       "config": {
         "colWidth": 12.0,
         "fontSize": 9.0,
@@ -198,15 +282,15 @@
       "jobName": "paragraph_1590219721659_-1318418810",
       "id": "20200523-154201_35965697",
       "dateCreated": "2020-05-23 15:42:01.659",
-      "dateStarted": "2020-05-24 15:54:16.788",
-      "dateFinished": "2020-05-24 15:54:16.790",
+      "dateStarted": "2020-06-11 07:12:51.782",
+      "dateFinished": "2020-06-11 07:12:51.788",
       "status": "FINISHED",
       "progressUpdateIntervalMs": 500
     },
     {
       "text": "val df:DataFrame \u003d sparkSession.read\n    .option(\"header\", \"true\")\n    .option(\"delimiter\",\",\")\n    .option(\"inferSchema\", \"true\")\n    .csv(hadoopmaster + \"/data/Covid-19-SG.csv\")",
       "user": "anonymous",
-      "dateUpdated": "2020-05-24 15:14:47.951",
+      "dateUpdated": "2020-06-11 07:12:51.879",
       "config": {
         "colWidth": 12.0,
         "fontSize": 9.0,
@@ -237,15 +321,15 @@
       "jobName": "paragraph_1590053160955_-872199283",
       "id": "20200521-172600_915077806",
       "dateCreated": "2020-05-21 17:26:00.955",
-      "dateStarted": "2020-05-24 15:14:47.975",
-      "dateFinished": "2020-05-24 15:14:48.363",
+      "dateStarted": "2020-06-11 07:12:51.911",
+      "dateFinished": "2020-06-11 07:12:52.204",
       "status": "FINISHED",
       "progressUpdateIntervalMs": 500
     },
     {
       "text": "%md \n\nTo take a brief look at the dataframe content, we use the `.show()` method. ",
       "user": "anonymous",
-      "dateUpdated": "2020-05-24 15:54:37.474",
+      "dateUpdated": "2020-06-11 07:12:52.211",
       "config": {
         "colWidth": 12.0,
         "fontSize": 9.0,
@@ -278,15 +362,15 @@
       "jobName": "paragraph_1590219765997_-392611521",
       "id": "20200523-154245_221393362",
       "dateCreated": "2020-05-23 15:42:45.998",
-      "dateStarted": "2020-05-24 15:54:37.474",
-      "dateFinished": "2020-05-24 15:54:37.476",
+      "dateStarted": "2020-06-11 07:12:52.263",
+      "dateFinished": "2020-06-11 07:12:52.268",
       "status": "FINISHED",
       "progressUpdateIntervalMs": 500
     },
     {
       "text": "df.show(5)",
       "user": "anonymous",
-      "dateUpdated": "2020-05-24 15:14:48.522",
+      "dateUpdated": "2020-06-11 07:12:52.363",
       "config": {
         "colWidth": 12.0,
         "fontSize": 9.0,
@@ -317,15 +401,15 @@
       "jobName": "paragraph_1590109376221_387582694",
       "id": "20200522-090256_1597244164",
       "dateCreated": "2020-05-22 09:02:56.221",
-      "dateStarted": "2020-05-24 15:14:48.550",
-      "dateFinished": "2020-05-24 15:14:48.799",
+      "dateStarted": "2020-06-11 07:12:52.396",
+      "dateFinished": "2020-06-11 07:12:52.571",
       "status": "FINISHED",
       "progressUpdateIntervalMs": 500
     },
     {
       "text": "%md\n\nTo find out the schema of the dataframe we use the `.printSchema()` method.",
       "user": "anonymous",
-      "dateUpdated": "2020-05-24 15:14:48.855",
+      "dateUpdated": "2020-06-11 07:12:52.596",
       "config": {
         "colWidth": 12.0,
         "fontSize": 9.0,
@@ -358,15 +442,15 @@
       "jobName": "paragraph_1590109410240_1445111972",
       "id": "20200522-090330_1318912369",
       "dateCreated": "2020-05-22 09:03:30.240",
-      "dateStarted": "2020-05-24 15:14:48.881",
-      "dateFinished": "2020-05-24 15:14:48.884",
+      "dateStarted": "2020-06-11 07:12:52.625",
+      "dateFinished": "2020-06-11 07:12:52.628",
       "status": "FINISHED",
       "progressUpdateIntervalMs": 500
     },
     {
       "text": "df.printSchema()",
       "user": "anonymous",
-      "dateUpdated": "2020-05-24 15:14:48.984",
+      "dateUpdated": "2020-06-11 07:12:52.725",
       "config": {
         "colWidth": 12.0,
         "fontSize": 9.0,
@@ -397,15 +481,15 @@
       "jobName": "paragraph_1590112599376_245669351",
       "id": "20200522-095639_714390801",
       "dateCreated": "2020-05-22 09:56:39.376",
-      "dateStarted": "2020-05-24 15:14:49.008",
-      "dateFinished": "2020-05-24 15:14:49.218",
+      "dateStarted": "2020-06-11 07:12:52.747",
+      "dateFinished": "2020-06-11 07:12:52.859",
       "status": "FINISHED",
       "progressUpdateIntervalMs": 500
     },
     {
       "text": "%md \n\n## Column Selection\n\nTo select a certain columns, we use `.select()` method.",
       "user": "anonymous",
-      "dateUpdated": "2020-05-24 15:56:04.634",
+      "dateUpdated": "2020-06-11 07:12:52.947",
       "config": {
         "colWidth": 12.0,
         "fontSize": 9.0,
@@ -438,15 +522,15 @@
       "jobName": "paragraph_1590223006317_-966995833",
       "id": "20200523-163646_65889638",
       "dateCreated": "2020-05-23 16:36:46.318",
-      "dateStarted": "2020-05-24 15:56:04.635",
-      "dateFinished": "2020-05-24 15:56:04.637",
+      "dateStarted": "2020-06-11 07:12:52.969",
+      "dateFinished": "2020-06-11 07:12:52.972",
       "status": "FINISHED",
       "progressUpdateIntervalMs": 500
     },
     {
       "text": "val dfDailyConfirmed \u003d df.select($\"Date\", $\"Daily Confirmed \")\n\ndfDailyConfirmed\n",
       "user": "anonymous",
-      "dateUpdated": "2020-05-24 15:14:49.438",
+      "dateUpdated": "2020-06-11 07:12:53.068",
       "config": {
         "colWidth": 12.0,
         "fontSize": 9.0,
@@ -469,7 +553,7 @@
         "msg": [
           {
             "type": "TEXT",
-            "data": "dfDailyConfirmed: org.apache.spark.sql.DataFrame \u003d [Date: string, Daily Confirmed : int]\nres22: org.apache.spark.sql.DataFrame \u003d [Date: string, Daily Confirmed : int]\n"
+            "data": "dfDailyConfirmed: org.apache.spark.sql.DataFrame \u003d [Date: string, Daily Confirmed : int]\nres30: org.apache.spark.sql.DataFrame \u003d [Date: string, Daily Confirmed : int]\n"
           }
         ]
       },
@@ -477,15 +561,15 @@
       "jobName": "paragraph_1590223120168_1530803030",
       "id": "20200523-163840_1640093930",
       "dateCreated": "2020-05-23 16:38:40.168",
-      "dateStarted": "2020-05-24 15:14:49.459",
-      "dateFinished": "2020-05-24 15:14:49.755",
+      "dateStarted": "2020-06-11 07:12:53.091",
+      "dateFinished": "2020-06-11 07:12:53.291",
       "status": "FINISHED",
       "progressUpdateIntervalMs": 500
     },
     {
-      "text": "%md\n\n## Exercise 1\n\nNote that it does not show the data, it returns a new dataframe. To show the data, we can apply the `.Show()` method to the new dataframe. Call the `show()` function to show the first 5 rows in the data frame. \n\n",
+      "text": "%md\n\n## Exercise 1\n\nNote that it does not show the data, it returns a new dataframe. To show the data, we can apply the `.Show()` method to the new dataframe. Call the `show()` function to show the first 5 rows in the data frame. \n\n\u003cstyle\u003e\n    div.hidecode + pre {display: none}\n\u003c/style\u003e\n\u003cscript\u003e\ndoclick\u003dfunction(e) {\n    e.nextSibling.nextSibling.style.display\u003d\"block\";\n}\n\u003c/script\u003e\n\n\u003cdiv class\u003d\"hidecode\" onclick\u003d\"doclick(this);\"\u003e[Show Hint]\u003c/div\u003e\n```scala\ndfDailyConfirmed.show(5)\n```",
       "user": "anonymous",
-      "dateUpdated": "2020-05-24 16:02:01.443",
+      "dateUpdated": "2020-06-11 07:21:27.752",
       "config": {
         "colWidth": 12.0,
         "fontSize": 9.0,
@@ -510,7 +594,7 @@
         "msg": [
           {
             "type": "HTML",
-            "data": "\u003cdiv class\u003d\"markdown-body\"\u003e\n\u003ch2\u003eExercise 1\u003c/h2\u003e\n\u003cp\u003eNote that it does not show the data, it returns a new dataframe. To show the data, we can apply the \u003ccode\u003e.Show()\u003c/code\u003e method to the new dataframe. Call the \u003ccode\u003eshow()\u003c/code\u003e function to show the first 5 rows in the data frame.\u003c/p\u003e\n\u003c/div\u003e"
+            "data": "\u003cdiv class\u003d\"markdown-body\"\u003e\n\u003ch2\u003eExercise 1\u003c/h2\u003e\n\u003cp\u003eNote that it does not show the data, it returns a new dataframe. To show the data, we can apply the \u003ccode\u003e.Show()\u003c/code\u003e method to the new dataframe. Call the \u003ccode\u003eshow()\u003c/code\u003e function to show the first 5 rows in the data frame. \u003c/p\u003e\n\u003cstyle\u003e\n    div.hidecode + pre {display: none}\n\u003c/style\u003e\n\u003cscript\u003e\ndoclick\u003dfunction(e) {\n    e.nextSibling.nextSibling.style.display\u003d\"block\";\n}\n\u003c/script\u003e\n\u003cdiv class\u003d\"hidecode\" onclick\u003d\"doclick(this);\"\u003e[Show Hint]\u003c/div\u003e\n\u003cpre\u003e\u003ccode class\u003d\"scala\"\u003edfDailyConfirmed.show(5)\n\u003c/code\u003e\u003c/pre\u003e\n\u003c/div\u003e"
           }
         ]
       },
@@ -518,15 +602,15 @@
       "jobName": "paragraph_1590223212041_-1086414120",
       "id": "20200523-164012_1321373755",
       "dateCreated": "2020-05-23 16:40:12.041",
-      "dateStarted": "2020-05-24 16:02:01.443",
-      "dateFinished": "2020-05-24 16:02:01.447",
+      "dateStarted": "2020-06-11 07:21:27.753",
+      "dateFinished": "2020-06-11 07:21:27.757",
       "status": "FINISHED",
       "progressUpdateIntervalMs": 500
     },
     {
       "text": "// TODO\n",
       "user": "anonymous",
-      "dateUpdated": "2020-05-24 15:14:49.769",
+      "dateUpdated": "2020-06-11 07:12:53.519",
       "config": {
         "colWidth": 12.0,
         "fontSize": 9.0,
@@ -552,15 +636,15 @@
       "jobName": "paragraph_1590223154300_1502203564",
       "id": "20200523-163914_1051107719",
       "dateCreated": "2020-05-23 16:39:14.300",
-      "dateStarted": "2020-05-24 15:14:49.800",
-      "dateFinished": "2020-05-24 15:14:50.013",
+      "dateStarted": "2020-06-11 07:12:53.540",
+      "dateFinished": "2020-06-11 07:12:53.663",
       "status": "FINISHED",
       "progressUpdateIntervalMs": 500
     },
     {
       "text": "%md\n\nWe can use `.select()` apply some simple modification to the projected columns.",
       "user": "anonymous",
-      "dateUpdated": "2020-05-24 16:01:56.938",
+      "dateUpdated": "2020-06-11 07:12:53.740",
       "config": {
         "colWidth": 12.0,
         "fontSize": 9.0,
@@ -593,15 +677,15 @@
       "jobName": "paragraph_1590243716672_1844871837",
       "id": "20200523-222156_636188602",
       "dateCreated": "2020-05-23 22:21:56.672",
-      "dateStarted": "2020-05-24 16:01:56.938",
-      "dateFinished": "2020-05-24 16:01:56.940",
+      "dateStarted": "2020-06-11 07:12:53.767",
+      "dateFinished": "2020-06-11 07:12:53.769",
       "status": "FINISHED",
       "progressUpdateIntervalMs": 500
     },
     {
       "text": "df.select(concat($\"Date\", lit(\"-2020\")).alias(\"Date\"), $\"Daily Confirmed \"+ 0.0).show(5)\n",
       "user": "anonymous",
-      "dateUpdated": "2020-05-24 16:04:15.660",
+      "dateUpdated": "2020-06-11 07:12:53.866",
       "config": {
         "colWidth": 12.0,
         "fontSize": 9.0,
@@ -632,15 +716,15 @@
       "jobName": "paragraph_1590243683440_723853287",
       "id": "20200523-222123_1353871435",
       "dateCreated": "2020-05-23 22:21:23.440",
-      "dateStarted": "2020-05-24 16:04:15.685",
-      "dateFinished": "2020-05-24 16:04:15.983",
+      "dateStarted": "2020-06-11 07:12:53.888",
+      "dateFinished": "2020-06-11 07:12:54.126",
       "status": "FINISHED",
       "progressUpdateIntervalMs": 500
     },
     {
       "text": "%md\n\n## Column Conversion\n\nSome times we want to \"modify\" the column without dropping the rest of the columns, to do that, we use `.withColumn()` method. \n",
       "user": "anonymous",
-      "dateUpdated": "2020-05-24 16:04:52.000",
+      "dateUpdated": "2020-06-11 07:12:54.188",
       "config": {
         "colWidth": 12.0,
         "fontSize": 9.0,
@@ -673,15 +757,15 @@
       "jobName": "paragraph_1590223263273_1758578067",
       "id": "20200523-164103_25984375",
       "dateCreated": "2020-05-23 16:41:03.273",
-      "dateStarted": "2020-05-24 16:04:52.000",
-      "dateFinished": "2020-05-24 16:04:52.004",
+      "dateStarted": "2020-06-11 07:12:54.210",
+      "dateFinished": "2020-06-11 07:12:54.214",
       "status": "FINISHED",
       "progressUpdateIntervalMs": 500
     },
     {
       "text": "\nval dfDateWithYear \u003d df.withColumn(\"Date\", concat(col(\"Date\"),lit(\"-2020\")))\n\ndfDateWithYear.show(5)\n",
       "user": "anonymous",
-      "dateUpdated": "2020-05-24 15:14:50.905",
+      "dateUpdated": "2020-06-11 07:12:54.310",
       "config": {
         "colWidth": 12.0,
         "fontSize": 9.0,
@@ -712,15 +796,15 @@
       "jobName": "paragraph_1590243090057_1407351466",
       "id": "20200523-221130_519723216",
       "dateCreated": "2020-05-23 22:11:30.057",
-      "dateStarted": "2020-05-24 15:14:50.927",
-      "dateFinished": "2020-05-24 15:14:51.231",
+      "dateStarted": "2020-06-11 07:12:54.334",
+      "dateFinished": "2020-06-11 07:12:54.584",
       "status": "FINISHED",
       "progressUpdateIntervalMs": 500
     },
     {
       "text": "%md \n\nThere more predefined dataframe functions in `org.apache.spark.sql.functions`\n\nFor instance, we can use the `to_date()` sql function to format the date string to date object.",
       "user": "anonymous",
-      "dateUpdated": "2020-05-24 16:06:17.348",
+      "dateUpdated": "2020-06-11 07:12:54.634",
       "config": {
         "colWidth": 12.0,
         "fontSize": 9.0,
@@ -753,15 +837,15 @@
       "jobName": "paragraph_1590243287903_1342273071",
       "id": "20200523-221447_2052635508",
       "dateCreated": "2020-05-23 22:14:47.903",
-      "dateStarted": "2020-05-24 16:06:17.348",
-      "dateFinished": "2020-05-24 16:06:17.351",
+      "dateStarted": "2020-06-11 07:12:54.655",
+      "dateFinished": "2020-06-11 07:12:54.659",
       "status": "FINISHED",
       "progressUpdateIntervalMs": 500
     },
     {
       "text": "import org.apache.spark.sql.functions.{to_date}\n\n\nval dfDateParsed \u003d dfDateWithYear.withColumn(\"Date\", to_date($\"Date\", \"dd-MMM-yyyy\"))\n\ndfDateParsed.show(5)\n",
       "user": "anonymous",
-      "dateUpdated": "2020-05-24 15:14:51.389",
+      "dateUpdated": "2020-06-11 07:12:54.755",
       "config": {
         "colWidth": 12.0,
         "fontSize": 9.0,
@@ -792,15 +876,15 @@
       "jobName": "paragraph_1590244545888_1585414003",
       "id": "20200523-223545_2045170901",
       "dateCreated": "2020-05-23 22:35:45.888",
-      "dateStarted": "2020-05-24 15:14:51.410",
-      "dateFinished": "2020-05-24 15:14:51.808",
+      "dateStarted": "2020-06-11 07:12:54.776",
+      "dateFinished": "2020-06-11 07:12:55.021",
       "status": "FINISHED",
       "progressUpdateIntervalMs": 500
     },
     {
       "text": "%md \n\n## Row Filtering\n\nTo filter rows from a dataframe based on a boolean condition, we use `.filter()` method.",
       "user": "anonymous",
-      "dateUpdated": "2020-05-24 16:21:17.835",
+      "dateUpdated": "2020-06-11 07:12:55.076",
       "config": {
         "colWidth": 12.0,
         "fontSize": 9.0,
@@ -833,15 +917,15 @@
       "jobName": "paragraph_1590279331928_-639593251",
       "id": "20200524-081531_644411355",
       "dateCreated": "2020-05-24 08:15:31.928",
-      "dateStarted": "2020-05-24 16:21:17.835",
-      "dateFinished": "2020-05-24 16:21:17.838",
+      "dateStarted": "2020-06-11 07:12:55.102",
+      "dateFinished": "2020-06-11 07:12:55.105",
       "status": "FINISHED",
       "progressUpdateIntervalMs": 500
     },
     {
       "text": "val dfAfterApril5 \u003d dfDateParsed.filter(col(\"Date\") \u003e\u003d to_date(lit(\"05-Apr-2020\"), \"dd-MMM-yyyy\"))\n\ndfAfterApril5.show(5)",
       "user": "anonymous",
-      "dateUpdated": "2020-05-24 16:21:56.903",
+      "dateUpdated": "2020-06-11 07:12:55.202",
       "config": {
         "colWidth": 12.0,
         "fontSize": 9.0,
@@ -872,15 +956,15 @@
       "jobName": "paragraph_1590244726212_635474639",
       "id": "20200523-223846_647760480",
       "dateCreated": "2020-05-23 22:38:46.212",
-      "dateStarted": "2020-05-24 16:21:56.928",
-      "dateFinished": "2020-05-24 16:21:57.209",
+      "dateStarted": "2020-06-11 07:12:55.225",
+      "dateFinished": "2020-06-11 07:12:55.475",
       "status": "FINISHED",
       "progressUpdateIntervalMs": 500
     },
     {
-      "text": "%md \n\n## Exercise 2\n\nCan you filter out rows whose `Daily Deaths` is greater than 0?",
+      "text": "%md \n\n## Exercise 2\n\nCan you filter out rows whose `Daily Deaths` is greater than 0?\n\n\n\u003cstyle\u003e\n    div.hidecode + pre {display: none}\n\u003c/style\u003e\n\u003cscript\u003e\ndoclick\u003dfunction(e) {\n    e.nextSibling.nextSibling.style.display\u003d\"block\";\n}\n\u003c/script\u003e\n\n\u003cdiv class\u003d\"hidecode\" onclick\u003d\"doclick(this);\"\u003e[Show Hint]\u003c/div\u003e\n```scala\nval dfWithDailyDeaths \u003d dfDateParsed.filter(col(\"Daily Deaths\") \u003e 0)\n\ndfWithDailyDeaths.show(5)\n```",
       "user": "anonymous",
-      "dateUpdated": "2020-05-24 16:22:20.506",
+      "dateUpdated": "2020-06-11 07:24:24.534",
       "config": {
         "colWidth": 12.0,
         "fontSize": 9.0,
@@ -905,7 +989,7 @@
         "msg": [
           {
             "type": "HTML",
-            "data": "\u003cdiv class\u003d\"markdown-body\"\u003e\n\u003ch2\u003eExercise 2\u003c/h2\u003e\n\u003cp\u003eCan you filter out rows whose \u003ccode\u003eDaily Deaths\u003c/code\u003e is greater than 0?\u003c/p\u003e\n\u003c/div\u003e"
+            "data": "\u003cdiv class\u003d\"markdown-body\"\u003e\n\u003ch2\u003eExercise 2\u003c/h2\u003e\n\u003cp\u003eCan you filter out rows whose \u003ccode\u003eDaily Deaths\u003c/code\u003e is greater than 0?\u003c/p\u003e\n\u003cstyle\u003e\n    div.hidecode + pre {display: none}\n\u003c/style\u003e\n\u003cscript\u003e\ndoclick\u003dfunction(e) {\n    e.nextSibling.nextSibling.style.display\u003d\"block\";\n}\n\u003c/script\u003e\n\u003cdiv class\u003d\"hidecode\" onclick\u003d\"doclick(this);\"\u003e[Show Hint]\u003c/div\u003e\n\u003cpre\u003e\u003ccode class\u003d\"scala\"\u003eval dfWithDailyDeaths \u003d dfDateParsed.filter(col(\u0026quot;Daily Deaths\u0026quot;) \u0026gt; 0)\n\ndfWithDailyDeaths.show(5)\n\u003c/code\u003e\u003c/pre\u003e\n\u003c/div\u003e"
           }
         ]
       },
@@ -913,15 +997,15 @@
       "jobName": "paragraph_1590281270401_475269873",
       "id": "20200524-084750_227168894",
       "dateCreated": "2020-05-24 08:47:50.401",
-      "dateStarted": "2020-05-24 16:22:20.506",
-      "dateFinished": "2020-05-24 16:22:20.508",
+      "dateStarted": "2020-06-11 07:24:24.534",
+      "dateFinished": "2020-06-11 07:24:24.538",
       "status": "FINISHED",
       "progressUpdateIntervalMs": 500
     },
     {
       "text": "// TODO\n",
       "user": "anonymous",
-      "dateUpdated": "2020-05-24 15:14:52.511",
+      "dateUpdated": "2020-06-11 07:12:55.654",
       "config": {
         "colWidth": 12.0,
         "fontSize": 9.0,
@@ -947,15 +1031,15 @@
       "jobName": "paragraph_1590281350541_2130531331",
       "id": "20200524-084910_1339962774",
       "dateCreated": "2020-05-24 08:49:10.541",
-      "dateStarted": "2020-05-24 15:14:52.542",
-      "dateFinished": "2020-05-24 15:14:52.723",
+      "dateStarted": "2020-06-11 07:12:55.678",
+      "dateFinished": "2020-06-11 07:12:55.804",
       "status": "FINISHED",
       "progressUpdateIntervalMs": 500
     },
     {
       "text": "%md\n\n## Grouping and Aggregation\n\nTo group rows we can use `groupBy()` method. Aggregation can be applied to groups. ",
       "user": "anonymous",
-      "dateUpdated": "2020-05-24 16:22:59.264",
+      "dateUpdated": "2020-06-11 07:12:55.878",
       "config": {
         "colWidth": 12.0,
         "fontSize": 9.0,
@@ -988,15 +1072,15 @@
       "jobName": "paragraph_1590281376754_140431690",
       "id": "20200524-084936_1360892146",
       "dateCreated": "2020-05-24 08:49:36.754",
-      "dateStarted": "2020-05-24 16:22:59.264",
-      "dateFinished": "2020-05-24 16:22:59.266",
+      "dateStarted": "2020-06-11 07:12:55.939",
+      "dateFinished": "2020-06-11 07:12:55.944",
       "status": "FINISHED",
       "progressUpdateIntervalMs": 500
     },
     {
       "text": "val dfWithMonth \u003d dfDateParsed.withColumn(\"Month\", month(col(\"Date\")))\n\ndfWithMonth.show(5)",
       "user": "anonymous",
-      "dateUpdated": "2020-05-24 15:14:52.878",
+      "dateUpdated": "2020-06-11 07:12:56.039",
       "config": {
         "colWidth": 12.0,
         "fontSize": 9.0,
@@ -1027,15 +1111,15 @@
       "jobName": "paragraph_1590281823946_-1150699508",
       "id": "20200524-085703_1196888051",
       "dateCreated": "2020-05-24 08:57:03.946",
-      "dateStarted": "2020-05-24 15:14:52.898",
-      "dateFinished": "2020-05-24 15:14:53.204",
+      "dateStarted": "2020-06-11 07:12:56.063",
+      "dateFinished": "2020-06-11 07:12:56.267",
       "status": "FINISHED",
       "progressUpdateIntervalMs": 500
     },
     {
       "text": "val dfGroupByMonth \u003d dfWithMonth.groupBy(\"Month\").sum()\ndfGroupByMonth.show(5)",
       "user": "anonymous",
-      "dateUpdated": "2020-05-24 15:14:53.301",
+      "dateUpdated": "2020-06-11 07:12:56.363",
       "config": {
         "colWidth": 12.0,
         "fontSize": 9.0,
@@ -1066,15 +1150,15 @@
       "jobName": "paragraph_1590282206215_-641336227",
       "id": "20200524-090326_45467593",
       "dateCreated": "2020-05-24 09:03:26.215",
-      "dateStarted": "2020-05-24 15:14:53.323",
-      "dateFinished": "2020-05-24 15:14:54.162",
+      "dateStarted": "2020-06-11 07:12:56.384",
+      "dateFinished": "2020-06-11 07:12:57.133",
       "status": "FINISHED",
       "progressUpdateIntervalMs": 500
     },
     {
       "text": "%md \n\n## SQL queries over DataFrame\n\n\nDataframe provides a unified approach for data manipulation. It allows SQL style queries to be perform on the data residing in the dataframe with parallization mechanism.\n\nFirstly, we need to register the dataframe as a temporary view.",
       "user": "anonymous",
-      "dateUpdated": "2020-05-24 16:24:59.174",
+      "dateUpdated": "2020-06-11 07:12:57.185",
       "config": {
         "colWidth": 12.0,
         "fontSize": 9.0,
@@ -1107,15 +1191,15 @@
       "jobName": "paragraph_1590282371250_1589318648",
       "id": "20200524-090611_1601014836",
       "dateCreated": "2020-05-24 09:06:11.251",
-      "dateStarted": "2020-05-24 16:24:59.174",
-      "dateFinished": "2020-05-24 16:24:59.176",
+      "dateStarted": "2020-06-11 07:12:57.212",
+      "dateFinished": "2020-06-11 07:12:57.216",
       "status": "FINISHED",
       "progressUpdateIntervalMs": 500
     },
     {
       "text": "dfDateParsed.createOrReplaceTempView(\"SingaporeCovid19\")\n\nval sqlDF \u003d spark.sql(\"SELECT * FROM SingaporeCovid19\")\nsqlDF.show()",
       "user": "anonymous",
-      "dateUpdated": "2020-05-24 15:14:54.370",
+      "dateUpdated": "2020-06-11 07:12:57.312",
       "config": {
         "colWidth": 12.0,
         "fontSize": 9.0,
@@ -1146,15 +1230,15 @@
       "jobName": "paragraph_1590282963654_929820304",
       "id": "20200524-091603_504263886",
       "dateCreated": "2020-05-24 09:16:03.654",
-      "dateStarted": "2020-05-24 15:14:54.390",
-      "dateFinished": "2020-05-24 15:14:54.676",
+      "dateStarted": "2020-06-11 07:12:57.333",
+      "dateFinished": "2020-06-11 07:12:57.553",
       "status": "FINISHED",
       "progressUpdateIntervalMs": 500
     },
     {
       "text": "%md \n\nWith Zeppelin, we can write SQL directly into a cell. Executing an SQL cell gives us the results in table, or charts.",
       "user": "anonymous",
-      "dateUpdated": "2020-05-24 16:25:46.337",
+      "dateUpdated": "2020-06-11 07:12:57.633",
       "config": {
         "colWidth": 12.0,
         "fontSize": 9.0,
@@ -1187,15 +1271,15 @@
       "jobName": "paragraph_1590283075198_-631784815",
       "id": "20200524-091755_805929900",
       "dateCreated": "2020-05-24 09:17:55.198",
-      "dateStarted": "2020-05-24 16:25:46.338",
-      "dateFinished": "2020-05-24 16:25:46.340",
+      "dateStarted": "2020-06-11 07:12:57.654",
+      "dateFinished": "2020-06-11 07:12:57.656",
       "status": "FINISHED",
       "progressUpdateIntervalMs": 500
     },
     {
       "text": "%sql \n\nSelect * from SingaporeCovid19\n",
       "user": "anonymous",
-      "dateUpdated": "2020-05-24 16:26:30.103",
+      "dateUpdated": "2020-06-11 07:12:57.754",
       "config": {
         "colWidth": 12.0,
         "fontSize": 9.0,
@@ -1266,6 +1350,11 @@
                   "name": "Daily Confirmed ",
                   "index": 1.0,
                   "aggr": "sum"
+                },
+                {
+                  "name": "Daily Deaths",
+                  "index": 4.0,
+                  "aggr": "sum"
                 }
               ]
             },
@@ -1301,15 +1390,15 @@
       "jobName": "paragraph_1590282905094_1175383507",
       "id": "20200524-091505_1115582538",
       "dateCreated": "2020-05-24 09:15:05.094",
-      "dateStarted": "2020-05-24 15:14:54.888",
-      "dateFinished": "2020-05-24 15:14:54.962",
+      "dateStarted": "2020-06-11 07:12:57.775",
+      "dateFinished": "2020-06-11 07:12:57.846",
       "status": "FINISHED",
       "progressUpdateIntervalMs": 500
     },
     {
-      "text": "%md \n\n## Exericse 3\n\nUsing Spark SQL, generate a bar chart for `Discharged To Isolation` after 1st Mar 2020.\n",
+      "text": "%md \n\n## Exericse 3\n\nUsing Spark SQL, generate a bar chart for `Discharged To Isolation` after 1st Mar 2020.\n\n\u003cstyle\u003e\n    div.hidecode + pre {display: none}\n\u003c/style\u003e\n\u003cscript\u003e\ndoclick\u003dfunction(e) {\n    e.nextSibling.nextSibling.style.display\u003d\"block\";\n}\n\u003c/script\u003e\n\n\u003cdiv class\u003d\"hidecode\" onclick\u003d\"doclick(this);\"\u003e[Show Hint]\u003c/div\u003e\n```sql\n\nSelect Date, `Discharged To Isolation` from SingaporeCovid19 where Date \u003e\u003d \u00272020-03-01\u0027\n-- In the `settings` dropdown, you might need to put `Date` in the `keys` field, and `Discharged To Isolation` to the `values` field.\n```\n\n",
       "user": "anonymous",
-      "dateUpdated": "2020-05-24 16:26:43.918",
+      "dateUpdated": "2020-06-11 07:24:34.746",
       "config": {
         "colWidth": 12.0,
         "fontSize": 9.0,
@@ -1322,8 +1411,8 @@
           "completionSupport": false
         },
         "editorMode": "ace/mode/markdown",
-        "editorHide": true,
-        "tableHide": false
+        "editorHide": false,
+        "tableHide": true
       },
       "settings": {
         "params": {},
@@ -1334,7 +1423,7 @@
         "msg": [
           {
             "type": "HTML",
-            "data": "\u003cdiv class\u003d\"markdown-body\"\u003e\n\u003ch2\u003eExericse 3\u003c/h2\u003e\n\u003cp\u003eUsing Spark SQL, generate a bar chart for \u003ccode\u003eDischarged To Isolation\u003c/code\u003e after 1st Mar 2020.\u003c/p\u003e\n\u003c/div\u003e"
+            "data": "\u003cdiv class\u003d\"markdown-body\"\u003e\n\u003ch2\u003eExericse 3\u003c/h2\u003e\n\u003cp\u003eUsing Spark SQL, generate a bar chart for \u003ccode\u003eDischarged To Isolation\u003c/code\u003e after 1st Mar 2020.\u003c/p\u003e\n\u003cstyle\u003e\n    div.hidecode + pre {display: none}\n\u003c/style\u003e\n\u003cscript\u003e\ndoclick\u003dfunction(e) {\n    e.nextSibling.nextSibling.style.display\u003d\"block\";\n}\n\u003c/script\u003e\n\u003cdiv class\u003d\"hidecode\" onclick\u003d\"doclick(this);\"\u003e[Show Hint]\u003c/div\u003e\n\u003cpre\u003e\u003ccode class\u003d\"sql\"\u003e\u003cbr/\u003eSelect Date, `Discharged To Isolation` from SingaporeCovid19 where Date \u0026gt;\u003d \u0026#39;2020-03-01\u0026#39;\n-- In the `settings` dropdown, you might need to put `Date` in the `keys` field, and `Discharged To Isolation` to the `values` field.\n\u003c/code\u003e\u003c/pre\u003e\n\u003c/div\u003e"
           }
         ]
       },
@@ -1342,20 +1431,71 @@
       "jobName": "paragraph_1590283194229_1846137650",
       "id": "20200524-091954_1739312923",
       "dateCreated": "2020-05-24 09:19:54.230",
-      "dateStarted": "2020-05-24 16:26:43.919",
-      "dateFinished": "2020-05-24 16:26:43.921",
+      "dateStarted": "2020-06-11 07:12:57.905",
+      "dateFinished": "2020-06-11 07:12:57.909",
       "status": "FINISHED",
       "progressUpdateIntervalMs": 500
     },
     {
-      "text": "%sql\n\n",
+      "text": "%sql\n\n-- TODO\n\n",
       "user": "anonymous",
-      "dateUpdated": "2020-05-24 10:45:45.632",
+      "dateUpdated": "2020-06-11 07:12:58.005",
       "config": {
         "colWidth": 12.0,
         "fontSize": 9.0,
         "enabled": true,
-        "results": {},
+        "results": {
+          "0": {
+            "graph": {
+              "mode": "table",
+              "height": 300.0,
+              "optionOpen": false,
+              "setting": {
+                "table": {
+                  "tableGridState": {},
+                  "tableColumnTypeState": {
+                    "names": {
+                      "Date": "string",
+                      "Discharged To Isolation": "string"
+                    },
+                    "updated": false
+                  },
+                  "tableOptionSpecHash": "[{\"name\":\"useFilter\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable filter for columns\"},{\"name\":\"showPagination\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable pagination for better navigation\"},{\"name\":\"showAggregationFooter\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable a footer for displaying aggregated values\"}]",
+                  "tableOptionValue": {
+                    "useFilter": false,
+                    "showPagination": false,
+                    "showAggregationFooter": false
+                  },
+                  "updated": false,
+                  "initialized": false
+                },
+                "lineChart": {
+                  "rotate": {
+                    "degree": "-45"
+                  },
+                  "xLabelStatus": "default"
+                }
+              },
+              "commonSetting": {},
+              "keys": [
+                {
+                  "name": "Date",
+                  "index": 0.0,
+                  "aggr": "sum"
+                }
+              ],
+              "groups": [],
+              "values": [
+                {
+                  "name": "Discharged To Isolation",
+                  "index": 1.0,
+                  "aggr": "sum"
+                }
+              ]
+            },
+            "helium": {}
+          }
+        },
         "editorSetting": {
           "language": "sql",
           "editOnDblClick": false,
@@ -1381,15 +1521,15 @@
       "jobName": "paragraph_1590283267759_-1883054594",
       "id": "20200524-092107_936803381",
       "dateCreated": "2020-05-24 09:21:07.759",
-      "dateStarted": "2020-05-24 09:21:18.361",
-      "dateFinished": "2020-05-24 09:21:18.376",
-      "status": "FINISHED",
+      "dateStarted": "2020-06-11 07:12:58.045",
+      "dateFinished": "2020-06-11 07:12:58.050",
+      "status": "ERROR",
       "progressUpdateIntervalMs": 500
     },
     {
       "text": "%md \n\n## User Defined Function (UDF)\n\n\nIn case we could not find the needed function in the library, we can define our user defined function.",
       "user": "anonymous",
-      "dateUpdated": "2020-05-24 16:27:51.842",
+      "dateUpdated": "2020-06-11 06:54:54.207",
       "config": {
         "colWidth": 12.0,
         "fontSize": 9.0,
@@ -1409,28 +1549,20 @@
         "params": {},
         "forms": {}
       },
-      "results": {
-        "code": "SUCCESS",
-        "msg": [
-          {
-            "type": "HTML",
-            "data": "\u003cdiv class\u003d\"markdown-body\"\u003e\n\u003ch2\u003eUser Defined Function (UDF)\u003c/h2\u003e\n\u003cp\u003eIn case we could not find the needed function in the library, we can define our user defined function.\u003c/p\u003e\n\u003c/div\u003e"
-          }
-        ]
-      },
       "apps": [],
       "jobName": "paragraph_1590290938976_-2051938859",
       "id": "20200524-112858_1007823102",
       "dateCreated": "2020-05-24 11:28:58.976",
-      "dateStarted": "2020-05-24 16:27:51.843",
-      "dateFinished": "2020-05-24 16:27:51.845",
+      "dateStarted": "2020-06-11 06:54:54.231",
+      "dateFinished": "2020-06-11 06:54:54.235",
       "status": "FINISHED",
+      "errorMessage": "",
       "progressUpdateIntervalMs": 500
     },
     {
       "text": "val isZero \u003d udf((s: Int) \u003d\u003e s \u003d\u003d 0)\n\nspark.udf.register(\"isZero\", isZero)\n",
       "user": "anonymous",
-      "dateUpdated": "2020-05-24 15:44:19.803",
+      "dateUpdated": "2020-06-11 06:54:54.331",
       "config": {
         "colWidth": 12.0,
         "fontSize": 9.0,
@@ -1448,28 +1580,20 @@
         "params": {},
         "forms": {}
       },
-      "results": {
-        "code": "SUCCESS",
-        "msg": [
-          {
-            "type": "TEXT",
-            "data": "isZero: org.apache.spark.sql.expressions.UserDefinedFunction \u003d UserDefinedFunction(\u003cfunction1\u003e,BooleanType,Some(List(IntegerType)))\nres51: org.apache.spark.sql.expressions.UserDefinedFunction \u003d UserDefinedFunction(\u003cfunction1\u003e,BooleanType,Some(List(IntegerType)))\n"
-          }
-        ]
-      },
       "apps": [],
       "jobName": "paragraph_1590304582979_2118088679",
       "id": "20200524-151622_1940191274",
       "dateCreated": "2020-05-24 15:16:22.979",
-      "dateStarted": "2020-05-24 15:44:19.827",
-      "dateFinished": "2020-05-24 15:44:20.104",
+      "dateStarted": "2020-06-11 06:54:54.364",
+      "dateFinished": "2020-06-11 06:54:54.814",
       "status": "FINISHED",
+      "errorMessage": "",
       "progressUpdateIntervalMs": 500
     },
     {
       "text": "%sql\n\nselect `Daily Discharged`, isZero(`Daily Discharged`) From SingaporeCovid19",
       "user": "anonymous",
-      "dateUpdated": "2020-05-24 15:44:22.630",
+      "dateUpdated": "2020-06-11 06:54:54.863",
       "config": {
         "colWidth": 12.0,
         "fontSize": 9.0,
@@ -1516,32 +1640,20 @@
         "params": {},
         "forms": {}
       },
-      "results": {
-        "code": "SUCCESS",
-        "msg": [
-          {
-            "type": "TABLE",
-            "data": "Daily Discharged\tUDF(Daily Discharged)\n0\ttrue\n0\ttrue\n0\ttrue\n0\ttrue\n0\ttrue\n0\ttrue\n0\ttrue\n0\ttrue\n0\ttrue\n0\ttrue\n0\ttrue\n0\ttrue\n1\tfalse\n0\ttrue\n0\ttrue\n1\tfalse\n0\ttrue\n4\tfalse\n1\tfalse\n2\tfalse\n6\tfalse\n0\ttrue\n2\tfalse\n1\tfalse\n1\tfalse\n5\tfalse\n5\tfalse\n5\tfalse\n3\tfalse\n10\tfalse\n2\tfalse\n2\tfalse\n2\tfalse\n5\tfalse\n4\tfalse\n4\tfalse\n3\tfalse\n3\tfalse\n2\tfalse\n4\tfalse\n0\ttrue\n1\tfalse\n2\tfalse\n1\tfalse\n8\tfalse\n0\ttrue\n3\tfalse\n0\ttrue\n3\tfalse\n0\ttrue\n1\tfalse\n8\tfalse\n0\ttrue\n4\tfalse\n5\tfalse\n3\tfalse\n7\tfalse\n7\tfalse\n9\tfalse\n4\tfalse\n8\tfalse\n3\tfalse\n5\tfalse\n12\tfalse\n11\tfalse\n15\tfalse\n14\tfalse\n16\tfalse\n12\tfalse\n5\tfalse\n21\tfalse\n16\tfalse\n15\tfalse\n23\tfalse\n24\tfalse\n33\tfalse\n29\tfalse\n54\tfalse\n32\tfalse\n35\tfalse\n32\tfalse\n26\tfalse\n25\tfalse\n41\tfalse\n31\tfalse\n25\tfalse\n38\tfalse\n26\tfalse\n33\tfalse\n39\tfalse\n57\tfalse\n36\tfalse\n38\tfalse\n46\tfalse\n58\tfalse\n35\tfalse\n33\tfalse\n62\tfalse\n56\tfalse\n24\tfalse\n79\tfalse\n61\tfalse\n49\tfalse\n62\tfalse\n115\tfalse\n78\tfalse\n328\tfalse\n256\tfalse\n425\tfalse\n504\tfalse\n626\tfalse\n958\tfalse\n1164\tfalse\n1275\tfalse\n1094\tfalse\n998\tfalse\n495\tfalse\n530\tfalse\n842\tfalse\n"
-          },
-          {
-            "type": "TEXT",
-            "data": ""
-          }
-        ]
-      },
       "apps": [],
       "jobName": "paragraph_1590305118675_-1222180857",
       "id": "20200524-152518_895420519",
       "dateCreated": "2020-05-24 15:25:18.675",
-      "dateStarted": "2020-05-24 15:44:22.324",
-      "dateFinished": "2020-05-24 15:44:22.385",
+      "dateStarted": "2020-06-11 06:54:54.902",
+      "dateFinished": "2020-06-11 06:54:55.119",
       "status": "FINISHED",
+      "errorMessage": "",
       "progressUpdateIntervalMs": 500
     },
     {
       "text": "%md\n\nThe UDFs are applicable to the dataframe methods such as `select`.\n",
       "user": "anonymous",
-      "dateUpdated": "2020-05-24 16:37:11.192",
+      "dateUpdated": "2020-06-11 06:54:55.202",
       "config": {
         "colWidth": 12.0,
         "fontSize": 9.0,
@@ -1561,28 +1673,20 @@
         "params": {},
         "forms": {}
       },
-      "results": {
-        "code": "SUCCESS",
-        "msg": [
-          {
-            "type": "HTML",
-            "data": "\u003cdiv class\u003d\"markdown-body\"\u003e\n\u003cp\u003eThe UDFs are applicable to the dataframe methods such as \u003ccode\u003eselect\u003c/code\u003e.\u003c/p\u003e\n\u003c/div\u003e"
-          }
-        ]
-      },
       "apps": [],
       "jobName": "paragraph_1590306452970_-1885243261",
       "id": "20200524-154732_2055590000",
       "dateCreated": "2020-05-24 15:47:32.970",
-      "dateStarted": "2020-05-24 16:37:11.192",
-      "dateFinished": "2020-05-24 16:37:11.194",
+      "dateStarted": "2020-06-11 06:54:55.252",
+      "dateFinished": "2020-06-11 06:54:55.257",
       "status": "FINISHED",
+      "errorMessage": "",
       "progressUpdateIntervalMs": 500
     },
     {
       "text": "val x \u003d dfDateParsed.select($\"Daily Discharged\", isZero($\"Daily Discharged\"))\nx.show()",
       "user": "anonymous",
-      "dateUpdated": "2020-05-24 15:47:20.684",
+      "dateUpdated": "2020-06-11 06:54:55.345",
       "config": {
         "colWidth": 12.0,
         "fontSize": 9.0,
@@ -1600,28 +1704,20 @@
         "params": {},
         "forms": {}
       },
-      "results": {
-        "code": "SUCCESS",
-        "msg": [
-          {
-            "type": "TEXT",
-            "data": "+----------------+---------------------+\n|Daily Discharged|UDF(Daily Discharged)|\n+----------------+---------------------+\n|               0|                 true|\n|               0|                 true|\n|               0|                 true|\n|               0|                 true|\n|               0|                 true|\n|               0|                 true|\n|               0|                 true|\n|               0|                 true|\n|               0|                 true|\n|               0|                 true|\n|               0|                 true|\n|               0|                 true|\n|               1|                false|\n|               0|                 true|\n|               0|                 true|\n|               1|                false|\n|               0|                 true|\n|               4|                false|\n|               1|                false|\n|               2|                false|\n+----------------+---------------------+\nonly showing top 20 rows\n\nx: org.apache.spark.sql.DataFrame \u003d [Daily Discharged: int, UDF(Daily Discharged): boolean]\n"
-          }
-        ]
-      },
       "apps": [],
       "jobName": "paragraph_1590304777749_1686640383",
       "id": "20200524-151937_849873454",
       "dateCreated": "2020-05-24 15:19:37.749",
-      "dateStarted": "2020-05-24 15:47:20.707",
-      "dateFinished": "2020-05-24 15:47:21.018",
+      "dateStarted": "2020-06-11 06:54:55.386",
+      "dateFinished": "2020-06-11 06:54:55.902",
       "status": "FINISHED",
+      "errorMessage": "",
       "progressUpdateIntervalMs": 500
     },
     {
       "text": "%md\n\nFor more about UDF, refer to https://docs.databricks.com/spark/latest/spark-sql/udf-scala.html",
       "user": "anonymous",
-      "dateUpdated": "2020-05-24 16:36:00.367",
+      "dateUpdated": "2020-06-11 06:54:55.984",
       "config": {
         "colWidth": 12.0,
         "fontSize": 9.0,
@@ -1640,29 +1736,21 @@
       "settings": {
         "params": {},
         "forms": {}
-      },
-      "results": {
-        "code": "SUCCESS",
-        "msg": [
-          {
-            "type": "HTML",
-            "data": "\u003cdiv class\u003d\"markdown-body\"\u003e\n\u003cp\u003eFor more about UDF, refer to \u003ca href\u003d\"https://docs.databricks.com/spark/latest/spark-sql/udf-scala.html\"\u003ehttps://docs.databricks.com/spark/latest/spark-sql/udf-scala.html\u003c/a\u003e\u003c/p\u003e\n\u003c/div\u003e"
-          }
-        ]
       },
       "apps": [],
       "jobName": "paragraph_1590308827929_1071780696",
       "id": "20200524-162707_1920342780",
       "dateCreated": "2020-05-24 16:27:07.930",
-      "dateStarted": "2020-05-24 16:36:00.368",
-      "dateFinished": "2020-05-24 16:36:00.370",
+      "dateStarted": "2020-06-11 06:54:56.030",
+      "dateFinished": "2020-06-11 06:54:56.034",
       "status": "FINISHED",
+      "errorMessage": "",
       "progressUpdateIntervalMs": 500
     },
     {
       "text": "%md \n\n## Next Step\n\nLet\u0027s open aonther Notebook, Spark Dataset.\n",
       "user": "anonymous",
-      "dateUpdated": "2020-05-24 16:36:42.606",
+      "dateUpdated": "2020-06-11 06:54:56.129",
       "config": {
         "colWidth": 12.0,
         "fontSize": 9.0,
@@ -1682,22 +1770,31 @@
         "params": {},
         "forms": {}
       },
-      "results": {
-        "code": "SUCCESS",
-        "msg": [
-          {
-            "type": "HTML",
-            "data": "\u003cdiv class\u003d\"markdown-body\"\u003e\n\u003ch2\u003eNext Step\u003c/h2\u003e\n\u003cp\u003eLet\u0026rsquo;s open aonther Notebook, Spark Dataset.\u003c/p\u003e\n\u003c/div\u003e"
-          }
-        ]
-      },
       "apps": [],
       "jobName": "paragraph_1590283323101_2057403879",
       "id": "20200524-092203_1408949272",
       "dateCreated": "2020-05-24 09:22:03.101",
-      "dateStarted": "2020-05-24 16:36:42.606",
-      "dateFinished": "2020-05-24 16:36:42.608",
+      "dateStarted": "2020-06-11 06:54:56.156",
+      "dateFinished": "2020-06-11 06:54:56.159",
       "status": "FINISHED",
+      "errorMessage": "",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "%md\n",
+      "user": "anonymous",
+      "dateUpdated": "2020-06-11 06:54:56.130",
+      "config": {},
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "apps": [],
+      "jobName": "paragraph_1591829696130_-173269016",
+      "id": "20200611-065456_1268770881",
+      "dateCreated": "2020-06-11 06:54:56.130",
+      "status": "READY",
+      "errorMessage": "",
       "progressUpdateIntervalMs": 500
     }
   ],
@@ -1707,6 +1804,7 @@
   "noteForms": {},
   "angularObjects": {
     "md:shared_process": [],
+    "sh:shared_process": [],
     "spark:shared_process": []
   },
   "config": {
