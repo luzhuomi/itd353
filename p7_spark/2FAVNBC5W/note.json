@@ -81,9 +81,9 @@
       "progressUpdateIntervalMs": 500
     },
     {
-      "text": "%md\n\n# A Tweet classifier\n\nThe school have collected some twitter data based on the keyword \"jae\".  However the term \"jae\" could refer to some Korean celebrities having \"jae\" as part of their names, or to joint admission exercise in Singapore. \n\nThe task here is to build a classifier to differentiate the KPOP tweets mentioning \"jae\" as a person\u0027s name or otherwise.\n\n\n\nFor example, the following tweet message falls into the category of Korean Pop because it seems talking about a person\u0027s name \n```\ncrazy cool jae s lee\u0027s pic of street singer reflected in raindrops tuesday on 2nd ave  \n```\nOn the other hand, the following tweet is not revelant to KPOP. \n```\naccident closes jae valley rd drivers advised to avoid area seek alternate routes\n```\nTo achieve the goal, we need to develop a classifier, which is a supervised machine learning technique. In this example, we consider using Support Vector Machine (SVM) as the classifier algorithm. On the higher level, we need to \"train\" the model with some manually labelled data and perform some tests against the trained model. As part of the input requirement the SVM expect the input data to represented as a label (either yes or no, 1 or 0) accompanied by the feature vector. The feature vector is a vector of values which uniquely differentiate one entry from another ideally. In the machine learning context, features have to be fixed by the programmers. \n\n\n",
+      "text": "%md\n\n# A Tweet classifier\n\nThe school have collected some twitter data based on the keyword \"jae\".  However the term \"jae\" could refer to some Korean celebrities having \"jae\" as part of their names, or to joint admission exercise in Singapore. \n\nThe task here is to build a classifier to differentiate the KPOP tweets mentioning \"jae\" as a person\u0027s name or otherwise.\n\n\n\nFor example, the following tweet message falls into the category of Korean Pop because it seems talking about a person\u0027s name \n```text\ncrazy cool jae s lee\u0027s pic of street singer reflected in raindrops tuesday on 2nd ave  \n```\nOn the other hand, the following tweet is not revelant to KPOP. \n```text\naccident closes jae valley rd drivers advised to avoid area seek alternate routes\n```\nTo achieve the goal, we need to develop a classifier, which is a supervised machine learning technique. In this example, we consider using Support Vector Machine (SVM) as the classifier algorithm. On the higher level, we need to \"train\" the model with some manually labelled data and perform some tests against the trained model. As part of the input requirement the SVM expect the input data to represented as a label (either yes or no, 1 or 0) accompanied by the feature vector. The feature vector is a vector of values which uniquely differentiate one entry from another ideally. In the machine learning context, features have to be fixed by the programmers. \n\n\n",
       "user": "anonymous",
-      "dateUpdated": "2020-06-08 21:43:46.586",
+      "dateUpdated": "2020-06-11 22:40:07.127",
       "config": {
         "colWidth": 12.0,
         "fontSize": 9.0,
@@ -108,7 +108,7 @@
         "msg": [
           {
             "type": "HTML",
-            "data": "\u003cdiv class\u003d\"markdown-body\"\u003e\n\u003ch1\u003eA Tweet classifier\u003c/h1\u003e\n\u003cp\u003eThe school have collected some twitter data based on the keyword \u0026ldquo;jae\u0026rdquo;. However the term \u0026ldquo;jae\u0026rdquo; could refer to some Korean celebrities having \u0026ldquo;jae\u0026rdquo; as part of their names, or to joint admission exercise in Singapore. \u003c/p\u003e\n\u003cp\u003eThe task here is to build a classifier to differentiate the KPOP tweets mentioning \u0026ldquo;jae\u0026rdquo; as a person\u0026rsquo;s name or otherwise.\u003c/p\u003e\n\u003cp\u003eFor example, the following tweet message falls into the category of Korean Pop because it seems talking about a person\u0026rsquo;s name \u003c/p\u003e\n\u003cpre\u003e\u003ccode\u003ecrazy cool jae s lee\u0026#39;s pic of street singer reflected in raindrops tuesday on 2nd ave  \n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003eOn the other hand, the following tweet is not revelant to KPOP. \u003c/p\u003e\n\u003cpre\u003e\u003ccode\u003eaccident closes jae valley rd drivers advised to avoid area seek alternate routes\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003eTo achieve the goal, we need to develop a classifier, which is a supervised machine learning technique. In this example, we consider using Support Vector Machine (SVM) as the classifier algorithm. On the higher level, we need to \u0026ldquo;train\u0026rdquo; the model with some manually labelled data and perform some tests against the trained model. As part of the input requirement the SVM expect the input data to represented as a label (either yes or no, 1 or 0) accompanied by the feature vector. The feature vector is a vector of values which uniquely differentiate one entry from another ideally. In the machine learning context, features have to be fixed by the programmers.\u003c/p\u003e\n\u003c/div\u003e"
+            "data": "\u003cdiv class\u003d\"markdown-body\"\u003e\n\u003ch1\u003eA Tweet classifier\u003c/h1\u003e\n\u003cp\u003eThe school have collected some twitter data based on the keyword \u0026ldquo;jae\u0026rdquo;. However the term \u0026ldquo;jae\u0026rdquo; could refer to some Korean celebrities having \u0026ldquo;jae\u0026rdquo; as part of their names, or to joint admission exercise in Singapore. \u003c/p\u003e\n\u003cp\u003eThe task here is to build a classifier to differentiate the KPOP tweets mentioning \u0026ldquo;jae\u0026rdquo; as a person\u0026rsquo;s name or otherwise.\u003c/p\u003e\n\u003cp\u003eFor example, the following tweet message falls into the category of Korean Pop because it seems talking about a person\u0026rsquo;s name \u003c/p\u003e\n\u003cpre\u003e\u003ccode class\u003d\"text\"\u003ecrazy cool jae s lee\u0026#39;s pic of street singer reflected in raindrops tuesday on 2nd ave  \n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003eOn the other hand, the following tweet is not revelant to KPOP. \u003c/p\u003e\n\u003cpre\u003e\u003ccode class\u003d\"text\"\u003eaccident closes jae valley rd drivers advised to avoid area seek alternate routes\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003eTo achieve the goal, we need to develop a classifier, which is a supervised machine learning technique. In this example, we consider using Support Vector Machine (SVM) as the classifier algorithm. On the higher level, we need to \u0026ldquo;train\u0026rdquo; the model with some manually labelled data and perform some tests against the trained model. As part of the input requirement the SVM expect the input data to represented as a label (either yes or no, 1 or 0) accompanied by the feature vector. The feature vector is a vector of values which uniquely differentiate one entry from another ideally. In the machine learning context, features have to be fixed by the programmers.\u003c/p\u003e\n\u003c/div\u003e"
           }
         ]
       },
@@ -116,15 +116,15 @@
       "jobName": "paragraph_1591622863196_-676052109",
       "id": "20200608-212743_61421612",
       "dateCreated": "2020-06-08 21:27:43.196",
-      "dateStarted": "2020-06-08 21:43:46.587",
-      "dateFinished": "2020-06-08 21:43:46.599",
+      "dateStarted": "2020-06-11 22:40:07.130",
+      "dateFinished": "2020-06-11 22:40:09.585",
       "status": "FINISHED",
       "progressUpdateIntervalMs": 500
     },
     {
-      "text": "%md \n\n## Importing and Setup\n\nLet\u0027s import all the require libraries and set the hadoop file system name node IP.\n\nWe make use of `numpy` a python library for numeric computation,\nIf Python complains about `numpy not found`, go to terminal and run \n\n```bash\n$ sudo apt install python-dev    \n$ sudo pip install numpy\n```\n",
+      "text": "%md \n\n## Importing and Setup\n\nLet\u0027s import all the require libraries and set the hadoop file system name node IP.\n\nWe make use of `numpy` a python library for numeric computation,\nIf Python complains about `numpy not found`, go to terminal and run \n\n```bash\n$ sudo apt install python-dev python-pip  \n$ sudo pip install numpy\n```\n",
       "user": "anonymous",
-      "dateUpdated": "2020-06-08 21:56:01.952",
+      "dateUpdated": "2020-06-11 22:40:22.111",
       "config": {
         "colWidth": 12.0,
         "fontSize": 9.0,
@@ -149,7 +149,7 @@
         "msg": [
           {
             "type": "HTML",
-            "data": "\u003cdiv class\u003d\"markdown-body\"\u003e\n\u003ch2\u003eImporting and Setup\u003c/h2\u003e\n\u003cp\u003eLet\u0026rsquo;s import all the require libraries and set the hadoop file system name node IP.\u003c/p\u003e\n\u003cp\u003eWe make use of \u003ccode\u003enumpy\u003c/code\u003e a python library for numeric computation,\u003cbr/\u003eIf Python complains about \u003ccode\u003enumpy not found\u003c/code\u003e, go to terminal and run \u003c/p\u003e\n\u003cpre\u003e\u003ccode class\u003d\"bash\"\u003e$ sudo apt install python-dev    \n$ sudo pip install numpy\n\u003c/code\u003e\u003c/pre\u003e\n\u003c/div\u003e"
+            "data": "\u003cdiv class\u003d\"markdown-body\"\u003e\n\u003ch2\u003eImporting and Setup\u003c/h2\u003e\n\u003cp\u003eLet\u0026rsquo;s import all the require libraries and set the hadoop file system name node IP.\u003c/p\u003e\n\u003cp\u003eWe make use of \u003ccode\u003enumpy\u003c/code\u003e a python library for numeric computation,\u003cbr/\u003eIf Python complains about \u003ccode\u003enumpy not found\u003c/code\u003e, go to terminal and run \u003c/p\u003e\n\u003cpre\u003e\u003ccode class\u003d\"bash\"\u003e$ sudo apt install python-dev python-pip  \n$ sudo pip install numpy\n\u003c/code\u003e\u003c/pre\u003e\n\u003c/div\u003e"
           }
         ]
       },
@@ -157,8 +157,8 @@
       "jobName": "paragraph_1591622857207_-383082929",
       "id": "20200608-212737_873649015",
       "dateCreated": "2020-06-08 21:27:37.207",
-      "dateStarted": "2020-06-08 21:56:01.953",
-      "dateFinished": "2020-06-08 21:56:01.956",
+      "dateStarted": "2020-06-11 22:40:22.114",
+      "dateFinished": "2020-06-11 22:40:22.140",
       "status": "FINISHED",
       "progressUpdateIntervalMs": 500
     },
