@@ -25,9 +25,10 @@ object TwitterTopology {
     var _collector:SpoutOutputCollector = _
     val queue : LinkedBlockingQueue[Status] = new LinkedBlockingQueue[Status](1000)
     
-    val stream:TwitterStream = new TwitterStreamFactory(new ConfigurationBuilder().build()).getInstance()
-    
+    var stream:TwitterStream = _
+
     override def open(conf: java.util.Map[_, _], context:TopologyContext, collector:SpoutOutputCollector) =  {
+      stream = new TwitterStreamFactory(new ConfigurationBuilder().build()).getInstance()
       val listener : StatusListener = new StatusListener() {
         def onStatus(status:Status) = queue.offer(status)
         def onDeletionNotice(sdn:StatusDeletionNotice) = {}
@@ -49,7 +50,11 @@ object TwitterTopology {
       val ret:Status = queue.poll()
       if (ret == null) { Utils.sleep(100) }
       else {
-	      _collector.emit(new Values(ret.getText()))
+        try {
+  	      _collector.emit(new Values(ret.getText()))
+        } catch {
+          case e: java.lang.NullPointerException => {}
+        }
       }
     }
     override def declareOutputFields(declarer: OutputFieldsDeclarer): Unit = {
@@ -64,7 +69,7 @@ object TwitterTopology {
     override def execute(input: Tuple, collector: BasicOutputCollector): Unit = {
       val sentence = input.getString(0)
       val words = sentence.split("\\s+")
-
+      println(sentence)
       for (word <- words) {
         collector.emit(new Values(word))
       }
@@ -104,10 +109,9 @@ object TwitterTopology {
     val builder = new TopologyBuilder
 
     builder.setSpout("twitter", new TwitterSampleSpout, 5)
-    builder.setBolt("split", new SplitSentence, 8)
-        .shuffleGrouping("twitter")
-    builder.setBolt("count", new WordCount, 12)
-        .fieldsGrouping("split", new Fields("word"))
+    builder.setBolt("split", new SplitSentence, 5).shuffleGrouping("twitter")
+    builder.setBolt("count", new WordCount, 2).fieldsGrouping("split", new Fields("word"))
+    
 
     val conf = new Config
     conf.setDebug(true)
