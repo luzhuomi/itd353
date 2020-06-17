@@ -11,8 +11,6 @@ import org.apache.storm.{Config, LocalCluster, StormSubmitter}
 
 import scala.util.Random
 
-import java.text.BreakIterator
-
 object WordCountTopology {
 
   class RandomSentenceSpout extends BaseRichSpout {
@@ -43,19 +41,10 @@ object WordCountTopology {
     override def execute(input: Tuple, collector: BasicOutputCollector): Unit = {
       
       val sentence = input.getString(0)
-      val boundary = BreakIterator.getWordInstance
-      
-      boundary.setText(sentence)
-      var start = boundary.first
-      var end:Int = start
-      
-      while(end!=BreakIterator.DONE) {
-        end = boundary.next
-        val word = sentence.substring(start,end).replaceAll("\\s+","")
-        start = end
-        if(!word.equals("")) {
-                collector.emit(new Values(word))
-        }
+      val words = sentence.split("\\s+")
+
+      for (word <- words) {
+        collector.emit(new Values(word))
       }
     }
     
@@ -80,10 +69,13 @@ object WordCountTopology {
       } else {
 	      counts.put(word,optCount.get+1)
       }
-      
+      for (entry <- counts) {
+        println(s"Word Count: ${entry._1}: ${entry._2}")
+      }
       collector.emit(new Values(word,counts))
     }
-    
+
+
     override def declareOutputFields(declarer: OutputFieldsDeclarer): Unit = {
       
       declarer.declare(new Fields("word","count"));

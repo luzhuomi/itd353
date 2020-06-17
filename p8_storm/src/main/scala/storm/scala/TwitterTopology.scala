@@ -1,4 +1,4 @@
-package storm.scala
+package storm.scala.examples
 
 
 import org.apache.storm.spout.SpoutOutputCollector
@@ -16,7 +16,6 @@ import twitter4j._
 import twitter4j.conf.ConfigurationBuilder
 import twitter4j.auth.AccessToken
 import java.util.concurrent.LinkedBlockingQueue
-import java.text.BreakIterator
 
 
 
@@ -64,19 +63,10 @@ object TwitterTopology {
   class SplitSentence extends BaseBasicBolt {
     override def execute(input: Tuple, collector: BasicOutputCollector): Unit = {
       val sentence = input.getString(0)
-      val boundary = BreakIterator.getWordInstance
-      
-      boundary.setText(sentence)
-      var start = boundary.first
-      var end:Int = start
-      
-      while(end!=BreakIterator.DONE) {
-        end = boundary.next
-        val word = sentence.substring(start,end).replaceAll("\\s+","")
-        start = end
-        if(!word.equals("")) {
-                collector.emit(new Values(word))
-        }
+      val words = sentence.split("\\s+")
+
+      for (word <- words) {
+        collector.emit(new Values(word))
       }
     }
     override def declareOutputFields(declarer: OutputFieldsDeclarer): Unit = {
@@ -97,7 +87,10 @@ object TwitterTopology {
       } else {
 	      counts.put(word,optCount.get+1)
       }
-      
+      for (entry <- counts) {
+        println(s"Word Count: ${entry._1}: ${entry._2}")
+      }
+
       collector.emit(new Values(word,counts))
     }
     override def declareOutputFields(declarer: OutputFieldsDeclarer): Unit = {      
