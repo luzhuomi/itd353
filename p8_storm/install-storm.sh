@@ -5,11 +5,11 @@ wget http://www-us.apache.org/dist/storm/apache-storm-1.2.3/apache-storm-1.2.3.t
 tar zxvf apache-storm-1.2.3.tar.gz
 echo "
 storm.zookeeper.servers:
-     - \"itd353-VirtualBox\"
+     - \"itd353-ext\"
 
 storm.zookeeper.port: 2181
 
-nimbus.host: \"itd353-VirtualBox\"
+nimbus.host: \"itd353-ext\"
 
 storm.local.dir: \"/mnt/storm\"
 
@@ -27,7 +27,7 @@ nimbus.childopts: \"-Xmx512m\"
 
 supervisor.childopts: \"-Xmx256m\"
 
-nimbus.seeds: [\"itd353-VirtualBox\"]
+nimbus.seeds: [\"itd353-ext\"]
 
 storm.zookeeper.root: \"/storm03\"
 
